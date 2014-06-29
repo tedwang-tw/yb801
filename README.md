@@ -1,7 +1,7 @@
 YB801 Project
 =============
 
-
+The project repository for III Business Intelligence / Big Data course.
 
 Acknowledgement
 -------------------
