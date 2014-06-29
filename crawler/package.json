@@ -1,0 +1,21 @@
+{
+	"name" : "bigdata-project-crawler",
+	"description" : "A big data project package crawler",
+	"author" : "Ted Wang <tedwang.tw@gmail.com>",
+	"version" : "0.1.0",
+	"private" : true,
+	"dependencies" : {
+		"async" : ">=0.2.10",
+		"cheerio" : ">=0.15.0",
+		"line-reader" : ">=0.2.3",
+		"mkdirp" : ">=0.3.5",
+		"request" : ">=2.33.0",
+		"sprintf-js" : ">=0.0.7",
+		"superagent" : ">=0.17.0",
+		"underscore" : ">=1.6.0",
+		"wordfreq" : ">=0.1.0-dev",
+		"xml2js" : ">=0.4.1"
+	},
+	"devDependencies" : {},
+	"engine" : "node >= 0.10.24"
+}
