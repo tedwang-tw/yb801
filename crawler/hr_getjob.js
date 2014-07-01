@@ -1,4 +1,4 @@
-﻿var fs = require('fs');
+var fs = require('fs');
 var path = require('path');
 var inspect = require("util").inspect;
 var cheerio = require("cheerio");
@@ -7,7 +7,7 @@ var async = require('async');
 
 var ext = '.html';
 var interval = 550; //	ms
-
+var NEWLINE = '\r\n';
 
 function checkHome(data) {
 	var title = '104人力銀行';
@@ -42,6 +42,7 @@ function hr_getjob(options, jobs, next) {
 	var header_UserAgent = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36';
 	var header_Accept = 'text/html,application/xhtml+xml,application/xml';
 
+	var filename_url = path.join(options.dir, options.cat + '_url.txt');
 	var newJobs = [];
 
 	async.whilst(
@@ -98,6 +99,8 @@ function hr_getjob(options, jobs, next) {
 							var sfile = fs.createWriteStream(fileName_s);
 							sfile.write(res.text, function () {
 								sfile.end();
+								if (options.keepUrl)
+									fs.appendFileSync(filename_url, item.comCode + '_' + item.jobCode + ',' + item.link + NEWLINE);
 								process.stdout.write('.');
 								callback();
 							});

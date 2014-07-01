@@ -94,7 +94,8 @@ function getJobsByAllPages(params, options, callbackOuter) {
 				dir : dir,
 				cat : params.cat,
 				area : params.area,
-				page : options.pageNum
+				page : options.pageNum,
+				keepUrl : true
 			}, jobsObj.jobs, function () {
 				options.pageNum++;
 				callbackInner();
