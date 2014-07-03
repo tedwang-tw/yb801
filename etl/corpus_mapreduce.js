@@ -445,6 +445,7 @@ if (!fs.existsSync(inTopDir)) {
 			fs.appendFileSync(filename_status, NEWLINE + 'Totally ' + totalItems + ' jobs processed.' + NEWLINE);
 
 			console.log('Elapsed time: ' + (timeB - timeA) / 1000 + ' sec.');
+			fs.appendFileSync(filename_status, NEWLINE + 'Elapsed time: ' + (timeB - timeA) / 1000 + ' sec.' + NEWLINE);
 		}
 	});
 	//});
