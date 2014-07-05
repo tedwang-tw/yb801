@@ -22,7 +22,7 @@ var basename_err = 'error.txt';
 var basename_status = 'status.txt';
 var filename_status;
 
-var filename_preset = path.join(__dirname, 'hr_detail_cfg.json');
+var filename_preset = path.join(__dirname, 'etl_config.json');
 var presetList;
 
 var emitter = new events.EventEmitter();

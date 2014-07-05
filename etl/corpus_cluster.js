@@ -52,7 +52,7 @@ var win_cmd = "copy";
 var linux_cmd = "/bin/cp";
 var command = '';
 
-var filename_preset = path.join(__dirname, 'corpus_group_cfg.json');
+var filename_preset = path.join(__dirname, 'etl_config.json');
 var presetList;
 
 var keywords = [];
