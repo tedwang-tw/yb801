@@ -401,6 +401,10 @@ function readKeywords() {
 		console.log('File "' + basename_keyword + '" not found!');
 		process.exit(1);
 	}
+	if (!fs.existsSync(basename_keyword_en)) {
+		console.log('File "' + basename_keyword_en + '" not found!');
+		process.exit(1);
+	}
 
 	async.parallel({
 		chinese: function(callback){
