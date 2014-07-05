@@ -65,3 +65,12 @@ $RECYCLE.BIN/
 
 # Temporary file
 *.bak
+
+# output folder
+crawler/raw
+etl/corpus
+etl/corpus_merge
+etl/input
+etl/synonym
+etl/text
+etl/tfidf
