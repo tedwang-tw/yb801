@@ -15,7 +15,7 @@ var ext = '.json'; //	null;	//	input file filter
 var outExt = '.json';
 
 var NEWLINE = '\r\n';
-var DELIMITER = ',';
+var DELIMITER = /[,\t]/;
 
 var inTopDir = 'corpus/104/job';
 var outTopDir = 'synonym/104/job';
@@ -184,9 +184,9 @@ function scrapeContent(dir, outDir, task, done) {
 		fileData.forEach(function (word) { //	compare against the synonym list
 			keywords.forEach(function (synonyms) {
 				var synonymLen = synonyms.length;
-				var synonym = synonyms[0];
+				var synonym = synonyms[0].trim();
 				for (var i = 1; i < synonymLen; i++) {
-					if (word === synonyms[i]) {
+					if (word === synonyms[i].trim()) {
 						word = synonym; //	replace with the first synonym
 						break;
 					}
