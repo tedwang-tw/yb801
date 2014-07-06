@@ -25,6 +25,7 @@ var outTopDir = 'tfidf/104/job';
 var basename_keyword = 'input/keywords_merge.txt';
 var basename_tf_idf = 'tf_idf.txt';
 var basename_tfidf = 'tfidf.txt'; //	tf*idf
+var basename_tfidf_idx = 'tfidf_index.txt'; //	index + tf*idf
 var basename_joblist = 'joblist.txt';
 var basename_err = 'error.txt';
 var basename_status = 'status.txt';
@@ -246,7 +247,7 @@ function walkJobCat(dir, outDir, done) { //	per job category
 					console.log('Failed to process job code!');
 				} else {
 					fd.end();
-					emitter.emit('doneJobCat', NEWLINE + 'Done.');
+					emitter.emit('doneJobCat', '\tDone.');
 				}
 			});
 
@@ -255,9 +256,11 @@ function walkJobCat(dir, outDir, done) { //	per job category
 				});
 			//console.log(matrix);
 			var outFile2 = path.join(outDir, basename_tfidf);
+			var outFile2_idx = path.join(outDir, basename_tfidf_idx);
 			//outFile = path.join(outDir, 'tfidf' + outExt);
 			emitter.emit('doneJobCat', NEWLINE + 'Write TF*IDF result to ' + outFile2 + '...');
 			var fd2 = fs.createWriteStream(outFile2);
+			var fd2_idx = fs.createWriteStream(outFile2_idx);
 			var lines = 0;
 
 			async.each(matrix, function (doc, outerCallback) { //	per row (document)
@@ -267,6 +270,7 @@ function walkJobCat(dir, outDir, done) { //	per job category
 				fd2.write(terms + NEWLINE);
 				//emitter.emit('log', ++lines + ' ');
 				lines++;
+				fd2_idx.write(lines + ',' + terms + NEWLINE);
 				outerCallback();
 			}, function (err) {
 				if (err) {
@@ -274,6 +278,7 @@ function walkJobCat(dir, outDir, done) { //	per job category
 				} else {
 					//fd2.write(util.inspect(matrix));
 					fd2.end();
+					fd2_idx.end();
 					emitter.emit('doneJobCat', NEWLINE + lines + ' rows Done.');
 					emitter.emit('doneJobCat', NEWLINE + 'Totally ' + itemCounter + '/' + listLen + ' jobs/files processed.');
 					//done(null, itemCounter);
