@@ -65,6 +65,7 @@ $RECYCLE.BIN/
 
 # Temporary file
 *.bak
+*.zip
 
 # output folder
 crawler/raw
