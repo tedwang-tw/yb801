@@ -13,7 +13,7 @@ var NEWLINE = '\r\n';
 var basename_keyword = '';
 var in_ext = '.txt';
 var out_ext = '_sort.txt';
-var filename_status;
+var filename_sort;
 var keywords = [];
 
 var emitter = new events.EventEmitter();
@@ -50,7 +50,7 @@ function readKeywords() {
 			else
 				return a.localeCompare(b);
 		}).reverse();
-		console.log(keywords);
+		//console.log(keywords);
 		//process.exit();
 		emitter.emit('keyword', NEWLINE + 'Totally ' + count + ' keywords counted.');
 	});
@@ -58,12 +58,15 @@ function readKeywords() {
 
 emitter.on('keyword', function (message) {
 	process.stdout.write(message);
-	filename_status = path.join('.', path.basename(basename_keyword, in_ext) + out_ext);
+	filename_sort = path.join('.', path.basename(basename_keyword, in_ext) + out_ext);
 
-	process.stdout.write(NEWLINE + 'Write back sorted keywords to "' + filename_status + '"..."');
+	process.stdout.write(NEWLINE + 'Write back sorted keywords to "' + filename_sort + '"..."');
+	var fd = fs.createWriteStream(filename_sort);
 	keywords.forEach(function (word) {
-		fs.appendFileSync(filename_status, word + NEWLINE);
+		if (word.trim().length > 0)
+			fd.write(word + NEWLINE);
 	});
+	fd.end();
 	process.stdout.write(NEWLINE + 'done.');
 });
 

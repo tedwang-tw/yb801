@@ -68,6 +68,8 @@ $RECYCLE.BIN/
 
 # output folder
 crawler/raw
+crawler/concat
+crawler/text
 etl/corpus
 etl/corpus_merge
 etl/input
