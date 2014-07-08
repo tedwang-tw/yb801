@@ -23,7 +23,7 @@ THE SOFTWARE.
 var _ = require("underscore")._,
 Tokenizer = require('./regexp_tokenizer').WordTokenizer,
 tokenizer = new Tokenizer(),
-stopwords = [], //require('./stopwords').words,
+stopwords = require('./stopwords').words,
 fs = require('fs');
 
 function buildDocument(text, key) {
