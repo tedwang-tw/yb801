@@ -33,7 +33,7 @@ process.stderr.write('File "' + filename_src + '" read ok.\nProcessing...');
 var atLeast = 2; // Show results with at least .. occurrences
 var numWords = 5; // Show statistics for one to .. words
 var ignoreCase = true; // Case-sensitivity
-var REallowedChars = /[^a-zA-Z'\-\+\/&0-9]+/g;
+var REallowedChars = /[^a-zA-Z'\-\+\/&\.0-9]+/g;
 // RE pattern to select valid characters. Invalid characters are replaced with a whitespace
 
 var i, j, k, textlen, len, s;
