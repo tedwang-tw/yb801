@@ -7,6 +7,7 @@ var sprintf = require("sprintf-js").sprintf;
 var async = require('async');
 var cheerio = require("cheerio");
 var lineReader = require('line-reader');
+var stopwords = require('./stopwords').words;
 
 var CONCURRENCY = 2;
 //var NORM_CONDS = 8; //	per actual job detail on web
@@ -171,7 +172,7 @@ function subKeyword(list, pos, word) { //	check sub-string like
 
 function tokenize(text) {
 	var ignoreCase = true; // Case-sensitivity
-	var REallowedChars = /[^a-zA-Z'\-\+]+/g; // RE pattern to select valid characters. Invalid characters are replaced with a whitespace
+	var REallowedChars = /[^a-zA-Z'\-\+\/&\.0-9]+/g; // RE pattern to select valid characters. Invalid characters are replaced with a whitespace
 
 	// Remove all irrelevant characters
 	text = text.replace(REallowedChars, " ").replace(/^\s+/, "").replace(/\s+$/, "");
@@ -240,6 +241,11 @@ function scrapeContent(dir, outDir, task, done) {
 		//console.log(fileData);
 
 		keywords_en.forEach(function (word) { //	compare every keyword
+			for (var iii=0; iii<word.length; iii++) {
+				if (stopwords.indexOf(word[iii]) >= 0)
+					return;	//	skip stop words
+			}
+				
 			index = 0;
 			//emitter.emit('log', NEWLINE + word + ':');
 			while (index !== -1) { //	get all occurrences
@@ -410,7 +416,8 @@ function readKeywords() {
 		chinese: function(callback){
 			// read all lines:
 			lineReader.eachLine(basename_keyword, function (line) {
-				keywords.push(line.trim());
+				if (line.trim().length > 0)
+					keywords.push(line.trim());
 			}).then(function () {
 				keywords.sort(function (a, b) { //	sort as longest prefix match
 					if (a.length < b.length)
@@ -427,7 +434,8 @@ function readKeywords() {
 		english: function(callback){
 			// read all lines:
 			lineReader.eachLine(basename_keyword_en, function (line) {
-				keywords_en.push(line.trim());
+				if (line.trim().length > 0)
+					keywords_en.push(line.trim().toLowerCase());
 			}).then(function () {
 				keywords_en.sort(function (a, b) { //	sort as longest prefix match
 					if (a.length < b.length)
