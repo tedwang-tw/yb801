@@ -20,6 +20,10 @@ var NEWLINE = '\r\n';
 var inTopDir = 'text';
 var outTopDir = 'concat/glossary';
 
+var postfix_normal = '_normal';
+var postfix_comma = '_comma';
+var postfix_synonym_hyphen = '_hyphen';
+var postfix_synonym_parentheses = '_parentheses';
 var basename_err = 'error.txt';
 var basename_status = 'status.txt';
 var filename_status;
@@ -356,15 +360,21 @@ function walk(dir, outDir, done) {
 			emitter.emit('log', NEWLINE + NEWLINE + 'Merged to ' + filename_merge);
 
 			var filename_sort = path.join(outDir, path.basename(filename_merge, outExt) + sortExt);
-			emitter.emit('log', NEWLINE + 'Sorted to ' + filename_sort + '...');
+			emitter.emit('log', NEWLINE + 'Sorted to ' + filename_sort + '...\t');
 			fd_merge = fs.createWriteStream(filename_sort, {
 					encoding : 'utf8'
 				});
-			sortUnique(keywords).forEach(function (word) {
+			var uniqueKeywords = sortUnique(keywords);
+			var unique = 0;
+			uniqueKeywords.forEach(function (word) {
 				fd_merge.write(word + NEWLINE);
+				unique++;
 			});
 			fd_merge.end();
 			emitter.emit('log', 'done.');
+			emitter.emit('log', NEWLINE + 'Totally ' + unique + ' words.');
+
+			separateSynonym(uniqueKeywords, outDir, presetList.day[0]);
 
 			if (errAsync) {
 				done(errAsync, 0);
@@ -394,6 +404,58 @@ function sortUnique(orgKeywords) {
 	});
 
 	return newKeywords;
+}
+
+function separateSynonym(sortedKeywords, outDir, day) {
+	var filename_normal = path.join(outDir, day + postfix_normal + outExt);
+	var filename_comma = path.join(outDir, day + postfix_comma + outExt);
+	var filename_hyphen = path.join(outDir, day + postfix_synonym_hyphen + outExt);
+	var filename_parentheses = path.join(outDir, day + postfix_synonym_parentheses + outExt);
+	var regexp_hyphen = /\s*-\s/; //	/\s-\s/;
+	var regexp_parentheses = /\([^\(]+\)/; //	/\([\w\s,\-']+\)/;
+	var regexp_comma = /,/;
+	var normal = 0;
+	var comma = 0;
+	var hyphen = 0;
+	var parentheses = 0;
+
+	emitter.emit('log', NEWLINE + 'Separate synonyms...');
+	emitter.emit('log', NEWLINE + '\t' + filename_hyphen);
+	emitter.emit('log', NEWLINE + '\t' + filename_parentheses);
+	emitter.emit('log', NEWLINE + '\t' + filename_comma);
+	emitter.emit('log', NEWLINE + '\t' + filename_normal);
+
+	var fd_normal = fs.createWriteStream(filename_normal);
+	var fd_comma = fs.createWriteStream(filename_comma);
+	var fd_hyphen = fs.createWriteStream(filename_hyphen);
+	var fd_parentheses = fs.createWriteStream(filename_parentheses);
+
+	sortedKeywords.forEach(function (word) {
+		if (word.match(regexp_hyphen)) {
+			fd_hyphen.write(word + NEWLINE);
+			hyphen++;
+		} else if (word.match(regexp_parentheses)) {
+			fd_parentheses.write(word + NEWLINE);
+			parentheses++;
+		} else if (word.match(regexp_comma)) {
+			fd_comma.write(word + NEWLINE);
+			comma++;
+		} else {
+			fd_normal.write(word + NEWLINE);
+			normal++;
+		}
+	});
+	fd_hyphen.end();
+	fd_parentheses.end();
+	fd_comma.end();
+	fd_normal.end();
+
+	emitter.emit('log', '\tdone.');
+	emitter.emit('log', NEWLINE + 'Separated words count:' +
+		NEWLINE + '\tnormal = ' + normal +
+		NEWLINE + '\tcomma = ' + comma +
+		NEWLINE + '\tsynonym hyphen = ' + hyphen +
+		NEWLINE + '\tparentheses = ' + parentheses);
 }
 
 if (!fs.existsSync(inTopDir)) {
