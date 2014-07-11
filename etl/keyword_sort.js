@@ -60,14 +60,14 @@ emitter.on('keyword', function (message) {
 	process.stdout.write(message);
 	filename_sort = path.join('.', path.basename(basename_keyword, in_ext) + out_ext);
 
-	process.stdout.write(NEWLINE + 'Write back sorted keywords to "' + filename_sort + '"..."');
+	process.stdout.write(NEWLINE + 'Write back sorted keywords to ' + filename_sort);
 	var fd = fs.createWriteStream(filename_sort);
 	keywords.forEach(function (word) {
 		if (word.trim().length > 0)
 			fd.write(word + NEWLINE);
 	});
 	fd.end();
-	process.stdout.write(NEWLINE + 'done.');
+	process.stdout.write('\tdone.' + NEWLINE);
 });
 
 if (process.argv.length <= 2) {
