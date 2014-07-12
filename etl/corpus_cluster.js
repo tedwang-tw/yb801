@@ -42,6 +42,7 @@ var outTopDir = 'corpus_group/104/job';
 var basename_prefix = 'group_';
 var basename_joblist = 'input/joblist.txt';
 var basename_jobgroup = 'input/jobgroup.txt';
+var basename_keywords_merge = 'keywords_merge.txt';
 var basename_err = 'error.txt';
 var basename_status = 'status.txt';
 var basename_na = 'not_found.txt';
@@ -56,6 +57,7 @@ var filename_preset = path.join(__dirname, 'etl_config.json');
 var presetList;
 
 var keywords = [];
+var keywords_merge = [];
 var jobList = [];
 var jobGroup = [];
 //var groupCount = {};
@@ -198,6 +200,11 @@ function subKeyword(list, pos, word) { //	check sub-string like
 	return false;
 }
 
+function addUniqueKeyword(word) {
+	if (keywords_merge.indexOf(word) === -1)
+		keywords_merge.push(word);
+}
+
 function scrapeContent(dir, outDir, task, done) {
 	if (path.extname(task) != ext) {
 		return done(null, 0); //	skip
@@ -219,6 +226,7 @@ function scrapeContent(dir, outDir, task, done) {
 
 			fileData.forEach(function (word) {
 				keywords[groupNum].push(word);
+				addUniqueKeyword(word);
 			});
 			done(null, 1); //	for count
 		}
@@ -269,6 +277,7 @@ function walkJobCat(dir, outDir, done) { //	per job category
 		q.drain = function () {
 			var groupDir = path.join(outDir, group_mode.name);
 			newDir(groupDir);
+			emitter.emit('log', NEWLINE + 'Writing grouped keywords to folder ' + groupDir);
 
 			keywords.forEach(function (groupWords, i) {
 				var outFile = path.join(groupDir, basename_prefix + sprintf('%03d', i) + outExt); //	format group number for future alphabetical sorting
@@ -277,6 +286,16 @@ function walkJobCat(dir, outDir, done) { //	per job category
 					fd.end();
 				});
 			});
+
+			var outFile_merge = path.join(outDir, basename_keywords_merge);
+			var fd_merge = fs.createWriteStream(outFile_merge);
+			emitter.emit('log', NEWLINE + 'All merged keywords also saved to ' + outFile_merge);
+
+			keywords_merge.forEach(function (word) {
+				fd_merge.write(word + NEWLINE);
+			});
+			fd_merge.end();
+			//emitter.emit('log', NEWLINE + 'Totally ' + keywords_merge.length + ' unique words saved.');
 
 			emitter.emit('doneJobCat', NEWLINE + 'Totally ' + itemCounter + '/' + listLen + ' jobs/files processed.');
 			done(null, itemCounter);
@@ -449,7 +468,7 @@ function readJobs() {
 		emitter.emit('log', NEWLINE + 'Totally ' + size + ' groups.');
 		//process.exit();
 		emitter.emit('keyword', NEWLINE + 'Totally ' + results.joblist + ' jobs counted.' +
-			NEWLINE + 'Totally ' + results.jobgroup + ' job/group counted.');
+			NEWLINE + 'Totally ' + results.jobgroup + ' jobs in group counted.');
 	});
 }
 
