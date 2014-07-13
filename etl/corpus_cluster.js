@@ -39,7 +39,7 @@ var DELIMITER = ',';
 var inTopDir = 'synonym/104/job';
 var outTopDir = 'corpus_group/104/job';
 
-var basename_prefix = 'group_';
+var basename_prefix = '';	//	'group_';
 var basename_joblist = 'input/joblist.txt';
 var basename_jobgroup = 'input/jobgroup.txt';
 var basename_keywords_merge = 'keywords_merge.txt';
@@ -235,7 +235,7 @@ function scrapeContent(dir, outDir, task, done) {
 } //	scrapeContent
 
 function walkJobCat(dir, outDir, done) { //	per job category
-	emitter.emit('log', '\n' + dir);
+	emitter.emit('log', '\n' + dir + '\n');
 
 	fs.readdir(dir, function (err, list) {
 		var itemCounter = 0;
@@ -327,7 +327,7 @@ function walkDaily(dir, outDir, done) { //	per day
 			var folder = path.join(dir, baseFolder);
 			fs.stat(folder, function (errStat, stat) {
 				if (stat && stat.isDirectory()) {
-					emitter.emit('doneDaily', NEWLINE + baseFolder);
+					//emitter.emit('doneDaily', NEWLINE + baseFolder);
 					walkJobCat(folder, path.join(outDir, baseFolder), function (err, count) {
 						itemCounter += count;
 						catCount++;
@@ -364,7 +364,7 @@ function walk(dir, outDir, done) {
 			var folder = path.join(dir, baseFolder);
 			fs.stat(folder, function (errStat, stat) {
 				if (stat && stat.isDirectory()) {
-					emitter.emit('doneTop', NEWLINE + baseFolder);
+					//emitter.emit('doneTop', NEWLINE + baseFolder);
 					walkDaily(folder, path.join(outDir, baseFolder), function (err, count) {
 						itemCounter += count;
 						dayCount++;
@@ -484,6 +484,7 @@ function checkPlatform() {
 
 if (!fs.existsSync(inTopDir)) {
 	console.log("Dir " + inTopDir + " not found!");
+	process.exit(1);
 } else {
 	var totalItems = 0;
 
@@ -524,7 +525,7 @@ if (!fs.existsSync(inTopDir)) {
 	});
 
 	filename_status = path.join(outTopDir, basename_status);
-	fs.appendFileSync(filename_status, getDateTime() + NEWLINE);
+	fs.appendFileSync(filename_status, NEWLINE + getDateTime() + NEWLINE);
 
 	getPreset();
 
