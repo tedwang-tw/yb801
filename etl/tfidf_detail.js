@@ -239,7 +239,7 @@ function walkJobCat(dir, outDir, done) { //	per job category
 			var fd = fs.createWriteStream(outFile);
 			//fd.write(JSON.stringify(jobList));
 
-			async.each(jobList, function (jobCode, callback) {
+			async.eachSeries(jobList, function (jobCode, callback) {
 				fd.write(jobCode + NEWLINE);
 				callback();
 			}, function (err) {
@@ -263,7 +263,7 @@ function walkJobCat(dir, outDir, done) { //	per job category
 			var fd2_idx = fs.createWriteStream(outFile2_idx);
 			var lines = 0;
 
-			async.each(matrix, function (doc, outerCallback) { //	per row (document)
+			async.eachSeries(matrix, function (doc, outerCallback) { //	per row (document)
 				var regEx = /[\[\]]/gi;
 				var terms = JSON.stringify(doc).replace(regEx, '');
 				//emitter.emit('log', terms + NEWLINE);
@@ -291,7 +291,7 @@ function walkJobCat(dir, outDir, done) { //	per job category
 			var fd3 = fs.createWriteStream(outFile3);
 			var lines3 = 0;
 
-			async.each(matrix3, function (doc, outerCallback) { //	per row (document)
+			async.eachSeries(matrix3, function (doc, outerCallback) { //	per row (document)
 				var regEx = /[\[\]]/gi;
 				var terms = JSON.stringify(doc).replace(regEx, '');
 				fd3.write(terms + NEWLINE);
