@@ -23,6 +23,7 @@ var inTopDir = 'synonym/104/job';
 var outTopDir = 'tfidf/104/job';
 
 var basename_keyword = 'input/keywords_merge.txt';
+var basename_keywords_sort = 'keywords_merge_sort.txt';
 var basename_tf_idf = 'tf_idf.txt';
 var basename_tfidf = 'tfidf.txt'; //	tf*idf
 var basename_tfidf_idx = 'tfidf_index.txt'; //	index + tf*idf
@@ -64,13 +65,14 @@ function isDate(tdate) {
 }
 
 function newDir(dir) {
-	console.log("\nDestination: " + dir);
+	//console.log("\nDestination: " + dir);
 	if (!fs.existsSync(dir)) {
-		console.log("Creating dir " + dir);
+		console.log("\nCreating dir " + dir);
 		mkdirp.sync(dir);
 
 		if (!fs.existsSync(dir)) {
 			process.stderr.write("Unable to create dir " + dir + "\n");
+			process.exit(1);
 		}
 	}
 }
@@ -191,7 +193,7 @@ function scrapeContent(dir, outDir, task, done) {
 } //	scrapeContent
 
 function walkJobCat(dir, outDir, done) { //	per job category
-	emitter.emit('log', '\n' + dir);
+	emitter.emit('log', '\n' + dir + '\n');
 
 	fs.readdir(dir, function (err, list) {
 		var itemCounter = 0;
@@ -279,15 +281,25 @@ function walkJobCat(dir, outDir, done) { //	per job category
 					//fd2.write(util.inspect(matrix));
 					fd2.end();
 					fd2_idx.end();
-					emitter.emit('doneJobCat', NEWLINE + lines + ' rows Done.');
-					emitter.emit('doneJobCat', NEWLINE + 'Totally ' + itemCounter + '/' + listLen + ' jobs/files processed.');
+					//emitter.emit('log', NEWLINE + lines + ' rows Done.');
+					emitter.emit('log', NEWLINE + 'Totally ' + itemCounter + '/' + listLen + ' jobs/files processed.');
+
+					var outFile_sort = path.join(outDir, basename_keywords_sort);
+					var fd_sort = fs.createWriteStream(outFile_sort);
+					emitter.emit('log', NEWLINE + 'Sorted keywords also saved to ' + outFile_sort);
+
+					keywords.forEach(function (word) {
+						fd_sort.write(word + NEWLINE);
+					});
+					fd_sort.end();
+
 					//done(null, itemCounter);
 				}
 			});
 
 			var matrix3 = tfidf.tf_idf_matrix(keywords, function (i, measure) {});
 			var outFile3 = path.join(outDir, basename_tf_idf);
-			emitter.emit('doneJobCat', NEWLINE + 'Write TF_IDF result to ' + outFile3 + '...');
+			emitter.emit('log', NEWLINE + 'Write TF_IDF result to ' + outFile3 + '...');
 			var fd3 = fs.createWriteStream(outFile3);
 			var lines3 = 0;
 
@@ -302,7 +314,7 @@ function walkJobCat(dir, outDir, done) { //	per job category
 					console.log('Failed to process outer!');
 				} else {
 					fd3.end();
-					emitter.emit('doneJobCat', NEWLINE + lines3 + ' rows Done.');
+					//emitter.emit('log', NEWLINE + lines3 + ' rows Done.');
 					emitter.emit('doneJobCat', NEWLINE + 'Totally ' + itemCounter + '/' + listLen + ' jobs/files processed.');
 					done(null, itemCounter);
 				}
@@ -335,7 +347,7 @@ function walkDaily(dir, outDir, done) { //	per day
 			var folder = path.join(dir, baseFolder);
 			fs.stat(folder, function (errStat, stat) {
 				if (stat && stat.isDirectory()) {
-					emitter.emit('doneDaily', NEWLINE + baseFolder);
+					//emitter.emit('doneDaily', NEWLINE + baseFolder);
 					walkJobCat(folder, path.join(outDir, baseFolder), function (err, count) {
 						itemCounter += count;
 						catCount++;
@@ -372,7 +384,7 @@ function walk(dir, outDir, done) {
 			var folder = path.join(dir, baseFolder);
 			fs.stat(folder, function (errStat, stat) {
 				if (stat && stat.isDirectory()) {
-					emitter.emit('doneTop', NEWLINE + baseFolder);
+					//emitter.emit('doneTop', NEWLINE + baseFolder);
 					walkDaily(folder, path.join(outDir, baseFolder), function (err, count) {
 						itemCounter += count;
 						dayCount++;
@@ -440,6 +452,7 @@ function readKeywords() {
 
 if (!fs.existsSync(inTopDir)) {
 	console.log("Dir " + inTopDir + " not found!");
+	process.exit(1);
 } else {
 	var totalItems = 0;
 
@@ -474,7 +487,7 @@ if (!fs.existsSync(inTopDir)) {
 	});
 
 	filename_status = path.join(outTopDir, basename_status);
-	fs.appendFileSync(filename_status, getDateTime() + NEWLINE);
+	fs.appendFileSync(filename_status, NEWLINE + getDateTime() + NEWLINE);
 
 	getPreset();
 
@@ -496,8 +509,8 @@ if (!fs.existsSync(inTopDir)) {
 
 			if (results) {
 				totalItems += results;
-				process.stdout.write('\nTotally ' + totalItems + ' courses processed.\n');
-				fs.appendFileSync(filename_status, NEWLINE + 'Totally ' + totalItems + ' courses processed.' + NEWLINE);
+				process.stdout.write('\nTotally ' + totalItems + ' jobs processed.\n');
+				fs.appendFileSync(filename_status, NEWLINE + 'Totally ' + totalItems + ' jobs processed.' + NEWLINE);
 
 				console.log('Elapsed time: ' + (timeB - timeA) / 1000 + ' sec.');
 				fs.appendFileSync(filename_status, NEWLINE + 'Elapsed time: ' + (timeB - timeA) / 1000 + ' sec.' + NEWLINE);
