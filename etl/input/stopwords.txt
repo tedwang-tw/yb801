@@ -1,4 +1,4 @@
-﻿about
+about
 after
 all
 also
@@ -107,11 +107,9 @@ you
 your
 a
 b
-c
 d
 e
 f
-g
 h
 i
 j
