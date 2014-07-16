@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 // a list of commonly used words that have little meaning and can be excluded
 // from analysis.
-var words = [
+var words = [	/*
     'about', 'after', 'all', 'also', 'am', 'an', 'and', 'another', 'any', 'are', 'as', 'at', 'be',
     'because', 'been', 'before', 'being', 'between', 'both', 'but', 'by', 'came', 'can',
     'come', 'could', 'did', 'do', 'each', 'for', 'from', 'get', 'got', 'has', 'had',
@@ -35,7 +35,27 @@ var words = [
     'what', 'where', 'which', 'while', 'who', 'with', 'would', 'you', 'your',
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
     'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '$', '1',
-    '2', '3', '4', '5', '6', '7', '8', '9', '0', '_', '&'];
+    '2', '3', '4', '5', '6', '7', '8', '9', '0', '_', '&'	*/	];
+
+
+var fs = require('fs');
+var basename_stopword = 'input/stopwords.txt';
+var NEWLINE = '\n';
+
+if (!fs.existsSync(basename_stopword)) {
+	console.log('File "' + basename_stopword + '" not found!');
+	process.exit(1);
+}
+
+//console.log('Totally = ' + words.length);
+
+fs.readFileSync(basename_stopword, 'utf8').split(NEWLINE).forEach(function (word) {
+	var goodWord = word.trim();
+	if (goodWord.length > 0)
+		words.push(goodWord);
+});
+
+//console.log('Totally = ' + words.length);
     
 // tell the world about the noise words.    
 exports.words = words;
