@@ -66,14 +66,18 @@ $RECYCLE.BIN/
 # Temporary file
 *.bak
 *.zip
+*.html
 
 # output folder
 crawler/raw
 crawler/concat
 crawler/text
+crawler/input
+crawler/*.txt
 etl/corpus
 etl/corpus_merge
 etl/input
 etl/synonym
 etl/text
 etl/tfidf
+etl/*.txt
