@@ -236,90 +236,174 @@ function walkJobCat(dir, outDir, done) { //	per job category
 			}, CONCURRENCY);
 
 		q.drain = function () {
-			var outFile = path.join(outDir, basename_joblist);
-			emitter.emit('doneJobCat', NEWLINE + 'Write job list ' + outFile);
-			var fd = fs.createWriteStream(outFile);
-			//fd.write(JSON.stringify(jobList));
+			/*
+			var countDown = 3; //	tasks count
 
-			async.eachSeries(jobList, function (jobCode, callback) {
-				fd.write(jobCode + NEWLINE);
-				callback();
-			}, function (err) {
-				if (err) {
-					console.log('Failed to process job code!');
-				} else {
-					fd.end();
-					emitter.emit('doneJobCat', '\tDone.');
-				}
-			});
-
-			var matrix = tfidf.tfidf_matrix(keywords, function (i, measure) {
-					//console.log('document #' + i + ' is ' + measure);
-				});
-			//console.log(matrix);
-			var outFile2 = path.join(outDir, basename_tfidf);
-			var outFile2_idx = path.join(outDir, basename_tfidf_idx);
-			//outFile = path.join(outDir, 'tfidf' + outExt);
-			emitter.emit('doneJobCat', NEWLINE + 'Write TF*IDF result to ' + outFile2 + '...');
-			var fd2 = fs.createWriteStream(outFile2);
-			var fd2_idx = fs.createWriteStream(outFile2_idx);
-			var lines = 0;
-
-			async.eachSeries(matrix, function (doc, outerCallback) { //	per row (document)
-				var regEx = /[\[\]]/gi;
-				var terms = JSON.stringify(doc).replace(regEx, '');
-				//emitter.emit('log', terms + NEWLINE);
-				fd2.write(terms + NEWLINE);
-				//emitter.emit('log', ++lines + ' ');
-				lines++;
-				fd2_idx.write(lines + ',' + terms + NEWLINE);
-				outerCallback();
-			}, function (err) {
-				if (err) {
-					console.log('Failed to process outer!');
-				} else {
-					//fd2.write(util.inspect(matrix));
-					fd2.end();
-					fd2_idx.end();
-					//emitter.emit('log', NEWLINE + lines + ' rows Done.');
-					emitter.emit('log', NEWLINE + 'Totally ' + itemCounter + '/' + listLen + ' jobs/files processed.');
-
-					var outFile_sort = path.join(outDir, basename_keywords_sort);
-					var fd_sort = fs.createWriteStream(outFile_sort);
-					emitter.emit('log', NEWLINE + 'Sorted keywords also saved to ' + outFile_sort);
-
-					keywords.forEach(function (word) {
-						fd_sort.write(word + NEWLINE);
-					});
-					fd_sort.end();
-
-					//done(null, itemCounter);
-				}
-			});
-
-			var matrix3 = tfidf.tf_idf_matrix(keywords, function (i, measure) {});
-			var outFile3 = path.join(outDir, basename_tf_idf);
-			emitter.emit('log', NEWLINE + 'Write TF_IDF result to ' + outFile3 + '...');
-			var fd3 = fs.createWriteStream(outFile3);
-			var lines3 = 0;
-
-			async.eachSeries(matrix3, function (doc, outerCallback) { //	per row (document)
-				var regEx = /[\[\]]/gi;
-				var terms = JSON.stringify(doc).replace(regEx, '');
-				fd3.write(terms + NEWLINE);
-				lines3++;
-				outerCallback();
-			}, function (err) {
-				if (err) {
-					console.log('Failed to process outer!');
-				} else {
-					fd3.end();
-					//emitter.emit('log', NEWLINE + lines3 + ' rows Done.');
-					emitter.emit('doneJobCat', NEWLINE + 'Totally ' + itemCounter + '/' + listLen + ' jobs/files processed.');
+			function emitCB(message) {
+				process.stdout.write(message);
+				if (countDown === 0) {
+					emitter.removeListener('drainDone', emitCB);
 					done(null, itemCounter);
 				}
+			}
+			emitter.on('drainDone', emitCB);
+			*/
+			
+			async.series([
+					function (callback) {
+						var outFile = path.join(outDir, basename_joblist);
+						emitter.emit('log', NEWLINE + 'Write job list ' + outFile);
+						var fd = fs.createWriteStream(outFile);
+						var dataOut = '';
+						jobList.forEach(function (jobCode) {
+							dataOut += jobCode + NEWLINE;
+						});
+						fd.write(dataOut, function () {
+							fd.end();
+							//countDown--;
+							emitter.emit('log', '\tDone.');
+							callback(null, 'one');
+						});
+					},
+					function (callback) {
+						var matrix = tfidf.tfidf_matrix(keywords, function (i, measure) {
+								//console.log('document #' + i + ' is ' + measure);
+							});
+						var outFile2 = path.join(outDir, basename_tfidf);
+						var outFile2_idx = path.join(outDir, basename_tfidf_idx);
+						emitter.emit('log', NEWLINE + 'Write TF*IDF result to ' + outFile2 + '...');
+						var fd2 = fs.createWriteStream(outFile2);
+						var fd2_idx = fs.createWriteStream(outFile2_idx);
+						var lines = 0;
+
+						var dataOut2_1 = '';
+						var dataOut2_2 = '';
+						matrix.forEach(function (doc) { //	per row (document)
+							var regEx = /[\[\]]/gi;
+							var terms = JSON.stringify(doc).replace(regEx, '');
+							dataOut2_1 += terms + NEWLINE;
+							dataOut2_2 += lines + ',' + terms + NEWLINE;
+							lines++;
+						});
+						fd2.write(dataOut2_1, function () {
+							fd2.end();
+							fd2_idx.write(dataOut2_2, function () {
+								fd2_idx.end();
+							});
+							//countDown--;
+							emitter.emit('drainDone', NEWLINE + 'matrix done.');
+							callback(null, 'two');
+						});
+					},
+					function (callback) {
+						var matrix3 = tfidf.tf_idf_matrix(keywords, function (i, measure) {});
+						var outFile3 = path.join(outDir, basename_tf_idf);
+						emitter.emit('log', NEWLINE + 'Write TF_IDF result to ' + outFile3 + '...');
+						var fd3 = fs.createWriteStream(outFile3);
+						var lines3 = 0;
+
+						var dataOut3 = '';
+						matrix3.forEach(function (doc) { //	per row (document)
+							var regEx = /[\[\]]/gi;
+							var terms = JSON.stringify(doc).replace(regEx, '');
+							dataOut3 += terms + NEWLINE;
+							lines3++;
+						});
+						fd3.write(dataOut3, function () {
+							fd3.end();
+
+							//countDown--;
+							emitter.emit('drainDone', NEWLINE + 'matrix3 done.');
+							callback(null, 'three');
+						});
+					},
+					function (callback) {
+						var outFile_sort = path.join(outDir, basename_keywords_sort);
+						var fd_sort = fs.createWriteStream(outFile_sort);
+						emitter.emit('log', NEWLINE + 'Sorted keywords also saved to ' + outFile_sort);
+
+						keywords.forEach(function (word) {
+							fd_sort.write(word + NEWLINE);
+						});
+						fd_sort.end();
+
+						callback(null, 'four');
+					}
+				],
+				// optional callback
+				function (err, results) {
+				// results is now equal to ['one', 'two']
+				emitter.emit('doneJobCat', NEWLINE + 'Totally ' + itemCounter + '/' + listLen + ' jobs/files processed.');
+				done(null, itemCounter);
 			});
 
+			/*
+			async.eachSeries(jobList, function (jobCode, callback) {
+			fd.write(jobCode + NEWLINE);
+			callback();
+			}, function (err) {
+			if (err) {
+			console.log('Failed to process job code!');
+			} else {
+			fd.end();
+			emitter.emit('doneJobCat', '\tDone.');
+			}
+			});
+			 */
+
+			/*
+			async.eachSeries(matrix, function (doc, outerCallback) { //	per row (document)
+			var regEx = /[\[\]]/gi;
+			var terms = JSON.stringify(doc).replace(regEx, '');
+			//emitter.emit('log', terms + NEWLINE);
+			fd2.write(terms + NEWLINE);
+			//emitter.emit('log', ++lines + ' ');
+			lines++;
+			fd2_idx.write(lines + ',' + terms + NEWLINE);
+			outerCallback();
+			}, function (err) {
+			if (err) {
+			console.log('Failed to process outer!');
+			} else {
+			//fd2.write(util.inspect(matrix));
+			fd2.end();
+			fd2_idx.end();
+			//emitter.emit('log', NEWLINE + lines + ' rows Done.');
+			emitter.emit('log', NEWLINE + 'Totally ' + itemCounter + '/' + listLen + ' jobs/files processed.');
+
+			var outFile_sort = path.join(outDir, basename_keywords_sort);
+			var fd_sort = fs.createWriteStream(outFile_sort);
+			emitter.emit('log', NEWLINE + 'Sorted keywords also saved to ' + outFile_sort);
+
+			keywords.forEach(function (word) {
+			fd_sort.write(word + NEWLINE);
+			});
+			fd_sort.end();
+
+			//done(null, itemCounter);
+			}
+			});
+			 */
+
+			/*
+			async.eachSeries(matrix3, function (doc, outerCallback) { //	per row (document)
+			var regEx = /[\[\]]/gi;
+			var terms = JSON.stringify(doc).replace(regEx, '');
+			fd3.write(terms + NEWLINE);
+			lines3++;
+			outerCallback();
+			}, function (err) {
+			if (err) {
+			console.log('Failed to process outer!');
+			} else {
+			fd3.end();
+			//emitter.emit('log', NEWLINE + lines3 + ' rows Done.');
+			emitter.emit('doneJobCat', NEWLINE + 'Totally ' + itemCounter + '/' + listLen + ' jobs/files processed.');
+
+			done(null, itemCounter);
+			}
+			});
+			 */
 		};
 		q.empty = function () {
 			enQueue(q, list, CONCURRENCY);
