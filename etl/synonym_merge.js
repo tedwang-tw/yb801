@@ -16,7 +16,7 @@ var outExt = '.txt';
 var NEWLINE = '\r\n';
 var DELIMITER = /[,\t]/;
 
-var inTopDir = 'corpus/104/job';
+//var inTopDir = 'corpus/104/job';
 var outTopDir = 'synonym/glossary';
 
 var basename_glossary_pure = 'input/glossary_normal_pure.txt';
@@ -400,6 +400,7 @@ function main() {
 		fs.appendFileSync(filename_status, NEWLINE + 'Totally ' + glossaryAll.length + ' glossary.' + NEWLINE);
 
 		console.log('\nElapsed time: ' + (timeB - timeA) / 1000 + ' sec.');
+		fs.appendFileSync(filename_status, NEWLINE + 'Elapsed time: ' + (timeB - timeA) / 1000 + ' sec.' + NEWLINE);
 	});
 }
 
