@@ -20,7 +20,7 @@ var DELIMITER = ',';
 var inTopDir = 'synonym/104/job';
 var outTopDir = 'corpus_merge/104/job';
 
-var basename_keyword = 'keywords_merge.txt';
+//var basename_keyword = 'keywords_merge.txt';
 var basename_joblist = 'joblist.txt';
 var basename_jobword = 'jobword_merge.txt';
 var basename_err = 'error.txt';
@@ -338,53 +338,9 @@ function walk(dir, outDir, done) {
 	});
 } //	walk
 
-function readKeywords() {
-	if (!fs.existsSync(basename_keyword)) {
-		console.log('File "' + basename_keyword + '" not found!');
-		process.exit(1);
-	}
-
-	var last = false;
-	var count = 0;
-	var synonyms = 0;
-
-	async.doWhilst(
-		function (callback) {
-		// read all lines:
-		lineReader.eachLine(basename_keyword, function (line) {
-			var item = line.trim();
-			if (item.length > 0) {
-				keywords.push(line.trim().split('\t'));
-				count++;
-				synonyms += item.length;
-			}
-		}).then(function () {
-			last = true;
-			callback();
-		});
-	},
-		function () {
-		return !last;
-	},
-		function (err) {
-		/*
-		keywords.sort(function (a, b) { //	sort as longest prefix match
-		if (a.length < b.length)
-		return -1;
-		else if (a.length > b.length)
-		return 1;
-		else
-		return a.localeCompare(b);
-		}).reverse();
-		 */
-		//console.log(keywords);
-		//process.exit();
-		emitter.emit('keyword', NEWLINE + 'Totally ' + count + ' synonyms counted.');
-	});
-}
-
 if (!fs.existsSync(inTopDir)) {
 	console.log("Dir " + inTopDir + " not found!");
+	process.exit(1);	
 } else {
 	var totalItems = 0;
 
@@ -423,8 +379,7 @@ if (!fs.existsSync(inTopDir)) {
 
 	getPreset();
 
-	var timeA = new Date().getTime(),
-	timeB;
+	var timeA = new Date().getTime();
 
 	//readKeywords();
 
@@ -433,7 +388,7 @@ if (!fs.existsSync(inTopDir)) {
 	//	fs.appendFileSync(filename_status, message);
 
 	walk(inTopDir, outTopDir, function (err, results) {
-		timeB = new Date().getTime();
+		var timeB = new Date().getTime();
 
 		if (err) {
 			console.err(util.inspect(err));
