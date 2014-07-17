@@ -1,0 +1,3326 @@
+Promoting and Enhancing Cybersecurity and Information Sharing Effectiveness Act of 2011, PRECISE Act of 2011
+Telecommunications Electronics Material Protected from Emanating Spurious Transmissions, TEMPEST
+Complementary Metal-Oxide Semiconductor, CMOS
+Radio Frequency, RF
+Power Amplifiers, PAs
+Voice-Enabled Residential/Small-Office Gateway/Router with Embedded DSL Modem, xDSL IAD
+Health Insurance Portability and Accountability Act Privacy Rule, HIPAA Privacy Rule
+DOD Information Technology Security Certification and Accreditation Process, DITSCAP
+Berne Convention for the Protection of Literary and Artistic Works, Berne Convention
+Completely Automated Public Turing Test To Tell Computers And Humans Apart, CAPTCHA
+Technology Education and Copyright Harmonization Act of 2001, TEACH Act, S.487
+Software-Defined Networking Monitoring Application, SDN Monitoring Application
+Nanotechnology Biotechnology Information Technology Cognitive Science, NBIC
+Health Information Technology For Economic And Clinical Health Act, HITECH Act
+American Society for Testing and Materials Continuity of Care Record, ASTM-CCR
+Process Manufacturing Enterprise Resource Planning, Process Manufacturing ERP
+Office of the National Coordinator for Health Information Technology, ONCHIT
+Organization For The Advancement Of Structured Information Standards OASIS
+Operationally Critical Threat Asset and Vulnerability Evaluation, OCTAVE
+International Information Systems Security Certification Consortium, ISC²
+DOD Information Assurance Certification and Accreditation Process, DIACAP
+COPICS, Communications Oriented Production Information and Control System
+SIP for Instant Messaging and and Presence Leveraging Extensions, SIMPLE
+Object-Oriented Programming Systems Languages and Applications, OOPSLA
+Information Technology Infrastructure Library Incident Management, ITIL Incident Management
+Digital Transmission Content Protection Over Internet Protocol, DTCP-IP
+Java 2 Platform Enterprise Edition Components, J2EE Components
+Secure Sockets Layer Certificate Authority, SSL Certificate Authority
+SFA, sales force automation, direct sales, field sales, inside sales
+Domain-based Message Authentication Reporting and Conformance, DMARC
+Certification Commission for Healthcare Information Technology, CCHIT
+International Committee for Information Technology Standards, INCITS
+Open Productivity and Connectivity Specification, OPC Specification
+National Cybersecurity and Communications Integration Center, NCCIC
+Intermediate System-to-Intermediate System Protocol, IS-IS Protocol
+Advanced Business Application Programming Workbench, ABAP Workbench
+Wildcard Secure Socket Layer Certificate, Wildcard SSL Certificate
+Voice Over Internet Protocol Caller Identification, VoIP Caller ID
+SWIFT, Society for Worldwide Interbank Financial Telecommunication
+Common Criteria for Information Technology Security Evaluation, CC
+Wavelength Division Multiplexing Passive Optical Network, WDM-PON
+HIS, hospital information system, healthcare information system
+Domain Name Server Amplification Attack, DNS Amplification Attack
+Application Life Cycle Management Platform as a Service, ALM PaaS
+U.S. Visitor and Immigrant Status Indicator Technology, US-VISIT
+Online Protection and Enforcement of Digital Trade Act, OPEN Act
+Mobile Station International Subscriber Directory Number, MSISDN
+HealthCare Information Security and Privacy Practitioner, HCISSP
+Control Objectives for Information and Related Technology, COBIT
+Control Objectives For Information And Related Technology, COBIT
+Secure Socket Layer Unified Communications Certificate, SSL UCC
+Internetwork Packet Exchange/Sequenced Packet Exchange, IPX/SPX
+Customer Relationship Management, CRM Dashboard
+Computer Aided Three-Dimensional Interactive Application, CATIA
+Universal Synchronous/Asynchronous Receiver/Transmitter, USART
+Sub-band Adaptive Differential Pulse Code Modulation, SB-ADPCM
+International Mobile Telecommunications Advanced, IMT-Advanced
+Integration-Centric Business Process Management Suite, IC-BPMS
+Digital Video Broadcasting-Satellite Second Generation, DVB-S2
+College of Healthcare Information Management Executives, CHIME
+scope track rank evaluate evangelize and transfer, STREET
+Simple Protocol for Independent Computing Environments, SPICE
+Publishers Requirements for Industry Standard Metadata, PRISM
+National Strategy for Trusted Identities in Cyberspace, NSTIC
+Internet Protocol Version 4 Packet Header, IPv4 packet header
+Business Process Extraction Language For Web Services, BPELWS
+Software as a Service Enterprise Resource Planning, SaaS ERP
+Multi-Cloud Application Management Platform, Multi-Cloud AMP
+Modular Object-Oriented Dynamic Learning Environment, Moodle
+Information Systems Security Engineering Professional, ISSEP
+IPv6 Over Low-Power Wireless Personal Area Networks, 6LoWPAN
+Electronic Signatures in Global National Commerce Act, ESIGN
+Cyber Intelligence Sharing and Protection Act of 2011, CISPA
+closed-loop MRP, closed-loop material requirements planning
+Electrically Erasable Programmable Read-Only Memory, EEPROM
+Computer-Aided Design/Computer-Aided Manufacturing, CAD/CAM
+Basically Available Soft State Eventual Consistency, BASE
+SSPC, structure scripting populating and channel outputs
+SC-FDMA, single-carrier frequency division multiple access
+Original Equipment Manufacturer Unbundling, OEM Unbundling
+Online Certificate Status Protocol Stapling, OCSP Stapling
+Java Database Connectivity Architecture, JDBC Architecture
+Internet Information Services Certificate, IIS Certificate
+Internet Corporation for Assigned Names and Numbers, ICANN
+Health Level Seven Clinical Document Architecture, HL7-CDA
+Health Insurance Portability And Accountability Act, HIPAA
+HIPAA, Health Insurance Portability and Accountability Act
+Fault Configuration Accounting Performance Security, FCAPS
+Certified Information Systems Security Professional, CISSP
+CISSP, Certified Information Systems Security Professional
+Web Services Business Process Execution Language, WS-BPEL
+Virtual Desktop Infrastructure Monitoring, VDI Monitoring
+Telephony Server Application Programming Interface, TSAPI
+Storage Area Network Monitoring Tool, SAN Monitoring Tool
+Self-Monitoring Analysis and Reporting Technology, SMART
+Information Technology Infrastructure Library v3, ITIL v3
+Distributed Denial of Service Prevention, DDoS Prevention
+Customer Relationship Management Analytics, CRM Analytics
+American Standard Code for Information Interchange, ASCII
+Terminal Access Controller Access Control System, TACACS
+Static Internet Protocol Address, Static IP Address
+Service-Oriented Architecture Repository, SOA Repository
+Operational Business Intelligence, OBI, Operational BI
+Intellectual Property Attache Act, IP Attache Act, IPPA
+Enterprise Voice Over Internet Protocol, Enterprise VoIP
+Cloud Storage Service Level Agreement, Cloud Storage SLA
+Certified in Risk and Information Systems Control, CRISC
+Transmission Control Protocol/Internet Protocol, TCP/IP
+TCP/IP, Transmission Control Protocol/Internet Protocol
+On-Premise Enterprise Resource Planning, On-Premise ERP
+Network Configuration and Change Management Tools, NCCM Tools
+Microsoft Security Development Lifecycle, Microsoft SDL
+Institute of Electrical and Electronics Engineers, IEEE
+Industrial Scientific and Medical Radio Band, ISM Band
+IMT-A, international mobile telecommunications advanced
+IEEE, Institute of Electrical and Electronics Engineers
+IDARS, integrated document archive and retrieval system
+Engineer-to-Order Enterprise Resource Planning, ETO ERP
+Electronic Product Environmental Assessment Tool, EPEAT
+Data Over Cable Service Interface Specification, DOCSIS
+Coded Orthogonal Frequency Division Multiplexing, COFDM
+Children's Online Privacy Protection Act of 1998, COPPA
+Certified Secure Software Lifecycle Professional, CSSLP
+Beginner's All-Purpose Symbolic Instruction Code, BASIC
+Worldwide Interoperability for Microwave Access, WiMAX
+WiMAX, Worldwide Interoperability for Microwave Access
+Virtual Storage Area Network Appliance, VSAN Appliance
+Public-Key Infrastructure Certificate, PKI Certificate
+Mobile Station Application Execution Environment, MexE
+Massively Multiplayer Online Role-Playing Game, MMORPG
+IMT-2000, international mobile telecommunications-2000
+DGT, Directorate General of Telecommunications
+Universal Description Discovery and Integration, UDDI
+Statistical Time Division Multiplexing, STDM, StatMUX
+STEP, specification tracking evaluation production
+Real-Time Business Intelligence, RTBI, Real-Time BI
+Program Evaluation Review Technique Chart, PERT Chart
+Procedural Language/Structured Query Language, PL/SQL
+National Initiative for Cybersecurity Education, NICE
+Internet Security and Acceleration Server, ISA Server
+External Serial Advanced Technology Attachment, eSATA
+European Telecommunications Standards Institute, ETSI
+Electronic Business XML Initiative, uebXML Initiative
+Electronic Business Extensible Markup Language, ebXML
+ETSI, European Telecommunications Standards Institute
+Dynamic Internet Protocol Address, Dynamic IP Address
+Comprehensive National Cybersecurity Initiative, CNCI
+CPM, critical path method, critical path management
+CPEMH, computer-aided patient-entered medical history
+CIMA, customer information management and application
+Advanced Clinical Research Information Systems, ACRIS
+Structured Systems Analysis And Design Method, SSADM
+Software As A Service Business Intelligence, SaaS BI
+Service-Oriented Architecture Security, SOA Security
+Service-Oriented Architecture Registry, SOA Registry
+Secure Socket Layer Virtual Private Network, SSL VPN
+Secure Network Address Translation, SecureNA, SNAT
+Reconfigurable Optical Add/Drop Multiplexers, ROADMs
+Object-Relational Database Management System, ORDBMS
+National Institute Of Standards And Technology, NIST
+Multidimensional Online Analytical Processing, MOLAP
+Java Database Connectivity Interface, JDBC Interface
+Java Database Connectivity Connector, JDBC Connector
+Information Technology Service Desk, IT Service Desk
+ITU Telecommunications Standardization Sector, ITU-T
+Hybrid Unified Communications and Collaboration, UCC
+HEDIS, Health Plan Employer Data and Information Set
+Fractional Chief Information Officer, Fractional CIO
+Extensible Stylesheet Language Transformations, XSLT
+Emergency Responder Electronic Health Record, ER-EHR
+Concatenated Short Message Service, Concatenated SMS
+Battery-Powered Radio Frequency Identification, RFID
+Application Channel Technology and Industry, ACT I
+American Standard for Information Interchange, ASCII
+Address Resolution Protocol Poisoning, ARP Poisoning
+Wireless Local Area Network Security, WLAN Security
+White Hat Search Engine Optimization, White Hat SEO
+Virtual Master Data Management, Virtual MDM, VMDM
+Structured System Analysis and Design Method, SSADM
+Stream Control Transmission Protocol Endpoint, SCTP
+Storage Area Network Architecture, SAN Architecture
+Software Platform Infrastructure Model, SPI Model
+Social Customer Relationship Management, Social CRM
+Single Carrier Radio Transmission Technology, 1xRTT
+Personally Identifiable Financial Information, PIFI
+Next Generation Nationwide Broadband Network, NGNBN
+Mobile Customer Relationship Management, Mobile CRM
+International Organization for Standardization, ISO
+Information Technology Infrastructure Library, ITIL
+ISO, International Organization for Standardization
+Hosted Customer Relationship Management, Hosted CRM
+High-Performance Radio Local Area Network, HIPERLAN
+Certified in the Governance of Enterprise IT, CGEIT
+Business Intelligence Architecture, BI Architecture
+Black Hat Search Engine Optimization, Black Hat SEO
+Active Matrix Organic Light-Emitting Diodes, AMOLED
+network outsourcing, enterprise and public network
+Yet Another Hierarchically Officious Oracle, Yahoo
+Wireless Universal Serial Bus, Wireless USB, WUSB
+Voice Over Internet Protocol Gateway, VoIP Gateway
+Storage Management Initiative Specification, SMI-S
+Sales-Focused Partner Relationship Management, PRM
+SCCM, software change and configuration management
+SAM tools, systems administration management tools
+Remote Authentication Dial-in User Service, RADIUS
+Regular Language for XML Next Generation, RELAX NG
+Radio Frequency Identification Reader, RFID Reader
+Protected Extensible Authentication Protocol, PEAP
+Peripheral Component Interconnect Modem, PCI Modem
+Operating System Virtualization, OS Virtualization
+Object-Oriented Database Management System, OODBMS
+National Protection and Programs Directorate, NPPD
+Multidimensional Database Management System, MDBMS
+Light Intensity Modulated Direct Overwrite, LIMDOW
+Intercompany Multimodal Unified Communications, UC
+Human Capital Management Application Services, HCM Application Services
+HCPCS, Healthcare Procedural Classification System
+Federal Information Security Management Act, FISMA
+Environmental Health and Safety Applications, EH&S Applications
+Electronic Medication Administration Records, eMAR
+Electronic Customer Relationship Management, E-CRM
+Distributed Relational Database Architecture, DRDA
+Digital Enhanced Cordless Telecommunications, DECT
+Conseil Europeen Pour La Recherche Nucleaire, CERN
+Computing Technology Industry Association, CompTIA
+Cloud Application Programming Interface, Cloud API
+Channel Service Unit/Digital Service Unit, CSU/DSU
+Agile Application Life Cycle Management, Agile ALM
+Advanced Research Projects Agency Network, ARPANET
+Address Resolution Protocol Spoofing, ARP Spoofing
+Adaptive Differential Pulse Code Modulation, ADPCM
+Wireless Internet Service Provider Roaming, WISPr
+Wi-Fi Protected Access-Enterprise, WPA Enterprise
+Storage Area Network File System, SAN File System
+Storage Area Network Certificate, SAN Certificate
+Standard Performance Evaluation Corporation, SPEC
+Serial Advanced Technology Attachment II, SATA II
+Secure Sockets Layer Certificate, SSL Certificate
+Secure Neighbor Discovery Protocol, SEND Protocol
+SVG interface, Scalable Vector Graphics interface
+Radio Frequency Fingerprinting, RF Fingerprinting
+RAS, reliability availability and serviceability
+Messaging Application Programming Interface, MAPI
+Internet Protocol Private Branch Exchange, IP PBX
+Internal Nonhostile Structured Threat, INS Threat
+Federated Application Life Cycle Management, FALM
+Enhanced Interior Gateway Routing Protocol, EIGRP
+Distance Vector Multicast Routing Protocol, DVMRP
+Digital Subscriber Line Access Multiplexer, DSLAM
+DMAIC, define measure analyze improve control
+Computer-Aided System Engineering Tool, CASE Tool
+Challenge Handshake Authentication Protocol, CHAP
+CSA Certificate of Cloud Security Knowledge, CCSK
+Automated Fingerprint Identification System, AFIS
+Windows Management Instrumentation Database, WMI Database
+Wide-Area Network Optimization Controllers, WOCs
+Wide Area Network Optimization, WAN Optimization
+Web Services Interoperability Technologies, WSIT
+Virtual Private Network Appliance, VPN appliance
+Virtual Local Area Network Hopping, VLAN Hopping
+Versatile Authentication Server and Service, VAS
+Universal Mobile Telecommunications System, UMTS
+TERM, technology-enabled relationship management
+Service-Oriented Modeling and Architecture, SOMA
+SOAP, subjective objective assessment and plan
+Redundant Array of Independent Disks 10, RAID 10
+Orthogonal Frequency Division Multiplexing, OFDM
+Office of Cybersecurity and Communications, CS&C
+National Information Assurance Partnership, NIAP
+Internet Small Computer Systems Interface, iSCSI
+Information Technology Supervisor, IT Supervisor
+Information Technology Management, IT Management
+Information Technology Governance, IT Governance
+ITSSM Tools, IT Service Support Management Tools
+IDA, Infocomm Development Authority of Singapore
+Human Capital Management in Social Software, HCM in Social Software
+Family Educational Rights and Privacy Act, FERPA
+Dynamic Network Address Translation, Dynamic NAT
+Dynamic Database Management System, Dynamic DBMS
+Digital Versatile Disc-Read Only Memory, DVD-ROM
+Defense Advanced Research Projects Agency, DARPA
+DARPA, Defense Advanced Research Projects Agency
+Computerized Maintenance Management System, CMMS
+Common Object Request Broker Architecture, CORBA
+Cloud Application Management for Platforms, CAMP
+Clearing House Interbank Payments Company, CHIPS
+Certified Wireless Networking Professional, CWNP
+Central Processing Unit Socket, CPU Socket
+CORBA, Common Object Request Broker Architecture
+CMYK, YMCK 
+CMMS, computerized maintenance management system
+Business Application Programming Interface, BAPI
+Bayonet Neill-Concelman Connector, BNC Connector
+Authentication Authorization and Accounting, AAA
+Atomicity Consistency Isolation Durability, ACID
+Advanced Configuration And Power Interface, ACPI
+consumer NAS, consumer network attached storage
+Voice Switching Control and Applications, VSCA
+Very-High-Bitrate Digital Subscriber Line, VDSL
+VMware Virtual Machine File System, VMware VMFS
+U.S. Computer Emergency Readiness Team, US-CERT
+Total Element Long Run Incremental Cost, TELRIC
+The Eiffel Parallel Execution Environment, EPEE
+Supervisory Control and Data Acquisition, SCADA
+Storage Area Network Management, SAN Management
+Session Initiation Protocol for Business, SIP-B
+Security Requirements Traceability Matrix, SRTM
+Security Information and Event Management, SIEM
+SCADA, supervisory control and data acquisition
+Recording Industry Association Of America, RIAA
+RAAD, rapid architected application development
+Organic Search Engine Optimization, Organic SEO
+Network-based Intrusion Prevention System, NIPS
+Mobile Device Management Services, MDM Services
+Microsoft Foundation Class Library, MFC Library
+Keep It Simple Stupid Principle, KISS Principle
+Intelligent Platform Management Interface, IPMI
+Information Systems, Information Services, IS
+IMEI, international mobile equipment identifier
+Hypertext Markup Language Comment, HTML Comment
+Human Capital Management Software, HCM Software
+High-Bandwidth Digital Content Protection, HDCP
+Federal Risk and Authorization Program, FedRAMP
+Enterprise Resource Planning System, ERP System
+Enterprise Product Information Management, EPIM
+Customer Relationship Management Analytics, CRM Analytics
+Configure Price Quote Application Suites, CPQ Application Suites
+Computer Security Incident Response Team, CSIRT
+Centers for Medicare and Medicaid Services, CMS
+COM, computer output to microfilm, computer output to microfiche
+Business Continuity and Disaster Recovery, BCDR
+Automatic Identification and Data Capture, AIDC
+Architected Rapid Application Development, ARAD
+Advanced Program-to-Program Communication, APPC
+Advanced Microcontroller Bus Architecture, AMBA
+Advanced Business Application Programming, ABAP
+AMIS, Audio Messaging Interchange Specification
+radio PAD, radio packet assembler/disassembler
+World Intellectual Property Organization, WIPO
+Wide Area Network Accelerator, WAN Accelerator
+Wi-Fi Protected Access Pre-Shared Key, WPA-PSK
+WECA, Wireless Ethernet Compatibility Alliance
+Voice Over Wireless Local Area Network, VoWLAN
+Voice Over Internet Protocol Phone, VoIP Phone
+Voice Over Internet Protocol Packet Loss, VoIP Packet Loss
+Virtualization-Aware Storage, VM-Aware Storage
+Virtualization-Aware Network, VM-Aware Network
+Very High-Speed Digital Subscriber Lines, VDSL
+Very High Speed Backbone Network Service, vBNS
+Telecommunications Equipment Manufacturer, TEM
+Static Database Management System, Static DBMS
+Secure Socket Layer Encryption, SSL Encryption
+SITE, strategy iteration testing enablement
+Retainable Evaluator Execution Framework, REEF
+Relational Online Analytical Processing, ROLAP
+ROLAP, relational online analytical processing
+Practical Extraction and Report Language, Perl
+Peripheral Component Interconnect Bus, PCI Bus
+PIMS, production information management system
+Network-based Intrusion Detection System, NIDS
+Linux Apache MySQL PHP, LAMP
+Limited Connected Device User Interface, LCDUI
+Laboratory Information Management System, LIMS
+International Mobile Subscriber Identity, IMSI
+International Electrotechnical Commission, IEC
+Information and Communications Technology, ICT
+IMSI, international mobile subscriber identity
+ILTC, instructor-led training in the classroom
+Hardware Virtual Private Network, Hardware VPN
+Gatekeeper Transaction Message Protocol, GKTMP
+Federal Information Processing Standards, FIPS
+Extended Validation Secure Socket Layer, EVSSL
+Enterprise Mobile Communications Gateway, EMCG
+Enhanced Data Rates for Global Evolution, EDGE
+Dynamic Structured Query Language, Dynamic SQL
+Domain Name System Security Extensions, DNSSEC
+Customer Premises Equipment Device, CPE Device
+Corporate Average Data Center Efficiency, CADE
+Clinical Information Modeling Initiative, CIMI
+CORE, COMPARE Operational Readiness Evaluation
+Asia Pacific Network Information Centre, APNIC
+Architecture Neutral Distribution Format, ANDF
+Amazon Relational Database Service, Amazon RDS
+Advanced Distribution Management Systems, ADMS
+AMIA, American Medical Informatics Association
+digital access and cross-connect system, DACS
+Wideband Code Division Multiple Access, WCDMA
+WIPO Performances and Phonograms Treaty, WPPT
+WCDMA, wideband code division multiple access
+Very High Speed Digital Subscriber Line, VDSL
+Unified Communications and Collaboration, UCC
+Texas Instruments Graphics Architecture, TIGA
+Systems Security Certified Practitioner, SSCP
+Super Video Graphics Array, Super VGA, SVGA
+Security Descriptor Definition Language, SDDL
+Secure Real-Time Protocol, Secure RTP, SRTP
+Second Generation Programming Language, 2GL
+SNOMED, Systematized Nomenclature of Medicine
+SFDR, software failure detection and recovery
+Regional Broadband Global Area Network, RBGAN
+Program Evaluation and Review Technique, PERT
+Product Portfolio and Program Management, PPM
+Personal Identity Verification Card, PIV Card
+Open Systems Interconnection Model, OSI Model
+Object Linking and Embedding Database, OLE DB
+Multiple Access With Colision Avoidance, MACA
+Microsoft Security Development Lifecycle, SDL
+Location/Identifier Separation Protocol, LISP
+Internet Network Information Center, InterNIC
+International Mobile Equipment Identity, IMEI
+Information Technology Asset Management, ITAM
+Independent Verification and Validation, IV&V
+Graphical User Interface Testing, GUI Testing
+Fourth Generation Programming Language, 4GL
+Facebook Obsessive Compulsive Disorder, FBOCD
+Extended Industry Standard Architecture, EISA
+Electronic Bill Presentment and Payment, EBPP
+Distributed Database Management System, DDBMS
+Digital Access and Cross-Connect System, DACS
+DDBMS, distributed database management system
+Complementary Metal Oxide Semiconductor, CMOS
+Column-Store Database Management System, DBMS
+Cardholder Information Security Program, CISP
+CMOS, complementary metal-oxide semiconductor
+Business Intelligence Reporting, BI Reporting
+Business Intelligence Dashboard, BI Dashboard
+Business Intelligence Competency Center, BICC
+Business Intelligence Architect, BI Architect
+Business Continuity Management Planning, BCMP
+Binary Runtime Environment for Wireless, BREW
+Automated Clearing House Network, ACH Network
+Application-Specific Integrated Circuit, ASIC
+eXtensible Business Reporting Language, XBRL
+Windows Apache MySQL PHP, WAMP
+Tier 1 Internet Service Provider, Tier 1 ISP
+Third Generation Programming Language, 3GL
+Small Form-Factor Pluggable Transceiver, SFP
+Simple Web Indexing System For Humans, SWISH
+Simple Inexpensive Mobile Computer, Simputer
+Security Incident and Event Management, SIEM
+STDM, statistical time-division multiplexing
+Relational Database Management System, RDBMS
+Regional Computer Forensics Laboratory, RCFL
+Radio Frequency Identification Tag, RFID Tag
+RDBMS, relational database management system
+Product Cost and Life Cycle Management, PCLM
+PRojects IN Controlled Environments, PRINCE2
+PACS, personal access communication services
+Open-Source Virtual Private Network, OpenVPN
+Online Analytical Processing Cube, OLAP Cube
+Network Driver Interface Specification, NDIS
+Local Multipoint Distribution Services, LMDS
+Lightweight User Datagram Protocol, UDP Lite
+Integrated Financial Management System, IFMS
+Information Security Management System, ISMS
+Host-Based Intrusion Prevention System, HIPS
+Global System for Mobile Communications, GSM
+Flexible Organic Light-Emitting Diode, FOLED
+First Generation Programming Language, 1GL
+Fifth Generation Programming Language, 5GL
+Extensible Business Reporting Language, XBRL
+Enterprise Risk Management Applications, ERM Applications
+Electrically Programmable Logic Device, EPLD
+Dense Wavelength Division Multiplexing, DWDM
+Data Interchange Standards Association, DISA
+Connected Limited Device Configuration, CLDC
+Common Management Information Protocol, CMIP
+Code Division Multiple Access 2000, CDMA2000
+Certified Information Security Manager, CISM
+Certified Cyber Forensics Professional, CCFP
+CPMS, corporate property management software
+Authorized Programming Analysis Report, APAR
+Artificial Linguistic Computer Entity, ALICE
+Address Resolution Protocol Cache, ARP Cache
+Wireless Application Service Provider, WASP
+WASP, wireless application service provider
+Very High Density Cable Interconnect, VHDCI
+Unified Extensible Firmware Interface, UEFI
+Transaction Authority Markup Language, XAML
+Storage Area Network Security, SAN Security
+Software Development Life Cycle Model, SDLC
+Server Message Block Protocol, SMB Protocol
+Serial Advanced Technology Attachment, SATA
+S-HTTP, Secure Hypertext Transport Protocol
+Rambus  Dynamic Random Access Memory, RDRAM
+RDM, requirements definition and management
+Peer-to-Peer Architecture, P2P Architecture
+Network Based Application Recognition, NBAR
+Network Attached Storage Server, NAS Server
+National Science Foundation Network, NSFNet
+Multipurpose Internet Mail Extensions, MIME
+Mobile Computing Promotion Consortium, MCPC
+Machine-Oriented High-Level Language, MOHLL
+Liquid Crystal Display Monitor, LCD Monitor
+Lightweight Directory Access Protocol, LDAP
+LDAP, Lightweight Directory Access Protocol
+Information Systems Security Engineer, ISSE
+Industry Standard Architecture Bus, ISA Bus
+Hybrid Software-Defined-Network, Hybrid SDN
+Host-based Intrusion Detection System, HIDS
+High-Speed Data Acquisition, High-Speed DAQ
+GNU Network Object Model Environment, GNOME
+Federal Intrusion Detection Network, FIDNET
+Extensible Hypertext Markup Language, XHTML
+Enterprise Instant Messaging, Enterprise IM
+Enterprise Certified Netware Engineer, ECNE
+Enhanced Integrated Drive Electronics, EIDE
+Electronic Document Management System, EDMS
+Data Center Infrastructure Management, DCIM
+Data Center Infrastructure Efficiency, DCIE
+DEVA, document-enabled vertical application
+Connected Portable Navigation Devices, PNDs
+Communications Over Internet Protocol, CoIP
+Certified Information Systems Auditor, CISA
+Capability Maturity Model Integration, CMMI
+Business Intelligence Software, BI Software
+Application-Specific Standard Product, ASSP
+AppleTalk Address Resolution Protocol, AARP
+American National Standards Institute, ANSI
+Active-Matrix Liquid Crystal Display, AMLCD
+3rd Generation Partnership Project 2, 3GPP2
+two tier enterprise resource planning, ERP
+Wireless Intrusion Prevention System, WIPS
+Wide Area Network Mini Port, WAN Mini Port
+Web Sphere Development Studio Client, WSDC
+Unified Communications as a Service, UCaaS
+Unbundled Network Elements-Platform, UNE-P
+Third Generation Partnership Project, 3GPP
+Stream Control Transmission Protocol, SCTP
+Standard Generalized Markup Language, SGML
+Spam and Open Relay Blocking System, SORBS
+Service-Oriented Analysis and Design, SOAD
+Regional Health Information Exchange, RHIE
+Redundant Array of Independent Nodes, RAIN
+Redundant Array of Independent Disks, RAID
+RAID, redundant array of independent disks
+Object-Oriented Programming Language, OOPL
+OLE for Process Control Specification, OPC
+Network Basic Input Output System, NetBIOS
+National Television System Committee, NTSC
+Mobile Voice Over Internet Protocol, mVoIP
+Mobile Augmented Reality Application, MARA
+Microsoft Certified Systems Engineer, MCSE
+Methods for Testing and Specification, MTS
+Medium Dependent Interface Crossover, MDIX
+Long-Term Evolution Advanced, LTE Advanced
+Java Platform Enterprise Edition, Java EE
+Internet Content Adaptation Protocol, ICAP
+International Telecommunication Union, ITU
+Intelligent Network Application Part, INAP
+ITU, International Telecommunication Union
+Hypertext Transport Protocol Secure, HTTPS
+Hybrid Online Analytical Processing, HOLAP
+Hosted Private Branch Exchange, Hosted PBX
+High-Definition Multimedia Interface, HDMI
+High Performance Parallel Interface, HIPPI
+Hack/Phreak/Virii/Crack/Anarchy, H/P/V/C/A
+Fiber Channel over Internet Protocol, FCIP
+Fiber Channel Storage Area Network, FC SAN
+Electronic Discovery Reference Model, EDRM
+Dynamic Application Security Testing, DAST
+Dialed Number Identification Service, DNIS
+DAPP, data analysis and provider profiling
+Computer-Based Physician Order Entry, CPOE
+Computer-Aided Facilities Management, CAFM
+Collaborative Master Data Management, CMDM
+Cloud Application Development Services, AD Services
+Cisco Network Admission Control, Cisco NAC
+Cisco Certified Network Professional, CCNP
+Certified Output Protection Protocol, COPP
+CPA, comprehensive production architecture
+Business Process Management Software, BPMS
+Business Process Management Standards, BPM Standards
+Business Process Analysis Tools, BPA Tools
+Business Planning and Control System, BPCS
+Automated Business Process Discovery, ABPD
+Attached Resource Computer Network, ARCNET
+Aspect-Oriented Software Development, AOSD
+Active Directory Monitoring, AD Monitoring
+Active Directory Management, AD Management
+AMD, architected model-driven development
+8-bit Unicode Transformation Format, UTF-8
+3GPP, Third-Generation Partnership Project
+white hat SEO, search engine optimization
+vStorage APIs for Array Integration, VAAI
+iDEN, integrated digital enhanced network
+black hat SEO, search engine optimization
+Wide Area Telecommunication Service, WATS
+Verizon Fiber Optic Service, Verizon FiOS
+System Center Configuration Manager, SCCM
+Symantec Operations Readiness Tools, SORT
+Subscriber Identity Module Card, SIM Card
+Static Application Security Testing, SAST
+Social Master Data Management, Social MDM
+SIM card card, subscriber identity module card
+SFF-LR, small-form-factor legacy-reduced
+Runtime Application Self-Protection, RASP
+Reusable Analog Intellectual Property, IP
+Remote Procedural Call Server, RPC Server
+Random Access Memory Latency, RAM Latency
+PSA, professional services administration
+Next-Generation Telematics Protocol, NGTP
+Network Attached Storage Drive, NAS Drive
+N-Channel Metal-Oxide Semiconductor, NMOS
+Mobile Application Service Provider, MASP
+Microsoft Private Cloud, MS Private Cloud
+Microsoft Malware Protection Center, MMPC
+Media Access Control Address, MAC Address
+Lithium Iron Phosphate Batteries, LiFePO4 Batteries
+Java 2 Platform Enterprise Edition, J2EE
+Internet Protocol Telephony, IP Telephony
+Internet Protocol Switching, IP Switching
+Internet Protocol Hijacking, IP Hijacking
+Internet Protocol Configuration, Ipconfig
+Internet Assigned Numbers Authority, IANA
+Intel Virtualization Technology, Intel VT
+Integrated Services Digital Network, ISDN
+Integrated Digital Enhanced Network, iDEN
+Integrated Cloud Service Management, ICSM
+ISDN, Integrated Services Digital Network
+File Transfer Protocol Client, FTP Client
+FOMA, Freedom of Mobile Multimedia Access
+Enhanced Intel Speedstep Technology, EIST
+Dynamic Host Configuration Protocol, DHCP
+Digital Simultaneous Voice and Data, DSVD
+DataStage Parallel Extender, DataStage PX
+Customer Information Control System, CICS
+Crisis/Incident Management Software, C/IM Software
+Create Retrieve Update Delete, CRUD
+Corporate Owned Personally Enabled, COPE
+Computer-Supported Cooperative Work, CSCW
+Computer-Aided Software Engineering, CASE
+Computer Aided Software Engineering, CASE
+Computational-Fluid-Dynamic Analysis, CFD Analysis
+Communication Streaming Architecture, CSA
+Common Vulnerabilities and Exposures, CVE
+Certified Authorization Professional, CAP
+Business Web Transaction Processing, BWTP
+Business Process Management Suites, BPMSs
+Business Process Execution Language, BPEL
+Business Intelligence Analyst, BI Analyst
+Bring Your Own Device Policy, BYOD Policy
+Advanced Threat Detection Appliances, ATD Appliances
+Absent by Enforced Net Deprivation, ABEND
+10 Gigabit Ethernet – 10GbE, IEEE 802.3ae
+Wireless Internet Service Provider, WISP
+Virtual Router Redundancy Protocol, VRRP
+Virtual Logical Unit Number, Virtual LUN
+Universal Terrestrial Radio Access, UTRA
+TACS, total access communications system
+Switched Multimegabit Data Service, SMDS
+Static Visualization Toolkit, Static VTK
+Simple Network Management Protocol, SNMP
+Service Integration Maturity Model, SIMM
+Sensitive Compartmented Information, SCI
+Security Assertion Markup Language, SAML
+Secure Socket Layer Checker, SSL Checker
+SSEM, System and Server Evaluation Model
+SNMP, Simple Network Management Protocol
+Register of Known Spam Operations, ROKSO
+Rapid Access Computing Environment, RACE
+Quarter Common Intermediate Format, QCIF
+Personally Identifiable Information, PII
+Passive File Transfer Protocol, PASV FTP
+Online Certificate Status Protocol, OCSP
+Office of Infrastructure Protection, OIP
+Non-Volatile Random Access Memory, NVRAM
+NetBIOS Extended User Interface, NetBEUI
+Multimedia Home Platform, MHP
+Motion Picture Experts Group-21, MPEG-21
+Microsoft Office SharePoint Server, MOSS
+Microsoft Network Access Protection, NAP
+Micro Secure Digital Slot, Micro SD Slot
+Local Area Network Emulation, LAN Emulation, LANE
+Linux Mobile Foundation, LiMo Foundation
+Internet Network Operations Center, INOC
+Integration Platform as a Service, iPaaS
+Integrated Marketing Communications, IMC
+Input/Output Operations per Second, IOPS
+IT Capability Maturity Framework, IT-CMF
+IAE, integrated applications environment
+Human Resources Information System, HRIS
+High-Speed Downlink Packet Access, HSDPA
+High-Energy Radio Frequency Weapon, HERF
+Frequency Division Multiple Access, FDMA
+Federal Desktop Core Configuration, FDCC
+Extensible Media Commerce Language, XMCL
+Extended System Configuration Data, ESCD
+European Union Copyright Directive, EUCD
+Enterprise Information Architecture, EIA
+Enhanced Observed Time Difference, E-OTD
+Energy Trading and Risk Management, ETRM
+Dynamic HyperText Markup Language, DHTML
+Dynamic Business Process Management, BPM
+Distributed Version Control System, DVCS
+Distributed Component Object Model, DCOM
+Digital Versatile Disk Rewritable, DVD-R
+Defense Information Systems Agency, DISA
+Data Quality Software as a Service, SaaS
+Copper Data Distribution Interface, CDDI
+Controlled Unclassified Information, CUI
+Control Program For Microcomputers, CP/M
+Computer-Aided Design and Drafting, CADD
+Competitive Local Exchange Carrier, CLEC
+Common Business Oriented Language, COBOL
+Common Address Redundancy Protocol, CARP
+Children's Internet Protection Act, CIPA
+Chief Information Security Officer, CISO
+Central Processing Unit Cache, CPU Cache
+Central Office Exchange Service, Centrex
+Business Process Modeling Language, BPML
+Bi-Directional Predictive Frame, B-Frame
+Authenticated Post Office Protocol, APOP
+Asymmetric Digital Subscriber Line, ADSL
+Application Platform as a Service, aPaaS
+Application Infrastructure Provider, AIP
+Application Development Environment, ADE
+Amazon Virtual Private Cloud, Amazon VPC
+Amazon Simple Storage Service, Amazon S3
+Amazon Elastic Compute Cloud, Amazon EC2
+Advanced Driver Assistance Systems, ADAS
+Active Database Management System, ADBMS
+3rd Generation Partnership Project, 3GPP
+Windows Management Instrumentation, WMI
+Web Services Description Language, WSDL
+Voice Over IP Security Alliance, VOIPSA
+Virtual Symmetric Multiprocessing, VSMP
+Virtual Reality Modeling Language, VRML
+Virtual Internet Service Provider, VISP
+SyncML, Synchronization Markup Language
+Symmetric Digital Subscriber Line, SDSL
+Storage Area Network Server, SAN Server
+Social Business Intelligence, Social BI
+Semi-Automatic Ground Environment, SAGE
+SIMD, single instruction multiple data
+SDSL, symmetric digital subscriber line
+SCIV, supply chain inventory visibility
+Routing and Remote Access Service, RRAS
+Red Hat Enterprise Virtualization, RHEV
+Public Switched Telephone Network, PSTN
+Public Key Cryptography Standards, PKCS
+Private Automatic Branch Exchange, PABX
+Point-to-Point Tunneling Protocol, PPTP
+PCO, physician contracting organization
+Outline Processor Markup Language, OPML
+Operating System Power Management, OSPM
+Mobile Information Device Profile, MIDP
+Mobile Business Intelligence, Mobile BI
+Microsoft Disk Operating System, MS-DOS
+Massively Multiplayer Online Game, MMOG
+Managed Security Service Provider, MSSP
+Link Aggregation Control Protocol, LACP
+Java Remote Method Invocation, Java RMI
+Internet Control Message Protocol, ICMP
+International Standard Works Code, ISWC
+Interior Gateway Routing Protocol, IGRP
+Intelligent Information Management, IIM
+Integrated Development Environment, IDE
+ITOM Software, IT Operations Management Software
+IPA, integrated publishing architecture
+ILPT, instructor-led practical training
+IDEF, Integrated Definition Methodology
+IDE, integrated development environment
+Human Resources Management System, HRMS
+Human Resources Analytics, HR Analytics
+Home Audio Video Interoperability, HAVi
+HIPAA Disaster Recovery Plan, HIPAA DRP
+Gramm-Leach-Bliley Act, GLB Act, GLBA
+Frequency Hopping Spread Spectrum, FHSS
+Federation Against Software Theft, FAST
+Failure Between Keyboard And Seat, FBKS
+FHMA, frequency-hopping multiple access
+Extensible User Interface Language, XUL
+Extensible Rights Markup Language, XrML
+Extensible Authentication Protocol, EAP
+Evolved High-Speed Packet Access, HSPA+
+Enterprise Technology Architecture, ETA
+Enterprise Relationship Management, ERM
+Enterprise Information System Tier, EIS
+Enterprise Information Integration, EII
+Enterprise Application Outsourcing, EAO
+Enterprise Application Integration, EAI
+Domain Name System Parking, DNS Parking
+Directory Service Markup Language, DSML
+Data Acquisition Hardware, DAQ Hardware
+DRP, distribution requirements planning
+DPMO, defects per million opportunities
+Customer Communications Management, CCM
+Critical Chain Project Management, CCPM
+Content-Aware Data Loss Prevention, DLP
+Consumer to Business to Consumer, C2B2C
+Consumer Digital Rights Management, DRM
+Configuration Management Database, CMDB
+Communication and Networking Riser, CNR
+Clinical Context Object Workgroup, CCOW
+Cisco Certified Network Associate, CCNA
+Business to Business to Consumer, B2B2C
+Building-Integrated Photovoltaics, BIPV
+Automatic Storage Tiering, Auto-Tiering
+Automated Broker Software, ABI Software
+Ashwood architecture, multi-core memory
+Application Performance Monitoring, APM
+Application Performance Management, APM
+Application Development Cycle, AD/Cycle
+Amazon Simple Queue Service, Amazon SQS
+All Your Base Are Belong To Us, AYBABTU
+Advanced Research Projects Agency, ARPA
+Advanced Message Queuing Protocol, AMQP
+Active Directory Application Mode, ADAM
+ATI Avivo High Definition, ATI Avivo HD
+AMO, application management outsourcing
+Web Proxy Autodiscovery Protocol, WPAD
+Universal Service Bus Modem, USB Modem
+Spatial Division Multiple Access, SDMA
+Sony/Philips Digital Interface, S/PDIF
+Software Configuration Management, SCM
+Secure Socket Layer Server, SSL Server
+Scalable Processor Architecture, SPARC
+Same Old Software as a Service, SoSaaS
+SDMA, spatial division multiple access
+SCM, software configuration management
+Reduced Instruction Set Computer, RISC
+ROIT, return on information technology
+RISC, reduced instruction set computer
+Predictive Model Markup Language, PMML
+Point-to-Multipoint Communication, PMP
+PHP: Hypertext Preprocessor 4.0, PHP 4
+PHP: Hypertext Preprocessor 3.0, PHP 3
+Operating System Security, OS Security
+OpenGL for Embedded Systems, OpenGL ES
+One-Time Password Specifications, OTPS
+Network Address Port Translation, NAPT
+National Geophysical Data Center, NGDC
+National Cyber Security Division, NCSD
+Municipal Wi-Fi, Muni Wi-Fi, Muni-Fi
+Multi-User Domain Object Oriented, MOO
+Machine-to-Machine Communications, M2M Communications
+Joint Photographic Experts Group, JPEG
+Internet Message Access Protocol, IMAP
+Internal Border Gateway Protocol, IBGP
+Intelligent Character Recognition, ICR
+Information Life Cycle Management, ILM
+Incumbent Local Exchange Carrier, ILEC
+IMAP, Internet Message Access Protocol
+High-Speed Uplink Packet Access, HSUPA
+High-Performance Cloud Computing, HPC2
+HRMS, human resource management system
+Flexible Single-Master Operation, FSMO
+Fiber Distributed Data Interface, FDDI
+Fast Common Gateway Interface, FastCGI
+FDDI, Fiber Distributed Data Interface
+FCC, Federal Communications Commission
+External Border Gateway Protocol, EBGP
+Enterprise Performance Management, EPM
+Enterprise Information Management, EIM
+Electronically Stored Information, ESI
+Dual Inline Package Switch, DIP Switch
+Document and Media Exploitation, DOMEX
+Distance Vector Routing Protocol, DVRP
+Digital Transformation Consulting, DTC
+Digital Millennium Copyright Act, DMCA
+Connected Portable Media Players, PMPs
+Computer Emergency Response Team, CERT
+Closed-Loop Performance Management, PM
+CRUD, create retrieve update delete
+COSE, Common Open Software Environment
+CISC, complex instruction set computer
+CIM, computer-integrated manufacturing
+Bluetooth Universal Serial Bus, BT-USB
+Binary Synchronous Communications, BSC
+Automatic Private IP Addressing, APIPA
+Automatic Location Identification, ALI
+Application Programming Interface, API
+Application Compatibility Toolkit, ACT
+Anonymous File Transfer Protocol, AFTP
+Analog Display Service Interface, ADSI
+Ad Hoc On-Demand Distance Vector, AODV
+information technology supervisor, IT supervisor
+Windows Internet Naming Service, WINS
+Windows Communication Foundation, WCF
+What You See Is What You Get, WYSIWYG
+Web-Based Enterprise Management, WBEM
+Wavelength Division Multiplexing, WDM
+Voice Over Wireless Fidelity, VoWi-Fi
+Voice Over Long-Term Evolution, VoLTE
+Virtual Private Dial-Up Network, VPDN
+Virtual Private Branch Exchange, VPBX
+Virtual Machine Snapshot, VM Snapshot
+User Experience Designer, UX Designer
+Temporal Key Integrity Protocol, TKIP
+TMS, transportation management system
+Synchronous Optical Networking, SONET
+Supplier Relationship Management, SRM
+Super Advanced Intelligent Tape, SAIT
+Software Development Life Cycle, SDLC
+Small Computer System Interface, SCSI
+Security as a Service, SecaaS, SaaS
+Secure Digital Music Initiative, SDMI
+SWAP, Simple Workflow Access Protocol
+Resistive Random Access Memory, ReRAM
+Representational State Transfer, REST
+Remote Monitoring and Management, RMM
+Radio-On-Chip For Mobile, ROCm, RoC
+R-UIM, removable user identity module
+Professional Services Automation, PSA
+Plesiochronous Digital Hierarchy, PDH
+Password Authentication Protocol, PAP
+PCS, personal communications services
+Organizational Change Management, OCM
+Nickel-Cadmium Battery, NiCd, NiCad
+Network Configuration Management, NCM
+Near Field Communication Tag, NFC Tag
+Mobile Virtual Network Operator, MVNO
+Million Instructions per Second, MIPS
+Metropolitan Ethernet, Metro Ethernet
+Marketing Performance Management, MPM
+MSO, management services organization
+Local Access and Transport Area, LATA
+Linear Tape Open Ultrium, LTO Ultrium
+Knowledge Discovery in Databases, KDD
+Java ME, Java Platform Micro Edition
+Java HyperText Markup Language, JHTML
+Internet Protocol Address, IP Address
+Internet Engineering Task Force, IETF
+Information and Content Exchange, ICE
+Information Technology Consultant, IT Consultant
+Information Systems Security, INFOSEC
+Immersive Learning Environments, ILEs
+IP address, Internet Protocol address
+Hybrid Fiber-Coaxial Cable, HFC Cable
+High Availability Cluster, HA Cluster
+Handheld Device Markup Language, HDML
+HDML, handheld device markup language
+Global-Regular-Expression-Print, GREP
+Extreme Ultraviolet Lithography, EUVL
+Environment-Mapped Bump Mapping, EMBM
+Enterprise Security Intelligence, ESI
+Enterprise Information Archiving, EIA
+Enterprise Architecture Assurance, EA Assurance
+Electronic Prescribing, E-prescribing
+Dynamic Virtual Private Network, DVPN
+Disaster Recovery-as-a-Service, DRaaS
+Disaster Recovery as a Service, DRaaS
+Direct Sequence Spread Spectrum, DSSS
+Demand Assigned Multiple Access, DAMA
+DAP, Distributed Application Platform
+DAB+, digital audio broadcasting plus
+Customer Relationship Management, CRM
+Computer-Aided Software Testing, CAST
+Computer Incident Response Team, CIRT
+Compact Disc-Read-Only Memory, CD-ROM
+Cloud Data Management Interface, CDMI
+CPS, certification practice statement
+CPM, corporate performance management
+CMNS, Connection Mode Network Service
+Business Relationship Management, BRM
+Broadband Remote Access Server, B-RAS
+Augmented Reality Headset, AR Headset
+Asynchronous JavaScript and XML, AJAX
+Application Portfolio Management, APM
+Application Lifecycle Management, ALM
+Application Infrastructure Suite, AIS
+Advanced Planning and Scheduling, APS
+Advanced Metering Infrastructure, AMI
+Abstract State Machine Language, AsmL
+Zero-Configuration Network, Zeroconf
+Zero Administration for Windows, ZAW
+Wireless Personal Area Network, WPAN
+Windows Presentation Foundation, WPF
+Wide Area Application Services, WAAS
+What You See Is All You Get, WYSIAYG
+Web Real-Time Communications, WebRTC
+Voice Web Application Platform, VWAP
+Ultra-Mobile Personal Computer, UMPC
+Trivial File Transfer Protocol, TFTP
+Transponder, XPDR, XPNDR, TPDR, TP
+Storage over Internet Protocol, SoIP
+Security Information Management, SIM
+SIM toolkit, SIM application toolkit
+Radio-Frequency Identification, RFID
+Radio Frequency Identification, RFID
+QAM, quadrature amplitude modulation
+Pseudo Random Number Generator, PRNG
+Project Management Professional, PMP
+Presidential Policy Directive, PPD-8
+Point of Sale Terminal, POS Terminal
+Pluggable Authentication Module, PAM
+Peripheral Interface Controller, PIC
+Partner Relationship Management, PRM
+PHO, physician hospital organization
+Original Equipment Manufacturer, OEM
+Optical Local Exchange Carrier, OLEC
+Open Cloud Computing Interface, OCCI
+On-Line Transaction Processing, OLTP
+National Vulnerability Database, NVD
+Mobile Virtual Private Network, mVPN
+Mobile Virtual Network Enabler, MVNE
+Micro-Electromechanical System, MEMS
+Knowledge Skills and Abilities, KSA
+KCC, Korea Communications Commission
+Java Platform Micro Edition, Java ME
+Intermediate Distribution Frame, IDF
+Information Technology Architect, IT Architect
+Incompatible Timesharing System, ITS
+IUS, infrastructure utility services
+IEEE 802.1 Working Group, IEEE 802.1
+High-Concentration Photovoltaics, PV
+Hierarchical Storage Management, HSM
+Health Information Organization, HIO
+Hadoop Distributed File System, HDFS
+HSM, hierarchical storage management
+Governance Risk And Compliance, GRC
+Globalization Management System, GMS
+Functional Reactive Programming, FRP
+Frequency Division Multiplexing, FDM
+Foreign/Global Trade Compliance, GTC
+Fiber Channel Arbitrated Loop, FC-AL
+FMEA, failure modes effects analysis
+Exchangeable Image File Format, EXIF
+Entity Resolution and Analysis, ER&A
+Enterprise Systems Connection, ESCON
+Enterprise Systems Architecture, ESA
+Enterprise Marketing Management, EMM
+Enterprise Knowledge Management, EKM
+Enterprise Collaboration System, ECS
+Electronics Disposal Efficiency, EDE
+Domain Name System Based List, DNSBL
+DRM, distributed resource management
+DMI, data management and integration
+DMB, digital multimedia broadcasting
+Customer Relationship Marketing, CRM
+Computer-Mediated Communication, CMC
+Composite Content Applications, CCAs
+Cloud Computing Maturity Model, CCMM
+Cloud Access Security Brokers, CASBs
+Classless Inter-Domain Routing, CIDR
+Cisco Unified Computing System, CUCS
+Cascading Style Sheets Level 3, CSS3
+Cascading Style Sheets Level 2, CSS2
+Cascading Style Sheets Level 1, CSS1
+CSP, communications service provider
+CIM, customer information management
+Business Process as a Service, BPaaS
+Business Process Re-engineering, BPR
+Business Process Re-Engineering, BPR
+Business Performance Management, BPM
+Automatic Number Identification, ANI
+Attribute-Based Access Control, ABAC
+Applications Portfolio Analysis, APA
+Application Delivery Controller, ADC
+Acrylonitrile Butadiene Styrene, ABS
+Access Control List, ACL
+100Base-T Fast Ethernet, IEEE 802.3u Fast Ethernet
+Volume Pixel, Voxel
+Vocabulary Management Solution, VMS
+Virtual Routing and Forwarding, VRF
+Virtual File Allocation Table, VFAT
+Virtual Desktop Infrastructure, VDI
+Video Graphics Array Connector, VGA Connector
+VMware High Availability, VMware HA
+Universally Unique Identifier, UUID
+Ultra Large-Scale Integration, ULSI
+Transaction Processing Monitor, TPM
+Time Division Multiple Access, TDMA
+TDMA, time division multiple access
+Static Internet Protocol, Static IP
+Standard Operating Environment, SOE
+Split Domain Name System, Split DNS
+Single Edge Contact Cartridge, SECC
+Simple Object Access Protocol, SOAP
+Simple Mail Transfer Protocol, SMTP
+Simple File Transfer Protocol, SFTP
+Serial Copy Management System, SCMS
+Secure File Transfer Protocol, SFTP
+SOAP, Simple Object Access Protocol
+SMTP, Simple Mail Transfer Protocol
+SMED, single minute exchange of die
+SAP Exchange Infrastructure, SAP XI
+Risk-Adjusted Value Management, RVM
+Rich Media Mobile Advertising, RMMA
+Resource Reservation Protocol, RSVP
+Resource Description Framework, RDF
+Relationship E-commerce, R-Commerce
+Reconfigurable Tactile Display, RTD
+Public Safety Answering Point, PSAP
+Protocol-independent Multicast, PIM
+Programmable Read-Only Memory, PROM
+Product Information Management, PIM
+Personal Identification Number, PIN
+PTT PoC, push-to-talk over cellular
+Outsourced Product Development, OPD
+Open Virtual Memory System, OpenVMS
+Open Data Definition, OpenDD, ODD
+Online Transaction Processing, OLTP
+Non-broadcast Multiple Access, NBMA
+National Climatic Data Center, NCDC
+NCCJ, native code compiler for Java
+Multiprotocol Label Switching, MPLS
+Multiple Channels Per Carrier, MCPC
+Multi Channel Television Sound, MTS
+Material Requirements Planning, MRP
+Laminated Object Manufacturing, LOM
+Knowledge-Based Authentication, KBA
+Java API For XML-based RPC, JAX-RPC
+Java 2 Platform Micro Edition, J2ME
+Information Technology Director, IT Director
+Industry Standard Architecture, ISA
+Identity and Access Management, IAM
+IDM, integrated document management
+Hardware Load Balancing Device, HLD
+Group Decision Support System, GDSS
+Free and Open-Source Software, FOSS
+Financial Information Exchange, FIX
+Extensible Stylesheet Language, XSL
+Entity Relationship Model, ER Model
+Enterprise Mobility Management, EMM
+Enterprise Metadata Management, EMM
+Enterprise Feedback Management, EFM
+Enterprise Decision Management, EDM
+Enhanced Data GSM Environment, EDGE
+Encapsulating Security Payload, ESP
+Electronic Image Stabilization, EIS
+Electronic Frontier Foundation, EFF
+Distributed Denial of Service, DDoS
+Dial Other Internet Providers, DOIP
+Device Relationship Management, DRM
+De-Content Scrambling System, DeCSS
+Customer Relationship Analysis, CRA
+Customer Experience Management, CEM
+Converged Application Platform, CAP
+Contract Life Cycle Management, CLM
+Continuous Controls Monitoring, CCM
+Continuity of Operations Plan, COOP
+Connected Device Configuration, CDC
+Configure Price Quote Software, CPQ
+Computer Telephony Integration, CTI
+Computer Output to Laser Disk, COLD
+Composite UI Application Block, CAB
+Common Language Infrastructure, CLI
+Code Division Multiple Access, CDMA
+CoDA, context delivery architecture
+Classless Interdomain Routing, CIDR
+Carrier Sense Multiple Access, CSMA
+Carrier Network Infrastructure, CNI
+CTI, computer-telephony integration
+CRP, capacity requirements planning
+CQI, continuous quality improvement
+CPT, Current Procedural Terminology
+CPRI, Common Public Radio Interface
+CPP, commercial parallel processing
+CPI, continuous process improvement
+CPC, collaborative product commerce
+CNP, Certified Network Professional
+CME, corporate and major enterprise
+CLI, Common Language Infrastructure
+Business Technology Management, BTM
+Business Intelligence Platforms, BI Platforms
+Business Continuity Management, BCM
+Broadband Global Area Network, BGAN
+Berkeley Software Distribution, BSD
+Attenuation-to-Crosstalk Ratio, ACR
+Application Release Automation, ARA
+Advanced Technology Attachment, ATA
+Advanced Interactive eXecutive, AIX
+Advanced Function Presentation, AFP
+Accredited Standards Committee, ASC
+Abstract Syntax Notation One, ASN.1
+AMPS, advanced mobile phone service
+information technology trainer, IT trainer
+entity-relationship model, diagram
+Wireless Application Protocol, WAP
+Web Services Security, WS Security
+WAP, Wireless Application Protocol
+Voice over Internet Protocol, VoIP
+Voice Over Internet Protocol, VoIP
+Voice Over Instant Messenger, VoIM
+Visual Basic for Applications, VBA
+Virtual Storage Area Network, VSAN
+Very Small Aperture Terminal, VSAT
+Very Large-Scale Integration, VLSI
+Variational Graphics Extended, VGX
+Unshielded Twisted Pair Cable, UTP
+Unified Communications System, UCS
+Transmission Control Protocol, TCP
+TCP, Transmission Control Protocol
+System Development Lifecycle, SDLC
+Synchronous Digital Hierarchy, SDH
+Subscription Video on Demand, SVoD
+Spam Over Internet Telephony, SPIT
+Software-Defined Data Center, SDDC
+Simple Network Time Protocol, SNTP
+Short Message Service Center, SMSC
+Session Announcement Protocol, SAP
+Service-Oriented Architecture, SOA
+Service Life Cycle Management, SLM
+Server Operating System, Server OS
+Secure Socket Layer Test, SSL Test
+Secure Electronic Transaction, SET
+SONET, Synchronous Optical Network
+SIMM, single in-line memory module
+SEO services, SEO Service Provider
+SAP Integration Repository, SAP IR
+SAE, system architecture evolution
+Rotary Heat Exchanger, Kyoto Wheel
+Return Material Authorization, RMA
+Registration Admission Status, RAS
+Real Time Streaming Protocol, RTSP
+Rapid Application Development, RAD
+Radio Over Internet Protocol, RoIP
+RAD, rapid application development
+Product Life Cycle Management, PLM
+Process Analytical Technology, PAT
+Principle of Least Privilege, POLP
+Preboot Execution Environment, PXE
+Post-Processing Deduplication, PPD
+Parallel Network File System, pNFS
+PLC, programmable logic controller
+PAD, packet assembler/disassembler
+Organic Light-Emitting Diode, OLED
+Opportunity Management System, OMS
+Open Document Management API, ODMA
+Open Digital Rights Language, ODRL
+Online Analytical Processing, OLAP
+Nickel-Metal Hydride Battery, NiMH
+Network Neutrality, Net Neutrality
+NDF, network dynamic functionality
+Moving Picture Experts Group, MPEG
+Modified Frequency Modulation, MFM
+Mobile Operating System, Mobile OS
+Mobile Deep Packet Inspection, DPI
+Mobile Application Management, MAM
+Microsoft XML Core Services, MSXML
+Mean Time Between Breakdowns, MTBB
+Massively Parallel Processing, MPP
+Management Information System, MIS
+Macintosh Operating System, Mac OS
+MERA VoIP Transit Softswitch, MVTS
+Longitudinal Redundancy Check, LRC
+Local Area Network Emulation, LANE
+Linux Apache MySQL and PHP, LAMP
+Linear Pulse Code Modulation, LPCM
+LRC, longitudinal redundancy check
+Just Enough Operating System, JeOS
+Joint Application Development, JAD
+Java Access Control List, Java ACL
+JBoss Application Server, JBoss AS
+Internet Relay Chat Worm, IRC Worm
+Internet Protocol Television, IPTV
+Internet Information Services, IIS
+Information Technology Manager, IT Manager
+Information Management System, IMS
+Identity Management, ID Management
+Identification Friend Or Foe, IFF
+ISDN Digital Subscriber Line, IDSL
+IEFM, integrated e-form management
+IDL, interface definition language
+High-Performance File System, HPFS
+High-Level Data Link Control, HDLC
+Google+ification, Google+ification
+Gigabit Point of Presence, GigaPOP
+Geographic Information System, GIS
+General Packet Radio Service, GPRS
+Gartner Magic Quadrant, Gartner MQ
+Fraud over Internet Protocol, FoIP
+Fouled Up Beyond All Repair, FUBAR
+Federated Identity Management, FIM
+FMS, flexible manufacturing system
+Expanded Memory Specification, EMS
+Erbium-Doped Fiber Amplifier, EDFA
+Enterprise Information Portal, EIP
+Enterprise Content Management, ECM
+Electronic Civil Disobedience, ECD
+Dynamic Random Access Memory, DRAM
+Disk and Execution Monitor, Daemon
+Database Audit and Protection, DAP
+Data Communications Equipment, DCE
+Dalvik Debug Monitor Service, DDMS
+DSM, distributed system management
+DOS Protected Mode Interface, DPMI
+DASD, direct-access storage device
+Corporate Information Factory, CIF
+Controlled Cryptographic Item, CCI
+Computer Network Exploitation, CNE
+Computer Fraud and Abuse Act, CFAA
+Common Language Specification, CLS
+Collaborative Commerce, C-Commerce
+Chrome Operating System, Chrome OS
+Cellular Digital Packet Data, CDPD
+Cakewalk Application Language, CAL
+CPR, computer-based patient record
+COLD, computer output to laserdisc
+CMV, controlled medical vocabulary
+CIRT, cyber incident response team
+CIRP, cyber incident response plan
+Business Relationship Manager, BRM
+Business Intelligence Services, BI Services
+Bandwidth Allocation Protocol, BAP
+Automatic Content Recognition, ACR
+Authorized Education Reseller, AER
+Application Programming Model, APM
+Accountable Care Organization, ACO
+local-area wireless network, LAWN
+communications as a service, CaaS
+application, application software
+Wireless Local-Area Network, WLAN
+Wireless Local Area Network, WLAN
+Web Authorization Management, WAM
+Web Accessibility Initiative, WAI
+WAG, wireless application gateway
+Virtual Private LAN Service, VPLS
+Virtual Private Data Center, VPDC
+Virtual Machine Server, VM Server
+Variable Length Subnet Mask, VLSM
+Unsolicited Commercial Email, UCE
+Universal Serial Bus 3.0, USB 3.0
+Universal Serial Bus 2.0, USB 2.0
+Uninterruptible Power Supply, UPS
+Transmission Sequence Number, TSN
+TLM, technical license management
+Systems Network Architecture, SNA
+Sun Open Net Environment, Sun ONE
+Static Random Access Memory, SRAM
+Software Testing Life Cycle, STLC
+Single Large Expensive Disk, SLED
+Single Inline Memory Module, SIMM
+Service Advertising Protocol, SAP
+Saucy Salamander, Ubuntu Codename
+SOC, software oversight committee
+SMA, service management agreement
+SLED, single large expensive disk
+SIO, strategic information office
+Routing Information Protocol, RIP
+Remote Office/Branch Office, ROBO
+Remote Direct Memory Access, RDMA
+Real-Time Transport Protocol, RTP
+Provisioning, Computer Networking
+Protected Health Information, PHI
+Project Portfolio Management, PPM
+Project Management Institute, PMI
+Programming Language/System, PL/S
+Product Lifecycle Management, PLM
+Practice Management Software, PMS
+Potentially Unwanted Program, PUP
+Plain Old Telephone Service, POTS
+Personal Information Manager, PIM
+Peer-To-Peer Network, P2P Network
+PIM, personal information manager
+Online Reputation Management, ORM
+Object Linking and Embedding, OLE
+Non Return to Zero Inverted, NRZI
+Network-to-Network Interface, NNI
+Mobile-to-Mobile Convergence, MMC
+Mobile Marketing Association, MMA
+Mobile Identification Number, MIN
+Microsoft Transaction Server, MTS
+Microsoft Management Console, MMC
+Microsoft Foundation Classes, MFC
+Microcom Networking Protocol, MNP
+Media-Embedded Merchandising, MEM
+Mean Swaps Between Failures, MSBF
+Marketing Service Providers, MSPs
+Managed Video as a Service, MVaaS
+MPEG-4 Advanced Video Coding, AVC
+Life Cycle Asset Management, LCAM
+Kernel-Based Virtual Machine, KVM
+KPOV, key process output variable
+Internetwork Packet Exchange, IPX
+Internet Protocol Version 6, IPv6
+Internet Protocol Version 4, IPv4
+Internet Protocol Security, IPsec
+Internet Inter-ORB Protocol, IIOP
+Internet Connection Firewall, ICF
+Integrated Threat Management, ITM
+Integrated Drive Electronics, IDE
+Input/Output Fencing, I/O Fencing
+Innovator's Patent Agreement, IPA
+Infrastructure as a Service, IaaS
+In-Service Software Upgrade, ISSU
+Hypertext Transfer Protocol, HTTP
+Hot Standby Router Protocol, HSRP
+Horizontal Enterprise Portal, HEP
+Green Personal Computer, Green PC
+Graphics Device Interface +, GDI+
+Fully Qualified Domain Name, FQDN
+Food and Drug Administration, FDA
+Financial Information System, FIS
+Fibre Channel over Ethernet, FCoE
+Fibre Channel Over Ethernet, FCoE
+Fiber Channel Over Ethernet, FCoE
+Executive Information System, EIS
+Enterprise Social Networking, ESN
+Enterprise Resource Planning, ERP
+Enterprise Digital Assistant, EDA
+Enterprise Data Architecture, EDA
+Endpoint Protection Platform, EPP
+Electronic Signature, e-Signature
+Electronic Discovery, E-Discovery
+Eight-to-Fourteen Modulation, EFM
+E-Commerce Advisor, E-Com Advisor
+Dye-Sensitized Solar Cells, DSSCs
+Discretionary Access Control, DAC
+Device Software Optimization, DSO
+Desktop Management Interface, DMI
+Demand-Driven Value Network, DDVN
+Database Activity Monitoring, DAM
+Data Transformation Services, DTS
+Data Center Markup Language, DCML
+Customer Feedback Management, CFM
+Connection-Oriented Protocol, COP
+Connection Admission Control, CAC
+Computer-Aided Manufacturing, CAM
+Compound Annual Growth Rate, CAGR
+Communications as a Service, CaaS
+Common Internet File System, CIFS
+CSS, customer service and support
+CIFS, Common Internet File System
+Business Process Outsourcing, BPO
+Business Process Improvement, BPI
+Business Intelligence 2.0, BI 2.0
+Business Continuity Planning, BCP
+Business Activity Monitoring, BAM
+Balanced Technology Extended, BTX
+Automatic Identification, Auto ID
+Automated Litigation Support, ALS
+Astronomical Markup Language, AML
+Asset Performance Management, APM
+Application Service Provider, ASP
+Application Client Container, ACC
+Analytical Hierarchy Process, AHP
+Advanced Technology Extended, ATX
+Advanced Encryption Standard, AES
+Address Verification Service, AVS
+Accelerated Hub Architecture, AHA
+XML User Interface Language, XUL
+Wireless Wide Area Network, WWAN
+Wireless Number Portability, WNP
+Warehouse Management System, WMS
+Visual Programming Language, VPL
+Virtual Local Area Network, VLAN
+Virtual Circuit Identifier, VCID
+Video Random Access Memory, VRAM
+User Interface Design, UI Design
+Universal Computer Protocol, UCP
+Universal Business Language, UBL
+Uniform Resource Identifier, URI
+Thousands of Lines of Code, KLOC
+Subnetwork Access Protocol, SNAP
+Storage Resource Management, SRM
+Source Code Control System, SCCS
+Software-Defined Networking, SDN
+Software-Defined Everything, SDE
+Single Connector Attachment, SCA
+Session Initiation Protocol, SIP
+Serial Storage Architecture, SSA
+Security-Enhanced Linux, SELinux
+Search Engine Results Page, SERP
+SVGA, Super Video Graphics Array
+SPC, statistical process control
+SME, small-to-midsize enterprise
+SLM, software license management
+SCPC, single channel per carrier
+SAC, subscriber acquisition cost
+Right-Hand Side Blacklist, RHSBL
+Red Hat Certified Engineer, RHCE
+Real-Time Location Service, RTLS
+Raring Ringtail, Ubuntu Codename
+Radio Frequency Over Glass, RFoG
+Quantal Quetzal, Ubuntu Codename
+Provisioning, Telecommunications
+Programmable Network Access, PNA
+Personal Health Information, PHI
+Performance Reference Model, PRM
+Penetration Testing, Pen-Testing
+PHP: Hypertext Preprocessor, PHP
+PDE, partial document encryption
+Out-of-Band Authentication, OOBA
+Open Database Connectivity, ODBC
+Object-Oriented Programming, OOP
+Object-Based Storage Device, OSD
+Not Invented Here Syndrome, NIHS
+Next-Generation Firewalls, NGFWs
+New Technology File System, NTFS
+Network Management Protocol, NMP
+Network Information Service, NIS
+Network Address Translation, NAT
+Neighbor Discovery Protocol, NDP
+Natural-Language Processing, NLP
+Natural Language Processing, NLP
+National Science Foundation, NSF
+Multi-Factor Authentication, MFA
+Mobile High-Definition Link, MHL
+Message Oriented Middleware, MOM
+Memorandum of Understanding, MOU
+Mean Time Between Failures, MTBF
+Massive Open Online Course, MOOC
+Management Information Base, MIB
+Loop Capable Fabric Port, L_Port
+Layer 2 Tunneling Protocol, L2TP
+Knowledge Management System, KMS
+KPIV, key process input variable
+JavaScript Object Notation, JSON
+Java Database Connectivity, JDBC
+Intrusion Prevention System, IPS
+Internet Transaction Server, ITS
+Internet Television, Internet TV
+Internet Relay Chat Bot, IRC Bot
+Internet Connection Sharing, ICS
+Internet Architecture Board, IAB
+Interface Message Processor, IMP
+Inter Process Communication, IPC
+Information Graphic, Infographic
+Independent Software Vendor, ISV
+Independent Hardware Vendor, IHV
+ISV, independent software vendor
+IRD, integrated receiver decoder
+High-Performance Addressing, HPA
+Health Information Exchange, HIE
+Hardware Management Console, HMC
+Guest Operating System, Guest OS
+Graphics Interchange Format, GIF
+Globally Unique Identifier, GUID
+Federal Health Architecture, FHA
+Fax Over Internet Protocol, FoIP
+Fabric-Based Infrastructure, FBI
+Entity-Relationship Diagram, ERD
+Enterprise Messaging System, EMS
+Enterprise Message Exchange, EMX
+Enterprise Identity Mapping, EIM
+Enterprise Fraud Management, EFM
+Enterprise Asset Management, EAM
+End-of-Life Product, EOL Product
+End-User License Agreement, EULA
+Electronic Data Interchange, EDI
+DomainKeys Identified Mail, DKIM
+Distributed Data Protection, DDP
+Disruption-Tolerant Network, DTN
+Digital-to-Analog Converter, DAC
+Digital Signature Algorithm, DSA
+Diffusing Update Algorithm, DUAL
+Database Management System, DBMS
+Daily Build and Smoke Test, DBST
+DBMS, database management system
+DAT, dynamic address translation
+Cross-Site Request Forgery, CSRF
+Critical Security Parameter, CSP
+Converged Enhanced Ethernet, CEE
+Content Addressable Storage, CAS
+Consumer Electronics ATA, CE-ATA
+Computer Operating Properly, COP
+Computer Network Operations, CNO
+Component-Based Development, CBD
+Comma-Separated Values File, CSV
+Cloud-Oriented Architecture, COA
+Cloud Operating System, Cloud OS
+Certificate Signing Request, CSR
+Certificate Revocation List, CRL
+Car Connectivity Consortium, CCC
+Calibrated Vectored Cooling, CVC
+CRL, certificate revocation list
+CPE, customer premises equipment
+CLA, Corporate License Agreement
+Business-Driven Development, BDD
+Business process management, BPM
+Business Service Management, BSM
+Business Process Utilities, BPUs
+Business Process Management, BPM
+Business Process Automation, BPA
+Business Payments Directory, BPD
+Business Continuity Manager, BCM
+Broadband Wireless Access, Wibro
+Behavior Driven Development, BDD
+Automatic Memory Management, AMM
+Automated System Operations, ASO
+Aspect-Oriented Programming, AOP
+Analog-to-Digital Converter, ADC
+Address Resolution Protocol, ARP
+ActiveX Data Object.NET, ADO.NET
+irDA, Infrared Data Association
+interprocess communication, IPC
+electroluminescent display, ELD
+Wi-Fi Protected Access II, WPA2
+WDP, Wireless Datagram Protocol
+Volume Shadow Copy Service, VSS
+Voice Over Wireless LAN, VoWLAN
+Visual Studio Team System, VSTS
+Virtual Machine Stall, VM Stall
+Virtual Channel Identifier, VCI
+Vertical Enterprise Portal, VEP
+Vertical Blanking Interval, VBI
+Transaction Process System, TPS
+Time Division Multiplexing, TDM
+Technical Support, Tech Support
+System Performance Monitor, SPM
+System Integration Testing, SIT
+Software Quality Assurance, SQA
+Small and Midsize Business, SMB
+Server Intelligent Storage, SIS
+Security Through Obscurity, STO
+Search Engine Rank, Search Rank
+Search Engine Optimization, SEO
+SGSN, serving GPRS support node
+SAP Integration Adapter, SAP IA
+Role-Based Access Control, RBAC
+Rights Expression Language, REL
+Regional Internet Registry, RIR
+Real-Time Data Monitoring, RTDM
+Radio Frequency Monitoring, RFM
+Radio Frequency Field, RF Field
+Quality Systems Regulations, QS
+Push to Talk over Cellular, PoC
+Product Quality Management, PQM
+Personal Digital Assistant, PDA
+Parallel Method Invocation, PMI
+Palo Alto Research Center, PARC
+PHS, personal HandyPhone system
+PDA, personal digital assistant
+PAM, pulse amplitude modulation
+Operational Support System, OSS
+Open Virtualization Format, OVF
+Object-Relational Database, ORD
+Object Transaction Service, OTS
+Multimedia Message Service, MMS
+Mobile Wireless Local Loop, WLL
+Mobile Software Management, MSM
+Micro Channel Architecture, MCA
+Medium Dependent Interface, MDI
+Measured Telephone Service, MTS
+Mail Exchange Record, MX Record
+Location-Based Advertising, LBA
+Liquid Crystal on Silicon, LCoS
+Language Integrated Query, LINQ
+Key Performance Indicators, KPI
+Java Management Extensions, JMX
+Intrusion Detection System, IDS
+Interactive Voice Response, IVR
+Instant Messaging Worm, IM Worm
+Input/Output Device, I/O Device
+Identifier for Advertisers, IFA
+IVR, interactive voice response
+IDS, integrated delivery system
+IDS, Internet document security
+IDN, Integrated Digital Network
+Hypertext Markup Language, HTML
+Hyper-V Virtual Hard Disk, VHDX
+Human-Computer Interaction, HCI
+High-Performance Computing, HPC
+Hardware Abstraction Layer, HAL
+HTML, Hypertext Markup Language
+Guest Virtual Machine, Guest VM
+GNU General Public License, GPL
+Fused Filament Fabrication, FFF
+File Allocation Table 32, FAT32
+Federated Identity Manager, FIM
+Federal Protective Service, FPS
+Federal Networking Council, FNC
+Fear Uncertainty and Doubt, FUD
+External Services Provider, ESP
+Extensible Markup Language, XML
+Extended Validation SSL, EV SSL
+Extended Capabilities Port, ECP
+Evolution-Data Optimized, EV-DO
+Enterprise Unified Process, EUP
+Enterprise Risk Management, ERM
+Enterprise Portal Software, EPS
+Enterprise Data Management, EDM
+Enhanced Messaging Service, EMS
+Energy Management Systems, EMSs
+Emailing While Intoxicated, EWI
+Electronic Retailing, E-Tailing
+Electronic Commerce, E-Commerce
+Electronic Business, E-Business
+Early Launch Anti-Malware, ELAM
+Dual Inline Memory Module, DIMM
+Disk-Based Data Protection, DDP
+Disaster Recovery Site, DR Site
+Direct Access File System, DAFS
+Digital Video Broadcasting, DVB
+Demo, Demo Scene and Demo Party
+Data Protection Management, DPM
+Data Manipulation Language, DML
+DRP, disaster recovery planning
+DBS, direct broadcast satellite
+DAS, distributed antenna system
+DAB, digital audio broadcasting
+Customer Engagement Center, CEC
+Continuous Data Protection, CDP
+Content Vectoring Protocol, CVP
+Content Delivery Networks, CDNs
+Concurrent Versions System, CVS
+Computer-Aided Engineering, CAE
+Computer Science Network, CSNet
+Computer Numerical Control, CNC
+Computer Graphics Metafile, CGM
+Communications Security, COMSEC
+Common Intermediate Format, CIF
+Commerce Services Provider, CSP
+Collaboration Data Objects, CDO
+Code Division Multiplexing, CDM
+Certified Systems Engineer, CSE
+Care Delivery Organization, CDO
+Capable-to-Promise Systems, CTP Systems
+CNS, converged network services
+CMS, campaign management system
+CIR, committed information rate
+Business Services Provider, BSP
+Bring Your Own Technology, BYOT
+Bridge Protocol Data Unit, BPDU
+Basic Input/Output System, BIOS
+Automatic Call Distributor, ACD
+Automated Vehicle Locating, AVL
+Automated Document Factory, ADF
+Asynchronous Transfer Mode, ATM
+Applicant Tracking Systems, ATS
+Apache Software Foundation, ASF
+Android Ice Cream Sandwich, ICS
+Advertising Network, Ad Network
+Advanced Persistent Threat, APT
+Adobe Certified Associate , ACA
+10Base-T, Twisted Pair Ethernet
+.NET Compact Framework, .NET CF
+integration as a service, IaaS
+first generation, 1G
+electronic commerce, ecommerce
+World Wide Web Consortium, W3C
+Windows Runtime Library, WinRT
+Wi-Fi Protected Access 2, WPA2
+Web-Oriented Architecture, WOA
+Web Services Coordination, WSC
+Visitor Location Register, VLR
+Virtual Network Computing, VNC
+Very High-Level Language, VHLL
+Vertical Service Provider, VSP
+Vertical Redundancy Check, VRC
+User-to-Network Interface, UNI
+User Experience Platforms, UXP
+University-Based Training, UBT
+Unique Device Identifier, UDID
+Unified Threat Management, UTM
+Unified Modeling Language, UML
+Unbundled Network Element, UNE
+U.S. Cyber Command, USCYBERCOM
+Transmission Security, TRANSEC
+Time-Domain Reflectometry, TDR
+Telephone Number Mapping, ENUM
+Tag Switching, Label Switching
+TDR, time domain reflectometry
+Symmetric Multiprocessing, SMP
+Structured Query Language, SQL
+Standard Template Library, STL
+Solid State Hybrid Drive, SSHD
+Software-Defined Security, SDS
+Software-Defined Anything, SDx
+Software Asset Management, SAM
+Social Media Optimization, SMO
+Shared Key Authentication, SKA
+Session Border Controller, SBC
+Service Management System, SMS
+Service Location Protocol, SLP
+Service Delivery Platform, SDP
+Sequenced Packet Protocol, SPP
+Sequenced Packet Exchange, SPX
+Selective Laser Sintering, SLS
+Second Generation Wireless, 2G
+STM, synchronous transfer mode
+SQL, Structured Query Language
+SOHO, small office/home office
+SMP, symmetric multiprocessing
+SFM, store-and-forward manager
+SAP Integration Server, SAP IS
+SAM, software asset management
+Routing Information Field, RIF
+Risk Assessment Framework, RAF
+Rich Internet Application, RIA
+Remote-Edge Access Point, REAP
+Red Hat Enterprise Linux, RHEL
+Really Simple Syndication, RSS
+ROC, return on competitiveness
+Quick Response Codes, QR Codes
+Public-Key Infrastructure, PKI
+Public Key Infrastructure, PKI
+Project Management Office, PMO
+Programming Language One, PL/I
+Power Usage Effectiveness, PUE
+Power Line Communications, PLC
+Portable Network Graphics, PNG
+Player Versus Environment, PvE
+Pipeline Burst Cache, PB Cache
+Phasor Measurement Units, PMUs
+Permanent Virtual Circuit, PVC
+PDC, personal digital cellular
+Optical Circuit Switching, OCS
+Open Shortest Path First, OSPF
+Object-Relational Mapping, ORM
+Object-Oriented Interface, OOI
+Object-Oriented Database, OODB
+Network Operations Center, NOC
+Network Management System, NMS
+Neighborhood Area Network, NAN
+NCOP, network code of practice
+N Port ID Virtualization, NPIV
+Multistation Access Unit, MSAU
+Multiple-In/Multiple-Out, MIMO
+Multiple System Operators, MSO
+Multidimensional Database, MDB
+Model-Driven Architecture, MDA
+Mobility Managed Services, MMS
+Mobile Satellite Services, MSS
+Mobile Application, Mobile App
+Microsoft Exchange Server, MXS
+Metropolitan Area Network, MAN
+Mean Time Between Repair, MTBR
+Maximum Transmission Unit, MTU
+Master Content Management, MCM
+Man-in-the-Middle Attack, MITM
+LCD, lowest common denominator
+Killer Application, Killer App
+Key Performance Indicator, KPI
+Internet Service Provider, ISP
+Interior Gateway Protocol, IGP
+Interactive Data Language, IDL
+Intelligent Virtual Agent, IVA
+Integration-as-a-Service, IaaS
+Infrared Wireless, IR Wireless
+ISP, Internet service provider
+Hybrid Electric Vehicles, HEVs
+High-Speed Packet Access, HSPA
+Hardware Asset Management, HAM
+Graph Search Optimization, GSO
+Global Positioning System, GPS
+Generic Top-Level Domain, gTLD
+Fused Deposition Modeling, FDM
+Frequency Division Duplex, FDD
+Fourth Generation Wireless, 4G
+First Come First Served, FCFS
+Federal Internet Exchange, FIX
+Facsimile Machine, Fax Machine
+FDD, frequency division duplex
+Extremely Large Database, XLDB
+Exterior Gateway Protocol, EGP
+Event-Driven Architecture, EDA
+Ethernet Data Acquisition, DAQ
+Enterprise Nervous System, ENS
+Electronic Medical Record, EMR
+Electronic Business XML, ebXML
+Dual-Tone Multifrequency, DTMF
+Digital Signal Processing, DSP
+Digital Rights Management, DRM
+Digital Object Identifier, DOI
+Development Data Platform, DDP
+Data Execution Prevention, DEP
+Data Distribution Service, DDS
+DRM, digital rights management
+DAP, Directory Access Protocol
+Customer Information File, CIF
+Customer Data Integration, CDI
+Converged Network Adapter, CNA
+Content Management System, CMS
+Computer Aided Test Tool, CATT
+Compressor/Decompressor, codec
+Complementary Code Keying, CCK
+Compact Disc-ReWritable, CD-RW
+Commercial Off-The-Shelf, COTS
+Chief Information Officer, CIO
+Certified Novell Engineer, CNE
+Capability Maturity Model, CMM
+CSD, consolidated service desk
+CMP, Cellular Multi-Processing
+CIO, chief information officer
+CD-I, Compact Disc-Interactive
+Business Service Provider, BSP
+Business Process Modeling, BPM
+Business Process Analysis, BPA
+Business Event Management, BEM
+Broadband Wireless Access, BWA
+Behavior Learning Engines, BLE
+Automatic Document Feeder, ADF
+Audio Home Recording Act, AHRA
+Artificial Neural Network, ANN
+Application System/400, AS/400
+Application Link Enabling, ALE
+AppleTalk Filing Protocol, AFP
+Advanced Technology Group, ATG
+Advanced Power Management, APM
+Advanced Authoring Format, AAF
+Activity-Based Management, ABM
+Active Server Pages, ASP pages
+Accelerated Graphics Port, AGP
+information assets, knowledge assets
+Word-of-Mouth Marketing, WOMM
+Wireless Markup Language, WML
+Wired Equivalent Privacy, WEP
+Windows Image Management, WIM
+Web Application Firewall, WAF
+WEP, wired equivalent privacy
+WBS, work breakdown structure
+Voice Over Wireless IP, VoWIP
+Visual Basic Script, VBScript
+Visitor-Based Networking, VBN
+Virtual Network Operator, VNO
+Virtual Home Environment, VHE
+Virtual Dedicated Server, VDS
+Vendor Management System, VMS
+User Experience Platform, UXP
+Universal Plug and Play, UPnP
+Uniform Resource Locator, URL
+Unified Messaging System, UMS
+Unified Computing System, UCS
+URL, uniform resource locator
+Transport Layer Security, TLS
+Total Quality Management, TQM
+Third Generation Wireless, 3G
+Terminal Node Controller, TNC
+Telecommunications Closet, TC
+TLS, transport layer security
+TLP, transmission-level point
+Switched Virtual Circuit, SVC
+Storage Service Provider, SSP
+Software-Defined Storage, SDS
+Software Development Kit, SDK
+Single Point of Failure, SPOF
+Service-Level Management, SLM
+Scalable Vector Graphics, SVG
+SSP, storage service provider
+SSN, switched service network
+SMR, specialized mobile radio
+SLM, service-level management
+SDK, software development kit
+Runtime Callable Wrapper, RCW
+Rich Communication Suite, RCS
+Report Program Generator, RPG
+Remote Method Invocation, RMI
+Recovery Point Objective, RPO
+Reality Distortion Field, RDF
+Real-Time Communications, RTC
+Real-Time Blackhole List, RBL
+Read The F###ing Manual, RTFM
+Rational Unified Process, RUP
+RNC, radio network controller
+Quality In Quality Out, QIQO
+Portable Document Format, PDF
+Port Address Translation, PAT
+Platform Development Kit, PDK
+Parallel Virtual Machine, PVM
+Over-the-Top Application, OTT
+Outage Management System, OMS
+Open Software Foundation, OSF
+Open Network Environment, ONE
+Object-Oriented Modeling, OOM
+Object-Oriented Language, OOL
+Next Generation Internet, NGI
+Network Service Provider, NSP
+Network Operating System, NOS
+Network Control Protocol, NCP
+Network Attached Storage, NAS
+NetBIOS Session Service, NBSS
+Near Field Communication, NFC
+Native Cloud Application, NCA
+National Security Agency, NSA
+NAS, network-attached storage
+Multifunction Peripheral, MFP
+Monitoring-as-a-Service, MaaS
+Model-Driven Development, MDD
+Mobile Satellite Service, MSS
+Mobile Location Protocol, MLP
+Mobile Instant Messaging, MIM
+Mobile E-Commerce, M-Commerce
+Mobile Device Management, MDM
+Mobile Assisted Handoff, MAHO
+Microsoft Hyper-V, MS Hyper V
+Mandatory Access Control, MAC
+Managed Service Provider, MSP
+Managed Document Service, MDS
+Location-Based Marketing, LBM
+Local Number Portability, LNP
+LCR, Lifetime Clinical Record
+LAN Manager Hash, LANMAN Hash
+Keyhole Mark-up Language, KML
+Java Runtime Environment, JRE
+Initial Sequence Numbers, ISN
+IT Infrastructure Utility, IU
+Human Capital Management, HCM
+Hosting Service Provider, HSP
+Host Virtual Machine, Host VM
+Hexadecimal To Character, X2C
+Hardware Identification, HWID
+Graphics Processing Unit, GPU
+Graphical User Interface, GUI
+Global Internet Exchange, GIX
+Garbage In Garbage Out, GIGO
+GUI, graphical user interface
+GPRS Tunneling Protocols, GTP
+Free Software Foundation, FSF
+Fouled Up Beyond Belief, FUBB
+Forward Error Correction, FEC
+Facebook commerce, F-commerce
+Facebook Commerce, F-Commerce
+FMC, fixed-mobile convergence
+Executive Support System, ESS
+Everything-as-a-Service, XaaS
+Enterprise as a Service, EaaS
+Electronic Textile, E-Textile
+Electronic Serial Number, ESN
+Electronic Paper Display, EPD
+Electronic Health Record, EHR
+Electronic Coupons, E-Coupons
+Electronic Cash Register, ECR
+Electronic Book Exchange, EBX
+Document Type Definition, DTD
+DoD Directive 8570, DoDD 8570
+Directory Harvest Attack, DHA
+Digital Visual Interface, DVI
+Digital Asset Management, DAM
+Denial-of-Service Attack, DoS
+Demand Signal Repository, DSR
+Data Management Software, DMS
+Data Management Platform, DMP
+Data Encryption Standard, DES
+Data Definition Language, DDL
+Data At Rest Protection, DARP
+DDL, data definition language
+Customer Data Management, CDM
+Critical Section Routine, CSR
+Course Management System, CMS
+Corporate Data Warehouse, CDW
+Content Delivery Network, CDN
+Consumer-Generated Media, CGM
+Computer Network Defense, CND
+Component Object Model+, COM+
+Component Load Balancing, CLB
+Complex Event Processing, CEP
+Common Information Model, CIM
+Common Gateway Interface, CGI
+Cloud Services Brokerage, CSB
+Clinical Data Repository, CDR
+Cisco Discovery Protocol, CDP
+Chief Technology Officer, CTO
+Chief Experience Officer, CXO
+Character to Hexadecimal, C2X
+Certified Wireless USB, W-USB
+Certified Ethical Hacker, CEH
+Category 7 Cable, Cat 7 Cable
+Category 6 Cable, Cat 6 Cable
+Category 4 Cable, Cat 4 Cable
+Category 3 Cable, Cat 3 Cable
+CTX, corporate trade exchange
+CTO, chief technology officer
+COL, Component Object Library
+CLV, constant linear velocity
+CIM, Common Information Model
+Business Impact Analysis, BIA
+Business Continuity Plan, BCP
+Bring Your Own Computer, BYOC
+Base Transceiver Station, BTS
+Autonomous System Number, ASN
+Automatic Test Equipment, ATE
+Automatic Repeat reQuest, ARQ
+Automated Teller Machine, ATM
+Advanced Shipment Notice, ASN
+Adobe Integrated Runtime, AIR
+Adaptive Packet Assembly, APA
+Access Control Facility, ACF2
+tablet ecommerce, t-commerce
+large-scale integration, LSI
+color management system, CMS
+Zero-Latency Enterprise, ZLE
+Wireless Sensor Network, WSN
+Wireless Point of Sale, WPOS
+Windows NT LAN Manager, NTLM
+Windows File Protection, WFP
+Virtual Server Facility, VSF
+Virtual Private Network, VPN
+Virtual Path Identifier, VPI
+Virtual Machine Monitor, VMM
+Virtual Desktop Manager, VDM
+User Identification, User ID
+User Acceptance Testing, UAT
+Unmanned Aerial Vehicle, UAV
+Trusty Tahr, Ubuntu Codename
+Trusted Platform Module, TPM
+Trusted Computing Group, TCG
+Total Cost of Ownership, TCO
+Test Driven Development, TDD
+Technical Report 069, TR-069
+Supply Chain Management, SCM
+Stop Online Piracy Act, SOPA
+Social Network Analysis, SNA
+Skinput, Bioacoustic Sensing
+Service Switching Point, SSP
+Service Set Identifier, SSID
+Service Level Agreement, SLA
+Sender Policy Framework, SPF
+Secure Digital Card, SD Card
+Secondary Audio Program, SAP
+Search Plus Your World, SPYW
+Search Engine Marketing, SEM
+Scalable Link Interface, SLI
+SSP, service switching point
+SLO, service-level objective
+SLA, service-level agreement
+SBM, skills-based management
+Rogue Access Point, Rogue AP
+Reverse Path Forwarding, RPF
+Remote Desktop Services, RDS
+Remote Desktop Protocol, RDP
+Recovery Time Objective, RTO
+Quick Response Code, QR Code
+Public Key Cryptography, PKC
+Programming Language I, PL/I
+Product Data Management, PDM
+Private Branch Exchange, PBX
+Point-to-Point Protocol, PPP
+Perfect Forward Secrecy, PFS
+Pages Per Visit, Pages/Visit
+Packet Switched Network, PSN
+PROTECT IP Act of 2011, PIPA
+PDM, product data management
+PCM, patient care management
+PBX, private branch exchange
+Optical Burst Switching, OBS
+Open Financial Exchange, OFX
+Object Management Group, OMG
+OLE for Process Control, OPC
+ODM, own design manufacturer
+Next Generation Network, NGN
+New Product Development, NPD
+Network Identity, Network ID
+Multiprotocol Over ATM, MPOA
+Multipoint Control Unit, MCU
+Modified Off-The-Shelf, MOTS
+Mobile Switching Center, MSC
+Mobile Network Operator, MNO
+Mobile Computing Device, MCD
+Mobile Broadband System, MBS
+Mobile Ad Hoc Network, MANET
+Minimum Point of Entry, MPOE
+Media Dispatch Protocol, MDP
+Main Distribution Frame, MDF
+Location Based Services, LBS
+Large-Scale Integration, LSI
+LBS, location-based services
+LANDesk Client Manager, LDCM
+Java Foundation Classes, JFC
+Internet Exchange Point, IXP
+Intelligent Input/Ouput, I2O
+Integration Definition, IDEF
+Information Architecture, IA
+In-Vehicle Infotainment, IVI
+Identity-Aware Networks, IAN
+IT Security Management, ITSM
+IRR, internal rate of return
+IP Multimedia Subsystem, IMS
+IMS, IP multimedia subsystem
+Hybrid Routing Protocol, HRP
+Hosted Virtual Desktops, HVD
+Functional Specification, FS
+Framework Class Library, FCL
+Folksonomies, Social Tagging
+Event-Stream Processing, ESP
+Enterprise Data Quality, EDQ
+Enterprise Archive File, EAR
+Electrostatic Discharge, ESD
+Electronic Data Capture, EDC
+Electro Mobility, E-Mobility
+Drawing Exchange Format, DXF
+Distributed File System, DFS
+Disk-to-Disk-to-Cloud, D2D2C
+Direct Attached Storage, DAS
+Digital Subscriber Line, DSL
+Digital Commerce, D-Commerce
+Decision Support System, DSS
+Database as a Service, DBaaS
+Database Manager, DB Manager
+Data Terminal Equipment, DTE
+Data Quality Management, DQM
+Data Center Outsourcing, DCO
+Data Access Arrangement, DAA
+DSL, digital subscriber line
+DPO, defects per opportunity
+DIF, Data Interchange Format
+Cyclic Redundancy Check, CRC
+Critical Success Factor, CSF
+Cooling Capacity Factor, CCF
+Configuration Management, CM
+Concept of Operations, CONOP
+Competitive Intelligence, CI
+Common Language Runtime, CLR
+Combined Heat and Power, CHP
+Cloud Security Alliance, CSA
+Cloud Printing Services, CPS
+Choose Your Own Device, CYOD
+Chief Knowledge Officer, CKO
+Central Processing Unit, CPU
+Category 5 Cable, Cat5 Cable
+Card Verification Value, CVV
+CSF, critical success factor
+CRC, cyclic redundancy check
+CPU, central processing unit
+CM, configuration management
+CKO, chief knowledge officer
+Business Process Fusion, BPF
+Business Process Engine, BPE
+Brain-Machine Interface, BMI
+Boyce-Codd Normal Form, BCNF
+Border Gateway Protocol, BGP
+Big Data as a Service, BDaaS
+Base Station Controller, BSC
+Average Speed of Answer, ASA
+Automatic Backup System, ABS
+Application Architecture, AA
+Anti-Virus Killer, AV Killer
+Analytics as a Service, AaaS
+Alliance to Save Energy, ASE
+Advanced Systems Format, ASF
+Advanced RISC Computing, ARC
+Active Template Library, ATL
+Abstract Window Toolkit, AWT
+100 Gigabit Ethernet, 100GbE
+security, computer security
+mobile operating system, OS
+gateway server, transcoding server
+Write-Once Read-Many, WORM
+Workforce Optimization, WFO
+Windows Imaging Format, WIF
+Wi-Fi Protected Access, WPA
+Web Log Client, Blog Client
+Web Graphics Library, WebGL
+Web Content Management, WCM
+Visual Basic Extension, VBX
+Virtual Storage Portal, VSP
+Virtual Private Server, VPS
+Virtual Channel Memory, VCM
+Video Teleconferencing, VTC
+Vendor Risk Management, VRM
+Vector Markup Language, VML
+Value Chain Management, VCM
+VLAN Trunking Protocol, VTP
+User-Generated Content, UGC
+User Datagram Protocol, UDP
+Unsolicited Bulk Email, UBE
+Ultra Mobile Broadband, UMB
+Trusted Computing Base, TCB
+Ticket Granting Ticket, TGT
+Ticket Granting Server, TGS
+Thermoelectric Cooling, TEC
+Tablet Commerce, T-Commerce
+Standard Parallel Port, SPP
+Spanning Tree Protocol, STP
+Software-Defined Radio, SDR
+Software as a Service, SaaS
+Social Networking Site, SNS
+Social Media Marketing, SMM
+Social Media Analytics, SMA
+Server-Based Computing, SBC
+Serial Presence Detect, SPD
+Sales Force Automation, SFA
+SPP, service parts planning
+SMS, system-managed storage
+SFA, sales force automation
+SCE, supply chain execution
+Retirement Brain Drain, RBD
+Resilient File System, ReFS
+Platform as a Service, PaaS
+Photonic Crystal Fiber, PCF
+Personal Supercomputer, PSC
+Personal Storage Table, PST
+Personal Health Record, PHR
+Persistent-State World, PSW
+PWM, pulse width modulation
+PHR, personal health record
+PAS, personal access system
+Organic User Interface, OUI
+Operational Data Store, ODS
+Open Wireless Movement, OWM
+Open Source Initiative, OSI
+Open Enterprise Server, OES
+Object-Oriented Design, OOD
+Network Load Balancing, NLB
+Network Interface Card, NIC
+Network Access Control, NAC
+Native Command Queuing, NCQ
+Mobile Internet Device, MID
+Mobile Cloud Computing, MCC
+Minimum Viable Product, MVP
+Message Transfer Agent, MTA
+Master Data Management, MDM
+Managed Print Services, MPS
+Malicious Software, Malware
+Local Exchange Carrier, LEC
+Liquid Crystal Display, LCD
+Linux SSD caching, dm-cache
+Label Switching Router, LSR
+LCD, liquid crystal display
+Keyboard Video Mouse, KVM
+Internet of Everything, IoE
+IT Service Management, ITSM
+IE, information engineering
+Human Interface Device, HID
+Hosted Virtual Desktop, HVD
+Host Identity Protocol, HIP
+Home Location Register, HLR
+High-Level Assembler, HLASM
+Hexadecimal To Decimal, X2D
+Head-Mounted Displays, HMDs
+Harlem Shake, in technology
+Hardware as a Service, HaaS
+HLR, home location register
+Generic Access Network, GAN
+GAN, generic access network
+Front-End Optimization, FEO
+Frequency-Shift Keying, FSK
+Firmware Over-The-Air, FOTA
+File Transfer Protocol, FTP
+File Exchange Protocol, FXP
+Fiber to the Building, FTTB
+Fiber To The Premises, FTTP
+False Acceptance Ratio, FAR
+Facebook Immune System, FIS
+Fabric-Based Computing, FBC
+FTTP, fiber to the premises
+FTP, File Transfer Protocol
+Extract Transform Load, ETL
+Enterprise Service Bus, ESB
+Enterprise Architecture, EA
+Enhanced Parallel Port, EPP
+Encrypting File System, EFS
+Driver Development Kit, DDK
+Disk-To-Disk-To-Tape, D2D2T
+Disaster Recovery Plan, DRP
+Dial-on-Demand Routing, DDR
+Defense Message System, DMS
+Deep Packet Inspection, DPI
+Decimal To Hexadecimal, D2X
+Database Administrator, DBA
+Data Governance Office, DGO
+Copyright Alert System, CAS
+Component Object Model, COM
+Command Line Interface, CLI
+Collaborative Filtering, CF
+Chief Security Officer, CSO
+Certification Authority, CA
+Central Outdoor Router, COR
+COMPUter SECurity, COMPUSEC
+COM, Component Object Model
+CMC, common messaging calls
+Business-to-Government, B2G
+Bring Your Own Device, BYOD
+Bell Operating Company, BOC
+Artificial Intelligence, AI
+Application Development, AD
+Anything But Microsoft, ABM
+Adobe Certified Expert, ACE
+Activity-Based Costing, ABC
+A Programming Language, APL
+3-D Stereo Technology, S3-D
+compliance, organizational
+cloud computing, the cloud
+Xerox Network Systems, XNS
+XML Query Language, XQuery
+Wireless Mesh Network, WMN
+Wireless Access Point, WAP
+Wireless Abstract XML, WAX
+Wi-Fi Protected Setup, WPS
+Web-Based Seminar, Webinar
+Web Access Management, WAM
+WIPO Copyright Treaty, WCT
+Voice of the Customer, VoC
+Voice Response System, VRS
+Voice Operated Switch, VOX
+Voice Call Continuity, VCC
+Visual Studio Express, VSE
+Virtual Shared Memory, VSM
+Virtual Private Cloud, VPC
+Virtual Device Driver, VxD
+Unified Communications, UC
+Tool Command Language, Tcl
+Too Long Didn't Read, TLDR
+Through-Silicon Vias, TSVs
+Theory of Constraints, TOC
+Terabytes Per Second, TBps
+Subject Matter Expert, SME
+Storage as a Service, SaaS
+Social Tagging, Folksonomy
+Smart Television, Smart TV
+Single Inline Package, SIP
+Signaling System No.7, SS7
+Short Message Service, SMS
+Shared Contact Center, SCC
+SCR, sustainable cell rate
+SCP, supply chain planning
+Robust File Copy, Robocopy
+Responsive Web Design, RWD
+Remote Procedure Call, RPC
+Remote Outdoor Router, ROR
+Reduce Reuse Recycle, R3
+RTP Control Protocol, RTCP
+Quality of Experience, QoE
+Pulse Code Modulation, PCM
+Project Health Checks, PHC
+Printed Circuit Board, PCB
+Power Macintosh, Power Mac
+Personal Area Network, PAN
+Payment Card Industry, PCI
+PTR, peak transaction rate
+PCM, pulse code modulation
+Oracle Database, Oracle DB
+Operations Security, OPSEC
+Operational Technology, OT
+Operation Windigo, malware
+Open Secure Shell, OpenSSH
+Open Handset Alliance, OHA
+Object Request Broker, ORB
+Network Time Protocol, NTP
+Network Access Server, NAS
+Netware Core Protocol, NCP
+Navy Knowledge Online, NKO
+NDC, networked data center
+Model View Controller, MVC
+Megabytes Per Second, MBps
+Medium-Level Language, MLL
+Mean Time to Failure, MTTF
+Managed Print Service, MPS
+Managed File Transfer, MFT
+MERA VoIP Key System, MVKS
+Liquid Cooling System, LCS
+Liquefied Natural Gas, LNG
+Linux OS, Operating System
+Link Control Protocol, LCP
+K Desktop Environment, KDE
+Internet Server API, ISAPI
+Internet Key Exchange, IKE
+Internationalization, I18N
+Interim Standard 95, IS-95
+Interexchange Carrier, IXC
+Integrated Lights-Out, iLO
+Information Technology, IT
+Information Management, IM
+IT, information technology
+ISO, Internet sales outlet
+IM, information management
+Hexadecimal To Binary, X2B
+HI, healthcare infomediary
+Global Assembly Cache, GAC
+Gigascale Integration, GSI
+Fixed Wireless Access, FWA
+File Allocation Table, FAT
+Error Correction Code, ECC
+Enterprise Application, EA
+Encyclopedia Dramatica, ED
+Electrophoretic Ink, E Ink
+Electromagnetic Field, EMF
+Dude Just Google It, DJGI
+Driving While Texting, DWT
+Document Object Model, DOM
+Distributed Generation, DG
+Distributed Computing, DCI
+Digital Cross-Connect, DXC
+Desktop-as-a-service, DaaS
+Desktop as a Service, DaaS
+Desktop Administration, DA
+DFSS, design for Six Sigma
+DAS, dual-attached station
+Customer Self Service, CSS
+Continuous Integration, CI
+Context-Aware Network, CAN
+Concurrent Engineering, CE
+Computer-Aided Design, CAD
+Committed Access Rate, CAR
+CloudBurst, IBM CloudBurst
+Client Access License, CAL
+Charge-Coupled Device, CCD
+Channel Access Method, CAM
+Cascading Style Sheet, CSS
+Call Detail Recording, CDR
+CSD, circuit-switched data
+Business Rule Engines, BRE
+Bulletin Board System, BBS
+Building Area Network, BAN
+Bring Your Own Cloud, BYOC
+Blue Screen of Death, BSoD
+Biological Internet, Bi-Fi
+Binary To Hexadecimal, B2X
+Backend-as-a-Service, BaaS
+Average Selling Price, ASP
+Authentication Center, AuC
+Army Knowledge Online, AKO
+Arithmetic Logic Unit, ALU
+Application Management, AM
+Annual Change Traffic, ACT
+Android Froyo, Android 2.2
+Advanced Video Coding, AVC
+Advanced RISC Machine, ARM
+Advanced Audio Coding, AAC
+Active-Matrix OLED, AMOLED
+Access Control System, ACS
+Acceptable Use Policy, AUP
+AMG, access media gateways
+AIM, AOL Instant Messenger
+40 Gigabit Ethernet, 40GbE
+10-Gigabit Ethernet, 10GbE
+user-centered design, UCD
+satellite phone, satphone
+magneto-optical drive, MO drive
+integration brokerage, IB
+execution environment, EE
+electronic waste, e-waste
+Windows Driver Model, WDM
+WiBro, wireless broadband
+WfM, Wired for Management
+WFM, workforce management
+Visual Basic .NET, VB.NET
+Virtual Tape Library, VTL
+Video Graphics Array, VGA
+Very Large Database, VLDB
+Value-Added Reseller, VAR
+Value Stream Mapping, VSM
+Value Added Reseller, VAR
+Usenet Death Penalty, UDP
+Universal Serial Bus, USB
+Time Division Duplex, TDD
+Tap, Digital Input Method
+TMG, trunk media gateways
+Storage Area Network, SAN
+Southbound Interface, SBI
+Solid-State Computer, SSC
+Solid State Recorder, SSR
+Service Data Objects, SDO
+Server Message Block, SMB
+Secure Sockets Layer, SSL
+SSL, Secure Sockets Layer
+SAN, storage area network
+Request for Proposal, RFP
+Request for Comments, RFC
+Remote Data Backup, ROBOs
+Remote Access Trojan, RAT
+Remote Access Server, RAS
+Registered Jack-11, RJ-11
+Referential Integrity, RI
+Real-Time Enterprise, RTE
+Random Access Memory, RAM
+ROI, return on investment
+Quick Access Toolbar, QAT
+Processing In Memory, PIM
+Private Access DSL, PADSL
+Privacy International, PI
+Power-Up In Standby, PUIS
+Post Office Protocol, POP
+Player Versus Player, PvP
+Physical Unit Number, PUN
+Permanent Link, Permalink
+PAL, Phase Alternate Line
+Optical Mesh Network, OMN
+Open-Source Software, OSS
+Open Mobile Alliance, OMA
+Open Document Format, ODF
+Northbound Interface, NBI
+Non-Volatile Storage, NVS
+Non-Player Character, NPC
+Network Access Point, NAP
+NAP, network access point
+Multicast Router, mrouter
+Multicast Backbone, MBone
+Mobile Payment, M-payment
+Megabits Per Second, Mbps
+Media Access Control, MAC
+Maximum Segment Size, MSS
+Logical Link Control, LLC
+Local Area Transport, LAT
+Light-Emitting Diode, LED
+Layer Two Forwarding, L2F
+LED, light-emitting diode
+Ku-band, Kurtz-under band
+Kilobits Per Second, Kbps
+Ka-band, Kurtz-above band
+Job Control Language, JCL
+Java Virtual Machine, JVM
+Java Message Service, JMS
+Java Media Framework, JMF
+Java Development Kit, JDK
+Inverse Multiplexer, IMUX
+Intermediate Language, IL
+Intellectual Property, IP
+Information Assurance, IA
+IT Asset Management, ITAM
+Hybrid MPLS, Internet WAN
+Hybrid Fiber Coaxial, HFC
+Hundred Call Seconds, CCS
+High-Definition Voice, HD Voice
+Hard Disk Controller, HDC
+Gigabits Per Second, Gbps
+GEO, geosynchronous orbit
+Full-Disk Encryption, FDE
+Free Cooling, Economizers
+First Person Shooter, FPS
+Fiber-Optic Service, FiOS
+FM, facilities management
+Extended Super Frame, ESF
+Extended Service Set, ESS
+Exchange To Exchange, E2E
+Evolution Data Only, EVDO
+Enterprise JavaBeans, EJB
+Endpoint Identifiers, EID
+Electronic Waste, E-Waste
+Electronic Forms, E-Forms
+Electricity Over IP, EoIP
+E-Book Readers, E-Readers
+Dynamic Link Library, DLL
+Dynamic Data Masking, DDM
+Duplication Bug, Dupe Bug
+Direct Memory Access, DMA
+Digital Loop Carrier, DLC
+Dedicated Short Code, DSC
+Data Loss Prevention, DLP
+Data Link Switching, DLSw
+Data Center Bridging, DCB
+Customer Intelligence, CI
+Cross Site Scripting, XSS
+Critical Path Method, CPM
+Consumer-to-Business, C2B
+Code Access Security, CAS
+Certificate Authority, CA
+Case-Based Reasoning, CBR
+Caller Ringback Tone, RBT
+CSU, channel service unit
+C Programming Language, C
+Business-to-Consumer, B2C
+Business-to-Business, B2B
+Business Rule Engine, BRE
+Business Intelligence, BI
+British Thermal Unit, BTU
+Bootstrap Protocol, BOOTP
+Blog Audience, Blaudience
+Blackberry Messenger, BBM
+Binary-Coded Decimal, BCD
+Binary Large Object, BLOB
+Binary File Transfer, BFT
+Bearer Channel, B Channel
+Authentication Header, AH
+Anisotropic Filtering, AF
+Android Debug Bridge, ADB
+Administrative Domain, AD
+Add/Drop Multiplexer, ADM
+ActiveX Data Objects, ADO
+Access Control Entry, ACE
+AMD Virtualization, AMD-V
+sensei, also lean sensei
+penetration rate, mobile
+peak traffic, in Erlangs
+database shard, sharding
+Wireless Fidelity, Wi-Fi
+Windows Sockets, Winsock
+Wi-Fi, wireless fidelity
+WIM, WAP identity module
+Voice Response Unit, VRU
+Virtual To Physical, V2P
+Virtual Tape System, VTS
+Virtual IP Address, VIPA
+Virtual File System, VFS
+Virtual Call Center, VCC
+Value-Added Service, VAS
+Value-Added Network, VAN
+Time To First Byte, TTFB
+Telephone Company, Telco
+System Object Model, SOM
+System Administrator, SA
+Source Code Manager, SCM
+Solid-State Storage, SSS
+Single System Image, SSI
+Security Identifier, SID
+SPF, Shortest Path First
+Remote File Sharing, RFS
+Relational Database, RDB
+Registered Jack-45, RJ45
+RM, relationship manager
+Pretty Good Privacy, PGP
+Power-On Self Test, POST
+Physical To Virtual, P2V
+Phase Change Memory, PCM
+PCU, packet control unit
+Optical Power Meter, OPM
+On-Demand Computing, ODC
+Non-Volatile Memory, NVM
+Non-Breaking Space, NBSP
+Network Intelligence, NI
+Network File System, NFS
+Metal-as-a-Service, MAAS
+Mass Storage Device, MSD
+Long Term Evolution, LTE
+Logical Unit Number, LUN
+Lithium-Ion battery, LIB
+Knowledge Management, KM
+Katmai, Pentium III Core
+Internet Relay Chat, IRC
+Information Security, IS
+In-Memory Database, IMDB
+IAM as a Service, IAMaaS
+High-Level Language, HLL
+Global Threat Bot, GTbot
+Global Area Network, GAN
+Floating-Point Unit, FPU
+Fiber Bragg Grating, FBG
+FM, frequency modulation
+Execute Disable Bit, EDB
+Eris Free Network, EFNet
+Enterprise Architect, EA
+Emission Security, EMSEC
+Direct Web Remoting, DWR
+Delta Channel, D Channel
+Deep Packet Capture, DPC
+Data as a Platform, DaaP
+Data Recovery Agent, DRA
+Data Center Manager, DCM
+Cost Per Impression, CPI
+Cost Per Conversion, CPC
+Consumer Electronics, CE
+Class-Based Queuing, CBQ
+Chip Multithreading, CMT
+Chief Green Officer, CGO
+Change Data Capture, CDC
+Campus Area Network, CAN
+CTQ, critical to quality
+CPGA, cost per gross add
+COM, communications port
+Build Your Own App, BYOA
+Bourne Again Shell, Bash
+Bluetooth Low Energy, LE
+Amazon Web Services, AWS
+Alternate Text, Alt Text
+Address Record, A Record
+Access Control List, ACL
+1000Base-T, IEEE 802.3ab
+White Space Device, WSD
+Web-Based Training, WBT
+Web Request Broker, WRB
+Volume Boot Record, VBR
+Virtual To Virtual, V2V
+Virtual Switch, VSwitch
+Virtual Disk Image, VDI
+Unix-to-Unix Copy, UUCP
+System Global Area, SGA
+Synchronous DRAM, SDRAM
+Stock-Keeping Unit, SKU
+Start of Authority, SOA
+Simple API For XML, SAX
+Second Normal Form, 2NF
+Sarbanes-Oxley Act, SOX
+Same Origin Policy, SOP
+SKU, stock-keeping unit
+SFC, shop floor control
+SAX, Simple API for XML
+Remote Monitoring, RMON
+Region of Interest, ROI
+Real-Time Strategy, RTS
+RSA, rural service area
+Queries-per-Second, QPS
+Quality of Service, QoS
+QoS, quality of service
+Provisioning, Computing
+Print Screen Key, PRTSC
+Phase-Shift Keying, PSK
+Personal System/2, PS/2
+PSK, phase-shift keying
+Number of Tiers, N-tier
+Not Safe for Work, NSFW
+Mutual Exclusion, Mutex
+Multi-User Dungeon, MUD
+Millisecond, ms, msec
+Memory In Cassette, MIC
+Master Boot Record, MBR
+Machine to Machine, M2M
+MIP Mapping, Mipmapping
+Locked Down Device, LDD
+Local Area Network, LAN
+Level 3 Cache, L3 Cache
+Level 2 Cache, L2 Cache
+Level 1 Cache, L1 Cache
+LAN, local-area network
+Internet of Things, IoT
+Interaction Design, IxD
+Intelligent Network, IN
+In-Betweening, Tweening
+I/O Virtualization, IOV
+Google File System, GFS
+Fourth Normal Form, 4NF
+File Control Block, FCB
+Fiber to the Node, FTTN
+Fiber to the Home, FTTH
+Fiber to the Curb, FTTC
+Fiber Connection, FICON
+FTTH, fiber to the home
+FPD, flat panel display
+Extreme Programming, XP
+Electronic Card, e-Card
+Electronic Book, E-Book
+Domain Name System, DNS
+Document Management, DM
+Do It With Others, DIWO
+Dirty Paper Coding, DPC
+Desktop Environment, DE
+Demilitarized Zone, DMZ
+Data as a Service, DaaS
+Data Transfer Rate, DTR
+Data Communications, DC
+DR, distributed request
+Continuous Delivery, CD
+Common Type System, CTS
+Common Access Card, CAC
+Collaborative CRM, CCRM
+Click-Through Rate, CTR
+Chief Risk Officer, CRO
+Carbon Copy, cc, c.c.
+Capacity On Demand, COD
+Call Detail Record, CDR
+Cache on a STick, COASt
+CTR, click-through rate
+CPU Interrupt Code, CIC
+CD-Read Writable, CD-RW
+Business to Anyone, B2A
+Basic Trading Area, BTA
+Balanced Scorecard, BSC
+Backus Normal Form, BNF
+Area Border Router, ABR
+Architect-Engineer, A-E
+Andrew File System, AFS
+AMR, adaptive multirate
+computer-to-plate, CTP
+compliance, regulatory
+compliance, commercial
+broadband ISDN, B-ISDN
+Write-Only Memory, WOM
+Wide Area Network, WAN
+Web Operations, WebOps
+WAN, wide-area network
+Virtual Hard Disk, VHD
+Virtual Data Room, VDR
+Very High Density, VHD
+Variable Bit Rate, VBR
+User Agent Server, UAS
+User Agent Client, UAC
+USB On-The-Go, USB OTG
+Third Normal Form, 3NF
+System Integration, SI
+Stereolithography, STL
+Small Form Factor, SFF
+Session Controller, SC
+SOW, statement of work
+Role-Playing Game, RPG
+Records Management, RM
+Read-Write Memory, RWM
+Point of Presence, POP
+POP, point of presence
+Open Rights Group, ORG
+One-Time Password, OTP
+On-Screen Display, OSD
+Multivalued Field, MVF
+Label Edge Router, LER
+K Virtual Machine, KVM
+Java Data Objects, JDO
+Interrupt Request, IRQ
+Internet Society, ISOC
+Integrated Circuit, IC
+Information System, IS
+IB, integration broker
+HyperTransport Bus, HT
+Hybrid Hard Drive, HHD
+Home-Area Network, HAN
+Home Area Network, HAN
+High-Ping Bastard, HPB
+High-Gain Antenna, HGA
+Health Informatics, HI
+Head-Up Displays, HUDs
+Garbage Collection, GC
+Frames Per Second, FPS
+Floppy Disk Drive, FDD
+First Normal Form, 1NF
+File Area Network, FAN
+Field Area Router, FAR
+Extra-high Density, ED
+Extended Data Out, EDO
+Expansion Port, E_Port
+Events Per Second, EPS
+Entity Data Model, EDM
+Electronic Mail, Email
+Elastic MapReduce, EMR
+Device Under Test, DUT
+Delay-Locked Loop, DLL
+Death by Tweakage, DBT
+Data Link Control, DLC
+Darrloz, Linux.Darrloz
+DAT, digital audiotape
+Content Management, CM
+Constant Bit Rate, CBR
+Common Short Code, CSC
+Cellular Automaton, CA
+CUG, closed user group
+CMOT, CMIP over TCP/IP
+Buzzword Quotient, BWQ
+Business Analytics, BA
+Body Area Network, BAN
+Blind Carbon Copy, BCC
+Bill-of-Materials, BOM
+Betamax Standard, Beta
+Beginning Of File, BOF
+Average Hold Time, AHT
+Audio Modem Riser, AMR
+Apple Desktop Bus, ADB
+Apache Subversion, SVN
+Adobe Wallaby, Wallaby
+Address-of Operator, &
+1xRTT, cdma2000 1x RTT
+eDonkey Network, eD2k
+computer virus, virus
+Wi-Fi Multimedia, WMM
+Web Intermediary, WBI
+Voice on the Net, VON
+Virtual Teletype, VTY
+Virtual Assistant, VA
+Variable, Mathematics
+Unified Messaging, UM
+Ultra Mobile PC, UMPC
+Two-Phase Commit, 2PC
+Triple Mode, Tri-Mode
+Top-Level Domain, TLD
+The Onion Router, Tor
+Tape Backup Unit, TBU
+System on a Chip, SoC
+System Integrator, SI
+Solid State Disk, SSD
+Social Computing, SoC
+SI, system integrator
+Read Only Memory, ROM
+ROE, return on equity
+Query By Example, QBE
+Quality Assurance, QA
+QA, quality assurance
+Proof of Concept, POC
+Print Server, PSERVER
+Personal Computer, PC
+Pebibit, Pibit, Pib
+Pages Per Minute, PPM
+POS, point of service
+Object Exchange, OBEX
+ODP, on-device portal
+Manual Page, Man Page
+Low-Ping Bastard, LPB
+Linux Containers, LXC
+Link Aggregation, LAG
+Linear Tape Open, LTO
+JavaServer Pages, JSP
+Internet Protocol, IP
+Internet Explorer, IE
+Interactive Video, IV
+IT Service Desk, ITSD
+IP, Internet Protocol
+IM, instant messaging
+Host Bus Adapter, HBA
+High Availability, HA
+Heads-Up Display, HUD
+Gigabit Ethernet, GbE
+Friend-To-Friend, F2F
+FPY, First Pass Yield
+Enterprise Portal, EP
+Eligible Provider, EP
+Electronic Ink, E Ink
+Elastic Computing, EC
+Double Data Rate, DDR
+Disaster Recovery, DR
+Decision Table, DETAB
+DPU, defects per unit
+Crash to Desktop, CTD
+Cognitive Network, CN
+Cathode-Ray Tube, CRT
+Card Not Present, CNP
+Canonical Name, CNAME
+COS, class of service
+CM, course management
+Business Blog, b-blog
+Business Add-In, BADI
+Brick and Mortar, B&M
+Back At Keyboard, BAK
+Autonomous System, AS
+Augmented Reality, AR
+Anti-Spyware, apyware
+Access Management, AM
+2G, second generation
+codec, coder/decoder
+World Wide Name, WWN
+Web browser, browser
+Video on Demand, VoD
+Video on Demand, VOD
+Vertical Sync, Vsync
+Terminal Adapter, TA
+Super-video, S-Video
+Send To Receive, S2R
+RTT, round-trip time
+Print on Demand, POD
+Port, an Application
+Polylactic Acid, PLA
+Pixels Per Inch, PPI
+Persistent URL, PURL
+PX, private exchange
+PS/2 Connector, PS/2
+Operating System, OS
+Network on Chip, NoC
+Network Computer, NC
+NetWare Link, NWLink
+NC, network computer
+Minutes of use, MOUs
+Micro Fuel Cell, MFC
+Low Earth Orbit, LEO
+Level of Detail, LOD
+LEO, low earth orbit
+Korea Scale, K-scale
+Knowledge Base, klog
+K-map, knowledge map
+Inline Frame, IFrame
+Hard Disk Drive, HDD
+Google+, Google Plus
+Google Plus, Google+
+Gigabyte, G, GByte
+Generic Port, G_Port
+Gallium Nitride, GaN
+Feature Group D, FGD
+Data Obfuscation, DO
+Creative Commons, CC
+Cost Per Action, CPA
+Compact HTML, C-HTML
+Cells In Frames, CIF
+Bluetooth 4.0, BT4.0
+Bluetooth 3.0, BT3.0
+Bits Per Second, bps
+Ball Grid Array, BGA
+Anonymous, Computing
+Active Directory, AD
+3G, third generation
+.NET Framework, .NET
+World Wide Web, WWW
+Word Processing, WP
+Windows on ARM, WOA
+Watchdog Timer, WDT
+Virtual Storage, VS
+Virtual Reality, VR
+Virtual Machine, VM
+Virtual Host, vhost
+Virtual Channel, VC
+User Experience, UX
+Unified Process, UP
+Transact-SQL, T-SQL
+The Pirate Bay, TPB
+Text to Speech, TTS
+Single Sign-On, SSO
+Secure MIME, S/MIME
+Remote Wake-Up, RWU
+Registered Jack, RJ
+Radio Frequency, RF
+Project Manager, PM
+Pay As You Go, PAYG
+PCI Extended, PCI-X
+Optical Carrier, OC
+Managed Bean, MBean
+Kilobit, Kb, kbit
+Key-Value Pair, KVP
+Karnaugh Map, K-map
+Instant Message, IM
+Globalization, G11N
+Fabric Port, F_Port
+Enterprise Bean, EB
+Dynamic HTML, DHTML
+Do It Yourself, DIY
+Demand Response, DR
+Data Governance, DG
+DTH, direct to home
+Cost Per Click, CPC
+Cognitive Radio, CR
+Close To Metal, CTM
+Cell On Wheels, COW
+CU, compliance unit
+CPC, cost per click
+CMOL, CMIP over LLC
+Business Object, BO
+Build to Order, BTO
+Big Red Switch, BRS
+Backup To Tape, B2T
+Backup To Disk, B2D
+Auxiliary Port, AUX
+Assisted GPS, A-GPS
+All-in-One PCs, AIO PCs
+Accessibility, a11y
+Abnormal End, ABEND
+90 nanometer, 90 nm
+45 Nanometer, 45 nm
+letter quality, LQ
+desk accessory, DA
+Web of Things, WoT
+Virtual Memory, VM
+User Interface, UI
+Subnetwork, Subnet
+Ruby On Rails, RoR
+Remote Control, RC
+Point of Sale, POS
+Plug and Play, PnP
+Plain Old XML, POX
+Pay Per Click, PPC
+POS, point of sale
+Network PC, Net PC
+Meaningful Use, MU
+Line of Sight, LoS
+IT Governance, ITG
+Hyperthreading, HT
+Frontside Bus, FSB
+FP, function point
+Erasure Coding, EC
+Enhanced 911, E911
+Dual Processor, DP
+Double-density, DD
+Dots Per Inch, DPI
+Direct Message, DM
+Demultiplex, DEMUX
+Data Warehouse, DW
+Cost Per Lead, CPL
+Commerce XML, cXML
+Change Mode, chmod
+Central Office, CO
+CTX, clear to send
+Binary Table, Byte
+Big Evil Grin, BEG
+Windows 2000, W2K
+WiHD, wireless HD
+White Balance, WB
+Visual Studio, VS
+Virtual LAN, VLAN
+Turing Number, TN
+Time to Live, TTL
+Secure Shell, SSH
+SELECT, Databases
+Reverse DNS, rDNS
+Q Signaling, QSIG
+Push-to-Talk, PTT
+Personal Java, PJ
+P2P, peer-to-peer
+Node Port, N_Port
+Just-In-Time, JIT
+Java Archive, JAR
+JIT, just in time
+Input/Output, I/O
+In Real Life, IRL
+I/O, input/output
+Golden Master, GM
+Free To Play, F2P
+Fixed Disk, FDISK
+Fiber Channel, FC
+DoJa, DoCoMo Java
+Disk-to-Disk, D2D
+Disk to Tape, D2T
+Digital Video, DV
+Data Robot, Drobo
+DFX, design for X
+Breakout Box, BoB
+Binary Digit, bit
+Binary Digit, Bit
+Backside Bus, BSB
+Visual Basic, VB
+Virtual I/O, VIO
+Spam Blog, Splog
+Set-Top Box, STB
+Service Pack, SP
+SP, service pack
+Remote Copy, rcp
+Real Reality, RR
+Portal, Internet
+Pay to Play, P2P
+Parameter, param
+Multiplexer, MUX
+Machine Code, MC
+Handheld PC, HPC
+Half Duplex, HDX
+Full Duplex, FDx
+Fast Infoset, FI
+Executable, .EXE
+End Of File, EOF
+Control Unit, CU
+CompactFlash, CF
+Cluster, Servers
+Bourne Shell, sh
+Blu-ray Disk, BD
+Base Station, BS
+Back Orifice, BO
+Access Point, AP
+Workstation, WS
+Tuple, Database
+SMFP, smart MFP
+Refresh, in SAP
+Read/Write, R/W
+Pentium II, PII
+Mac OS, Classic
+LulzSec, Lulsec
+IP Storage, IPS
+Hub, Networking
+Escape Key, ESC
+Device API, DAP
+Chroma Bug, CUE
+Character, CHAR
+ACCESS.bus, A.b
+Web Page, page
+User Group, UG
+User Agent, UA
+Trusted PC, TC
+Pseudowire, PW
+Pseudonym, nym
+PostScript, PS
+Picosecond, ps
+Nanosecond, ns
+Megahertz, MHz
+JavaScript, JS
+Interface, I/F
+IEEE 488, GPIB
+Hub, Computing
+Gigahertz, GHz
+Flame, malware
+Attosecond, as
+rack unit, RU
+Zettabyte, ZB
+Zebibyte, ZiB
+Yottabyte, YB
+Yobibyte, YiB
+WordPress, WP
+Web Log, Blog
+Tebibyte, TiB
+Page View, PV
+Megapixel, MP
+Mebibyte, MiB
+Kademlia, Kad
+Inter-IC, I2C
+HomePNA, HPNA
+Hardware, H/W
+Exbibyte, EiB
+Download, D/L
+Command, .CMD
+Cluster, Disk
+Upgrade, UPG
+Terabyte, TB
+Petabyte, PB
+Megabyte, MB
+LinkedIn, LI
+Kilobyte, KB
+Jitter, VoIP
+Integer, INT
+Infrared, IR
+Handover, HO
+Database, DB
+Bit Rate, BR
+Upload, U/L
+Retweet, RT
+Petabit, Pb
+Megabit, Mb
+Gigabit, Gb
+Forward, FW
+Exabyte, EB
+Candela, cd
+C#, C Sharp
+Bitmap, BMP
+Telnet, TN
+Output, OP
+Model, MVC
+Index, IDX
+View, MVC
+Null, NUL
+Baud, Bd
+giga, G
+Information Technology Infrastructure Library, ITIL
+Network Configuration and Change Management, NCCM
+Human Capital Management, HCM
+Environmental Health and Safety, EH&S
+Windows Management Instrumentation, WMI
+Human Capital Management, HCM
+Customer Relationship Management, CRM
+Configure Price Quote, CPQ
+Voice Over Internet Protocol, VoIP
+Enterprise Risk Management, ERM
+Cloud Application Development, AD
+Business Process Management, BPM
+SIM card, subscriber identity module
+Lithium Iron Phosphate, LiFePO4
+Crisis/Incident Management, C/IM
+Computational-Fluid-Dynamic, CFD
+Advanced Threat Detection, ATD
+ITOM, IT Operations Management
+Machine-to-Machine, M2M
+information technology, IT
+Information Technology, IT
+Enterprise Architecture, EA
+Information Technology, IT
+100Base-T, IEEE 802.3u
+Video Graphics Array, VGA
+Information Technology, IT
+Business Intelligence, BI
+information technology, IT
+Information Technology, IT
+Business Intelligence, BI
+Capable-to-Promise, CTP
+information, knowledge
+gateway, transcoding
+magneto-optical, MO
+High-Definition, HD
+All-in-One, AIO
+G, GByte
+Kb, kbit
+cc, c.c.
+ms, msec
+ROCm, RoC
+Pibit, Pib
+NiCd, NiCad
+OpenDD, ODD
+DVB-MHP, MHP
+SecaaS, SaaS
+GLB Act, GLBA
+Super VGA, SVGA
+SecureNA, SNAT
+Secure RTP, SRTP
+TEACH Act, S.487
+Virtual MDM, VMDM
+RTBI, Real-Time BI
+Muni Wi-Fi, Muni-Fi
+OBI, Operational BI
+Volume Pixel, Voxel
+Neural Net, Neural Network
+Shared Services, Shared Services Center

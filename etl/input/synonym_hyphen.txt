@@ -1,0 +1,247 @@
+Office of the National Coordinator - Authorized Testing and Certification Body, ONC-ATCB
+OPEN Act, Online Protection and Enforcement of Digital Trade Act
+Peripheral Component Interconnect Express, PCI Express, PCI-E
+open source CRM, open source customer relationship management
+TCP/IP, Transmission Control Protocol/Internet Protocol
+MCDST, Microsoft Certified Desktop Support Technician
+customer relationship management, small business CRM
+MCIF, IBM Measured Capability Improvement Framework
+ISO, International Organization for Standardization
+cloud CRM, Customer Relationship Management cloud
+SaaS, Software as a Service, Storage as a Service
+Revolution Analytics, big data analytics software
+TRILL, Transparent Interconnect of Lots of Links
+CAMP, Cloud Application Management for Platforms
+disaster recovery as a service, DR-as-a-Service
+SCADA, supervisory control and data acquisition
+HDCP, high-bandwidth digital-content protection
+ERP module, Enterprise Resource Planning module
+EFTPOS, Electronic Funds Transfer Point of Sale
+Digital Video Broadcasting - Terrestrial, DVB-T
+TOAD, Tools for Oracle Application Development
+REEF, Retainable Evaluator Execution Framework
+PEAR, PHP Extension and Application Repository
+LRDIMM, Load-Reduced Dual Inline Memory Module
+Integrated Development Environment, IDE
+ICT, Information and Communications Technology
+Application Programming Interface, API
+RDBMS, relational database management system
+LDAP, Lightweight Directory Access Protocol
+IMEI, International Mobile Equipment Identity
+GSM, Global System for Mobile Communications
+Digital Video Broadcasting - Handheld, DVB-H
+DWDM, Dense Wavelength Division Multiplexing
+search engine optimization, SEO
+DDoS attack, Distributed Denial of Service attack
+RAID, redundant array of independent disks
+IP address, Internet Protocol address
+HDMI, High-Definition Multimedia Interface
+MAC address, Media Access Control address
+ISDN, integrated services digital network
+Digital Video Broadcasting - Cable, DVB-C
+DHCP, Dynamic Host Configuration Protocol
+SNMP, Simple Network Management Protocol
+J2EE, Java 2 Platform Enterprise Edition
+IPng, IPv6, Internet Protocol Version 6
+COBOL, common business oriented language
+Amazon Virtual Private Cloud, Amazon VPC
+Amazon Simple Storage Service, Amazon S3
+PSTN, Public Switched Telephone Network
+PABX, Private Automated Branch Exchange
+IS manager, information systems manager
+APM, application performance management
+PMML, Predictive Model Markup Language
+PCI, Peripheral Component Interconnect
+JPEG, Joint Photographic Experts Group
+IMAP, Internet Message Access Protocol
+APIPA, Automatic Private IP Addressing
+Small Computer System Interface, SCSI
+RMA, returned materials authorization
+Office Web apps, Microsoft Office 365
+NDAS, Network Direct Attached Storage
+MCP, Microsoft Certified Professional
+MAC Layer, Media Access Control Layer
+ZAW, Zero Administration for Windows
+SMTP, Simple Mail Transfer Protocol
+RFID, radio frequency identification
+OEM, original equipment manufacturer
+IDF, intermediate distribution frame
+IBM, International Business Machines
+Hadoop Distributed File System, HDFS
+DoS attack, Denial of Service attack
+BPM, business performance management
+RDF, Resource Description Framework
+PXE, Pre-Boot Execution Environment
+PROM, programmable read-only memory
+MPLS, Multiprotocol Label Switching
+GIS, Geographic Information Systems
+DTN, Disruption Tolerant Networking
+CDMA, Code-Division Multiple Access
+ATA, Advanced Technology Attachment
+software-defined data center, SDDC
+WAP, Wireless Application Protocol
+W3C, The World Wide Web Consortium
+VoIP, Voice over Internet Protocol
+TCP, Transmission Control Protocol
+SONET, Synchronous Optical Network
+SAP, Session Announcement Protocol
+OLAP, Online Analytical Processing
+MPEG, Moving Picture Experts Group
+MIS, management information system
+GPRS, General Packet Radio Service
+ESM, enterprise storage management
+DevOps, development and operations
+API, application program interface
+WLAN, wireless local-area network
+VNF, virtualized network function
+UPS, uninterruptible power supply
+SRAM, static random access memory
+SDE, software defined environment
+POTS, plain old telephone service
+OLE, Object Linking and Embedding
+NRZI, Non-Return-to-Zero Inverted
+Mint GNOME Shell Extensions, MGSE
+HTTP, HyperText Transfer Protocol
+Extensible Threat Management, XTM
+ERP, enterprise resource planning
+Vertical Industry Portal, Vortal
+Software-Defined Everything, SDE
+SOHO, Small Office / Home Office
+SERP, search engine results page
+SDN, software defined networking
+OSI, Open System Interconnection
+ODBC, Open DataBase Connectivity
+NAT, Network Address Translation
+JDBC, Java Database Connectivity
+IVR, interactive voice response
+EULA, End-User License Agreement
+DBMS, database management system
+Apple Lossless Audio Codec, ALAC
+ARP, Address Resolution Protocol
+PDA, personal digital assistant
+HTML, HyperText Markup Language
+HCI, human-computer Interaction
+GIF, graphic interchange format
+EPS, Enterprise Portal Software
+DAFS, Direct Access File System
+CMYK, Cyan-Magenta-Yellow-Black
+BPDU, bridge protocol data unit
+BIOS, basic input/output system
+ATM, Asynchronous Transfer Mode
+APT, advanced persistent threat
+A3, anytime anywhere anyplace
+next generation firewall, NGFW
+WPA2, Wi-Fi Protected Access 2
+SQL, structured query language
+SMS, Systems Management Server
+SMP, Symmetric Multiprocessing
+SMO, social media optimization
+OSPF, Open Shortest Path First
+NOC, network operations center
+MAN, Metropolitan Area Network
+ISP, Internet service provider
+DSP, digital signal processing
+resistive memory, ReRAM, RRAM
+mobile device management, MDM
+WEP, Wired Equivalent Privacy
+SDK, software development kit
+RUP, Rational Unified Process
+RTM, release to manufacturing
+PDF, Portable Document Format
+PAT, port address translation
+OMR, optical mark recognition
+NOS, network operating system
+NAS, Network Attached Storage
+GUI, graphical user interface
+ETL, Extract Transform Load
+DVI, Digital Visual Interface
+CGI, Common Gateway Interface
+CDN, Content Delivery Network
+BYOC, Bring Your Own Computer
+phablet, phone tablet hybrid
+decision support system, DSS
+UTP, unshielded twisted pair
+TPM, Trusted Platform Module
+Server Message Block 2, SMB2
+SSID, service set identifier
+SOPA, Stop Online Piracy Act
+PMS, Pantone Matching System
+PBX, private branch exchange
+MDF, main distribution frame
+DAS, Direct Attached Storage
+message transfer agent, MTA
+disaster recovery plan, DRP
+XaaS, Anything-as-a-Service
+WSoD, White Screen of Death
+WPA, Wi-Fi Protected Access
+SATA III, SATA Revision 3.x
+NIC, network interface card
+LCD, liquid crystal display
+IRQ, interrupt request line
+FTP, file transfer protocol
+FORTRAN, formula translator
+ESB, Enterprise Service Bus
+DVD, digital versatile disc
+BYOD, bring your own device
+AI, artificial intelligence
+Webinar, Web-based seminar
+SBC, single-board computer
+OWL, Ontology Web Language
+OST, Offline Storage Table
+IT, Information Technology
+FAT, file allocation table
+DOS, disk operating system
+CFM, cubic feet per minute
+CAD, computer-aided design
+BYOC, Bring Your Own Cloud
+BHO, Browser Helper Object
+adb, Android Debug Bridge
+VGA, video graphics array
+USB, universal serial bus
+TFT, thin film transistor
+SSL, Secure Sockets Layer
+SMB, Server Message Block
+SAN, Storage Area Network
+RAM, random access memory
+POP, Post Office Protocol
+OData, Open Data Protocol
+Mbps, megabits per second
+JVM, Java Virtual Machine
+DMA, direct memory access
+BI, business intelligence
+SKU, stock keeping unit
+Pinwheel of Death, SPoD
+LAN, local-area network
+IoT, Internet of Things
+DNS, Domain Name System
+AdWords, Google AdWords
+AdSense, Google AdSense
+1080 progressive, 1080p
+vEth, virtual Ethernet
+WAN, wide area network
+Virtual Data Room, VDR
+USB OTG, USB On-The-Go
+MAU, Media Access Unit
+GAE, Google App Engine
+1080 interlaced, 1080i
+disaster recovery, DR
+ROM, read-only memory
+PC, personal computer
+IP, Internet Protocol
+CNAME, canonical name
+PIPA, PROTECT IP Act
+OS, operating system
+NTFS, NT File System
+HDD, hard disk drive
+RF, radio frequency
+OP, original poster
+OC, Optical Carrier
+HP, Hewlett-Packard
+pay per click, PPC
+DPI, dots per inch
+0FB, zero feedback
+SSH, Secure Shell
+I/O, input/output
+mini-SATA, mSATA
+AP, Access Point
+Hotmail.com, Outlook.com
