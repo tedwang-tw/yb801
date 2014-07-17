@@ -17,13 +17,14 @@ var ext = '.json'; //	null;	//	input file filter
 var outExt = '.txt';
 
 var NEWLINE = '\r\n';
-var DELIMITER = ',';
+//var DELIMITER = ',';
 
 var inTopDir = 'corpus_group/104/job';
 var outTopDir = 'tfidf_group/104/job';
 
 var basename_keyword = 'input/keywords_merge.txt';
 var basename_keywords_sort = 'keywords_merge_sort.txt';
+var basename_prefix = 'rep_';
 var basename_tf_idf = 'tf_icf.txt';
 var basename_tfidf = 'tficf.txt'; //	tf*idf
 var basename_tf_cluster = 'tf_cluster.txt'; //	term freq
@@ -192,7 +193,8 @@ function genDocTF(doc) {
 			list.push({
 				tfidf : tfidf,
 				keyword : keywords[i],
-				freq : 0
+				freq : 0,
+				rfreq : 0 //	reduced frequency
 			});
 	});
 
@@ -206,7 +208,8 @@ function genDocTF(doc) {
 	});
 
 	list.map(function (item, i) {
-		item.freq = Math.floor((i + 1) / 10) + 1; //	to fit the two-digits limitation of the wordcloud2.js
+		item.freq = i + 1;
+		item.rfreq = Math.floor(item.freq / 10) + 1; //	to fit the two-digits limitation of the wordcloud2.js
 		return item;
 	});
 
@@ -219,13 +222,28 @@ function genClustersTF(outDir, clusterFileList, matrix) {
 
 	clusterFileList.forEach(function (file, i) {
 		var outFile = path.join(outDir, file + outExt);
+		var outFile_rep = path.join(outDir, basename_prefix + file + outExt);
 		var fd = fs.createWriteStream(outFile);
+		var fd_rep = fs.createWriteStream(outFile_rep);
+		//var fd_rep = fs.openSync(outFile_rep, "w");
+		var repData = '';
 		var docTf = genDocTF(matrix[i]);
 
+		emitter.emit('log', ' ' + i);
+
 		docTf.forEach(function (item) {
-			fd.write(item.freq + FREQ_DELIMITER + item.keyword + FREQ_NEWLINE);
+			fd.write(item.rfreq + FREQ_DELIMITER + item.keyword + FREQ_NEWLINE);
+
+			var buffer = item.keyword + FREQ_NEWLINE;
+			for (var i = 0; i < item.freq; i++)
+				//fs.writeSync(fd_rep, buffer);
+				repData += buffer;
+		});
+		fd_rep.write(repData, function () {
+			fd_rep.end();
 		});
 		fd.end();
+		//fs.closeSync(fd_rep);
 	});
 }
 
@@ -292,6 +310,21 @@ function walkAlgorithm(dir, outDir, done) { //	per algorithm
 			var outFile = path.join(outDir, basename_joblist);
 			emitter.emit('log', NEWLINE + 'Write job list ' + outFile);
 			var fd = fs.createWriteStream(outFile);
+			var countDown = 2;	//	two matrix calc
+
+			function emitCB(message) {
+				process.stdout.write(message);
+				if (countDown === 0) {
+					emitter.removeListener('drainDone', emitCB);
+
+					emitter.emit('log', NEWLINE + 'Generate cloud freq per cluster...');
+					genClustersTF(outDir, jobList, matrix);
+					emitter.emit('log', '\tdone.');
+
+					done(null, itemCounter);
+				}
+			}
+			emitter.on('drainDone', emitCB);
 
 			jobList.forEach(function (jobCode) {
 				fd.write(jobCode + NEWLINE);
@@ -329,10 +362,6 @@ function walkAlgorithm(dir, outDir, done) { //	per algorithm
 					//emitter.emit('log', NEWLINE + lines + ' rows Done.');
 					emitter.emit('log', NEWLINE + 'Totally ' + itemCounter + '/' + listLen + ' cluster/files processed.');
 
-					emitter.emit('log', NEWLINE + 'Generate cloud freq per cluster...');
-					genClustersTF(outDir, jobList, matrix);
-					emitter.emit('log', '\tdone.');
-
 					var outFile_sort = path.join(outDir, basename_keywords_sort);
 					var fd_sort = fs.createWriteStream(outFile_sort);
 					emitter.emit('log', NEWLINE + 'Sorted keywords also saved to ' + outFile_sort);
@@ -342,6 +371,8 @@ function walkAlgorithm(dir, outDir, done) { //	per algorithm
 					});
 					fd_sort.end();
 
+					countDown--;
+					emitter.emit('drainDone', NEWLINE + 'matrix done.');
 					//done(null, itemCounter);
 				}
 			});
@@ -365,10 +396,12 @@ function walkAlgorithm(dir, outDir, done) { //	per algorithm
 					fd3.end();
 					//emitter.emit('log', NEWLINE + lines3 + ' rows Done.');
 					emitter.emit('log', NEWLINE + 'Totally ' + itemCounter + '/' + listLen + ' cluster/files processed.');
-					done(null, itemCounter);
+
+					countDown--;
+					emitter.emit('drainDone', NEWLINE + 'matrix3 done.');
+					//done(null, itemCounter);
 				}
 			});
-
 		};
 		q.empty = function () {
 			enQueue(q, list, CONCURRENCY);
@@ -579,8 +612,7 @@ if (!fs.existsSync(inTopDir)) {
 
 	getPreset();
 
-	var timeA = new Date().getTime(),
-	timeB;
+	var timeA = new Date().getTime();
 
 	readKeywords();
 
@@ -589,7 +621,7 @@ if (!fs.existsSync(inTopDir)) {
 		fs.appendFileSync(filename_status, message);
 
 		walk(inTopDir, outTopDir, function (err, results) {
-			timeB = new Date().getTime();
+			var timeB = new Date().getTime();
 
 			if (err) {
 				console.err(util.inspect(err));
