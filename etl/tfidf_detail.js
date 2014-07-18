@@ -214,7 +214,7 @@ function processTFIDF(dir, outDir, done, itemCounter) {
 				jobList.forEach(function (jobCode, i) {
 					if (presetList.resume)
 						if (i >= resumeIndex)
-							return;	//	bypass resumes
+							return; //	bypass resumes
 					dataOut += jobCode + NEWLINE;
 				});
 				fd.write(dataOut, function () {
@@ -236,24 +236,14 @@ function processTFIDF(dir, outDir, done, itemCounter) {
 
 				var dataOut2_1 = '';
 				var dataOut2_2 = '';
+				var dataResume = '';
 				matrix.forEach(function (doc) { //	per row (document)
 					var regEx = /[\[\]]/gi;
 					var terms = JSON.stringify(doc).replace(regEx, '');
 
 					if (presetList.resume) {
-						if (lines === resumeIndex) {	//	separate resume ouput
-							var outFile_resume = path.join(outDir, resume_dir + basename_tfidf_resume);
-							var outFile_resume_idx = path.join(outDir, resume_dir + basename_tfidf_resume_idx);
-							emitter.emit('log', NEWLINE + 'Write ' + outFile_resume);
-							var fd_resume = fs.createWriteStream(outFile_resume);
-							var fd_resume_idx = fs.createWriteStream(outFile_resume_idx);
-							fd_resume.write(terms, function () {
-								fd_resume.end();
-							});
-							fd_resume_idx.write('1,' + terms, function () {
-								fd_resume_idx.end();
-								emitter.emit('log', '\tDone.');
-							});
+						if (lines === resumeIndex) { //	separate resume ouput
+							dataResume = terms;
 
 							return;
 						}
@@ -268,6 +258,22 @@ function processTFIDF(dir, outDir, done, itemCounter) {
 					fd2_idx.write(dataOut2_2, function () {
 						fd2_idx.end();
 					});
+
+					if (presetList.resume) {
+						var outFile_resume = path.join(outDir, resume_dir + basename_tfidf_resume);
+						var outFile_resume_idx = path.join(outDir, resume_dir + basename_tfidf_resume_idx);
+						emitter.emit('log', NEWLINE + 'Write ' + outFile_resume);
+						var fd_resume = fs.createWriteStream(outFile_resume);
+						var fd_resume_idx = fs.createWriteStream(outFile_resume_idx);
+						fd_resume.write(dataResume, function () {
+							fd_resume.end();
+						});
+						fd_resume_idx.write('1,' + dataResume, function () {
+							fd_resume_idx.end();
+							emitter.emit('log', '\tDone.');
+						});
+					}
+
 					callback(null, 'two');
 				});
 			},
