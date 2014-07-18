@@ -21,8 +21,10 @@ var DELIMITER = ',';
 
 var inTopDir = 'synonym/104/job';
 var outTopDir = 'tfidf/104/job';
+var cat_resume = 'resume';
 
 var basename_keyword = 'input/keywords_merge.txt';
+var basename_keyword_resume = 'input/keywords_merge_resume.txt';
 var basename_keywords_sort = 'keywords_merge_sort.txt';
 var basename_keywords_sort_index = 'keywords_merge_sort_index.txt';
 var basename_tf_idf = 'tf_idf.txt';
@@ -37,6 +39,7 @@ var filename_preset = path.join(__dirname, 'etl_config.json');
 var presetList;
 
 var keywords = [];
+var jobList = [];
 
 var emitter = new events.EventEmitter();
 
@@ -193,6 +196,105 @@ function scrapeContent(dir, outDir, task, done) {
 
 } //	scrapeContent
 
+function processTFIDF(dir, outDir, done, itemCounter) {
+	var resume_dir = '';
+	if (presetList.resume)
+		resume_dir = cat_resume + '/';	//	force output files to resume folder
+		
+	async.series([
+			function (callback) {
+				var outFile = path.join(outDir, resume_dir + basename_joblist);
+				emitter.emit('log', NEWLINE + 'Write job list ' + outFile);
+				var fd = fs.createWriteStream(outFile);
+				var dataOut = '';
+				jobList.forEach(function (jobCode) {
+					dataOut += jobCode + NEWLINE;
+				});
+				fd.write(dataOut, function () {
+					fd.end();
+					emitter.emit('log', '\tDone.');
+					callback(null, 'one');
+				});
+			},
+			function (callback) {
+				var matrix = tfidf.tfidf_matrix(keywords, function (i, measure) {
+						//console.log('document #' + i + ' is ' + measure);
+					});
+				var outFile2 = path.join(outDir, resume_dir + basename_tfidf);
+				var outFile2_idx = path.join(outDir, resume_dir + basename_tfidf_idx);
+				emitter.emit('log', NEWLINE + 'Write TF*IDF result to ' + outFile2 + '...');
+				var fd2 = fs.createWriteStream(outFile2);
+				var fd2_idx = fs.createWriteStream(outFile2_idx);
+				var lines = 0;
+
+				var dataOut2_1 = '';
+				var dataOut2_2 = '';
+				matrix.forEach(function (doc) { //	per row (document)
+					var regEx = /[\[\]]/gi;
+					var terms = JSON.stringify(doc).replace(regEx, '');
+					dataOut2_1 += terms + NEWLINE;
+					dataOut2_2 += lines + ',' + terms + NEWLINE;
+					lines++;
+				});
+				fd2.write(dataOut2_1, function () {
+					fd2.end();
+					fd2_idx.write(dataOut2_2, function () {
+						fd2_idx.end();
+					});
+					callback(null, 'two');
+				});
+			},
+			function (callback) {
+				var matrix3 = tfidf.tf_idf_matrix(keywords, function (i, measure) {});
+				var outFile3 = path.join(outDir, resume_dir + basename_tf_idf);
+				emitter.emit('log', NEWLINE + 'Write TF_IDF result to ' + outFile3 + '...');
+				var fd3 = fs.createWriteStream(outFile3);
+				var lines3 = 0;
+
+				var dataOut3 = '';
+				matrix3.forEach(function (doc) { //	per row (document)
+					var regEx = /[\[\]]/gi;
+					var terms = JSON.stringify(doc).replace(regEx, '');
+					dataOut3 += terms + NEWLINE;
+					lines3++;
+				});
+				fd3.write(dataOut3, function () {
+					fd3.end();
+
+					callback(null, 'three');
+				});
+			},
+			function (callback) {
+				var outFile_sort = path.join(outDir, resume_dir + basename_keywords_sort);
+				var outFile_index = path.join(outDir, resume_dir + basename_keywords_sort_index);
+				var fd_sort = fs.createWriteStream(outFile_sort);
+				var fd_index = fs.createWriteStream(outFile_index);
+				emitter.emit('log', NEWLINE + 'Sorted keywords also saved to ' + outFile_sort);
+
+				var lines = 0;
+				var dataOut4_1 = '';
+				var dataOut4_2 = '';
+				keywords.forEach(function (word) {
+					dataOut4_1 += word + NEWLINE;
+					dataOut4_2 += lines + ',' + word + NEWLINE;
+					lines++;
+				});
+				fd_sort.write(dataOut4_1, function() {
+					fd_sort.end();
+					fd_index.write(dataOut4_2, function() {
+						fd_index.end();
+						emitter.emit('log', '\tdone.');
+						callback(null, 'four');
+					});
+				});
+			}
+		],
+		// optional callback
+		function (err, results) {
+		done(null, itemCounter);
+	});
+}
+
 function walkJobCat(dir, outDir, done) { //	per job category
 	emitter.emit('log', '\n' + dir + '\n');
 
@@ -224,7 +326,6 @@ function walkJobCat(dir, outDir, done) { //	per job category
 		newDir(outDir);
 
 		var listLen = list.length;
-		var jobList = [];
 
 		var q = async.queue(function (task, taskCB) {
 				scrapeContent(dir, outDir, task, function (err, count) {
@@ -237,6 +338,7 @@ function walkJobCat(dir, outDir, done) { //	per job category
 			}, CONCURRENCY);
 
 		q.drain = function () {
+			emitter.emit('doneJobCat', NEWLINE + 'Totally ' + itemCounter + '/' + listLen + ' jobs/files processed.');
 			/*
 			var countDown = 3; //	tasks count
 
@@ -249,6 +351,11 @@ function walkJobCat(dir, outDir, done) { //	per job category
 			}
 			emitter.on('drainDone', emitCB);
 			*/
+			if (!presetList.resume)
+				processTFIDF(dir, outDir, done, itemCounter);
+			else
+				done(null, itemCounter);
+			return;
 			
 			async.series([
 					function (callback) {
@@ -459,7 +566,10 @@ function walkDaily(dir, outDir, done) { //	per day
 				done(errAsync, 0);
 			} else {
 				emitter.emit('doneDaily', NEWLINE + 'Totally ' + catCount + '/' + list.length + ' categories processed.');
-				done(null, itemCounter);
+				if (presetList.resume)
+					processTFIDF(dir, outDir, done, catCount, list.length);
+				else
+					done(null, itemCounter);
 			}
 		});
 	});
@@ -504,9 +614,9 @@ function walk(dir, outDir, done) {
 	});
 } //	walk
 
-function readKeywords() {
-	if (!fs.existsSync(basename_keyword)) {
-		console.log('File "' + basename_keyword + '" not found!');
+function readKeywords(filename) {
+	if (!fs.existsSync(filename)) {
+		console.log('File "' + filename + '" not found!');
 		process.exit(1);
 	}
 
@@ -517,7 +627,7 @@ function readKeywords() {
 	async.doWhilst(
 		function (callback) {
 		// read all lines:
-		lineReader.eachLine(basename_keyword, function (line) {
+		lineReader.eachLine(filename, function (line) {
 			var item = line.trim();
 			if (item.length > 0) {
 				keywords.push(line.trim());
@@ -545,6 +655,18 @@ function readKeywords() {
 		//process.exit();
 		emitter.emit('keyword', NEWLINE + 'Totally ' + count + ' keywords counted.');
 	});
+}
+
+function processOptions() {
+	//console.log(process.argv);
+	//console.log(process.argv.length);
+	if (process.argv.length > 2) {
+		if (cat_resume === process.argv[2].toLowerCase()) {
+			console.log('\nProcess resumes!');
+			presetList.cat.push(cat_resume);
+			presetList.resume = true;
+		}
+	}
 }
 
 if (!fs.existsSync(inTopDir)) {
@@ -587,18 +709,21 @@ if (!fs.existsSync(inTopDir)) {
 	fs.appendFileSync(filename_status, NEWLINE + getDateTime() + NEWLINE);
 
 	getPreset();
+	processOptions();
 
-	var timeA = new Date().getTime(),
-	timeB;
+	var timeA = new Date().getTime();
 
-	readKeywords();
+	if (presetList.resume)
+		readKeywords(basename_keyword_resume);
+	else
+		readKeywords(basename_keyword);
 
 	emitter.on('keyword', function (message) {
 		process.stdout.write(message);
 		fs.appendFileSync(filename_status, message);
 
 		walk(inTopDir, outTopDir, function (err, results) {
-			timeB = new Date().getTime();
+			var timeB = new Date().getTime();
 
 			if (err) {
 				console.err(util.inspect(err));

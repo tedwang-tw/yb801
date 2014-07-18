@@ -18,8 +18,10 @@ var NEWLINE = '\r\n';
 
 var inTopDir = 'synonym/104/job';
 var outTopDir = 'corpus_merge/104/job';
+var cat_resume = 'resume';
 
 var basename_keyword = 'keywords_merge.txt';
+var basename_keyword_resume = 'keywords_merge_resume.txt';
 var basename_err = 'error.txt';
 var basename_status = 'status.txt';
 var filename_status;
@@ -57,9 +59,9 @@ function isDate(tdate) {
 }
 
 function newDir(dir) {
-	console.log("\nDestination: " + dir);
+	//console.log("\nDestination: " + dir);
 	if (!fs.existsSync(dir)) {
-		console.log("Creating dir " + dir);
+		console.log("\nCreating dir " + dir);
 		mkdirp.sync(dir);
 
 		if (!fs.existsSync(dir)) {
@@ -186,7 +188,7 @@ function scrapeContent(dir, outDir, task, done) {
 } //	scrapeContent
 
 function walkJobCat(dir, outDir, done) { //	per job category
-	emitter.emit('log', '\n' + dir);
+	emitter.emit('log', '\n' + dir + '\n');
 
 	fs.readdir(dir, function (err, list) {
 		var itemCounter = 0;
@@ -225,16 +227,19 @@ function walkJobCat(dir, outDir, done) { //	per job category
 			}, CONCURRENCY);
 
 		q.drain = function () {
-			var outFile = path.join(outDir, basename_keyword);
-			emitter.emit('doneJobCat', NEWLINE + 'Write back merged keywords to ' + outFile);
+			if (!presetList.resume) {
+				var outFile = path.join(outDir, basename_keyword);
+				emitter.emit('log', NEWLINE + 'Write back merged keywords to ' + outFile);
 
-			var fd = fs.createWriteStream(outFile);
-			for (var word in keywords) {
-				fd.write(word + NEWLINE);
+				var fd = fs.createWriteStream(outFile);
+				for (var word in keywords) {
+					fd.write(word + NEWLINE);
+				}
+				fd.end();
+
+				emitter.emit('log', NEWLINE + 'Done.');
 			}
-			fd.end();
 
-			emitter.emit('doneJobCat', NEWLINE + 'Done.');
 			emitter.emit('doneJobCat', NEWLINE + 'Totally ' + itemCounter + '/' + listLen + ' jobs/files processed.');
 			done(null, itemCounter);
 		};
@@ -264,7 +269,7 @@ function walkDaily(dir, outDir, done) { //	per day
 			var folder = path.join(dir, baseFolder);
 			fs.stat(folder, function (errStat, stat) {
 				if (stat && stat.isDirectory()) {
-					emitter.emit('doneDaily', NEWLINE + baseFolder);
+					//emitter.emit('doneDaily', NEWLINE + baseFolder);
 					walkJobCat(folder, path.join(outDir, baseFolder), function (err, count) {
 						itemCounter += count;
 						catCount++;
@@ -278,6 +283,19 @@ function walkDaily(dir, outDir, done) { //	per day
 			if (errAsync) {
 				done(errAsync, 0);
 			} else {
+				if (presetList.resume) {	//	process jobs + resume
+					var outFile = path.join(outDir, cat_resume + '/' + basename_keyword_resume);
+					emitter.emit('log', NEWLINE + 'Write back merged keywords to ' + outFile);
+
+					var fd = fs.createWriteStream(outFile);
+					for (var word in keywords) {
+						fd.write(word + NEWLINE);
+					}
+					fd.end();
+
+					emitter.emit('log', NEWLINE + 'Done.');
+				}
+			
 				emitter.emit('doneDaily', NEWLINE + 'Totally ' + catCount + '/' + list.length + ' categories processed.');
 				done(null, itemCounter);
 			}
@@ -301,7 +319,7 @@ function walk(dir, outDir, done) {
 			var folder = path.join(dir, baseFolder);
 			fs.stat(folder, function (errStat, stat) {
 				if (stat && stat.isDirectory()) {
-					emitter.emit('doneTop', NEWLINE + baseFolder);
+					//emitter.emit('doneTop', NEWLINE + baseFolder);
 					walkDaily(folder, path.join(outDir, baseFolder), function (err, count) {
 						itemCounter += count;
 						dayCount++;
@@ -324,49 +342,16 @@ function walk(dir, outDir, done) {
 	});
 } //	walk
 
-function readKeywords() {
-	if (!fs.existsSync(basename_keyword)) {
-		console.log('File "' + basename_keyword + '" not found!');
-		process.exit(1);
+function processOptions() {
+	//console.log(process.argv);
+	//console.log(process.argv.length);
+	if (process.argv.length > 2) {
+		if (cat_resume === process.argv[2].toLowerCase()) {
+			console.log('\nProcess resumes!');
+			presetList.cat.push(cat_resume);
+			presetList.resume = true;
+		}
 	}
-
-	var last = false;
-	var count = 0;
-	var synonyms = 0;
-
-	async.doWhilst(
-		function (callback) {
-		// read all lines:
-		lineReader.eachLine(basename_keyword, function (line) {
-			var item = line.trim();
-			if (item.length > 0) {
-				keywords.push(line.trim().split('\t'));
-				count++;
-				synonyms += item.length;
-			}
-		}).then(function () {
-			last = true;
-			callback();
-		});
-	},
-		function () {
-		return !last;
-	},
-		function (err) {
-		/*
-		keywords.sort(function (a, b) { //	sort as longest prefix match
-		if (a.length < b.length)
-		return -1;
-		else if (a.length > b.length)
-		return 1;
-		else
-		return a.localeCompare(b);
-		}).reverse();
-		 */
-		//console.log(keywords);
-		//process.exit();
-		emitter.emit('keyword', NEWLINE + 'Totally ' + count + ' synonyms counted.');
-	});
 }
 
 if (!fs.existsSync(inTopDir)) {
@@ -409,6 +394,7 @@ if (!fs.existsSync(inTopDir)) {
 	fs.appendFileSync(filename_status, getDateTime() + NEWLINE);
 
 	getPreset();
+	processOptions();
 
 	var timeA = new Date().getTime();
 
@@ -427,8 +413,8 @@ if (!fs.existsSync(inTopDir)) {
 
 			if (results) {
 				totalItems += results;
-				process.stdout.write('\nTotally ' + totalItems + ' courses processed.\n');
-				fs.appendFileSync(filename_status, NEWLINE + 'Totally ' + totalItems + ' courses processed.' + NEWLINE);
+				process.stdout.write('\nTotally ' + totalItems + ' jobs processed.\n');
+				fs.appendFileSync(filename_status, NEWLINE + 'Totally ' + totalItems + ' jobs processed.' + NEWLINE);
 
 				console.log('Elapsed time: ' + (timeB - timeA) / 1000 + ' sec.');
 				fs.appendFileSync(filename_status, NEWLINE + 'Elapsed time: ' + (timeB - timeA) / 1000 + ' sec.' + NEWLINE);

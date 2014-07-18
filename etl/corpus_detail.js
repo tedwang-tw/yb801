@@ -19,6 +19,7 @@ var NEWLINE = '\r\n';
 
 var inTopDir = 'text/104/job';
 var outTopDir = 'corpus/104/job';
+var cat_resume = 'resume';
 
 var basename_keyword = 'input/keywords_ch.txt';
 var basename_keyword_en = 'input/keywords_en.txt';
@@ -60,9 +61,9 @@ function isDate(tdate) {
 }
 
 function newDir(dir) {
-	console.log("\nDestination: " + dir);
+	//console.log("\nDestination: " + dir);
 	if (!fs.existsSync(dir)) {
-		console.log("Creating dir " + dir);
+		console.log("\nCreating dir " + dir);
 		mkdirp.sync(dir);
 
 		if (!fs.existsSync(dir)) {
@@ -241,11 +242,11 @@ function scrapeContent(dir, outDir, task, done) {
 		//console.log(fileData);
 
 		keywords_en.forEach(function (word) { //	compare every keyword
-			for (var iii=0; iii<word.length; iii++) {
+			for (var iii = 0; iii < word.length; iii++) {
 				if (stopwords.indexOf(word[iii]) >= 0)
-					return;	//	skip stop words
+					return; //	skip stop words
 			}
-				
+
 			index = 0;
 			//emitter.emit('log', NEWLINE + word + ':');
 			while (index !== -1) { //	get all occurrences
@@ -263,7 +264,7 @@ function scrapeContent(dir, outDir, task, done) {
 				}
 			}
 		});
-		
+
 		var fd = fs.createWriteStream(outFile);
 		fd.write(JSON.stringify(outText), function () {
 			fd.end();
@@ -274,7 +275,7 @@ function scrapeContent(dir, outDir, task, done) {
 } //	scrapeContent
 
 function walkJobCat(dir, outDir, done) { //	per job category
-	emitter.emit('log', '\n' + dir);
+	emitter.emit('log', '\n' + dir + '\n');
 
 	fs.readdir(dir, function (err, list) {
 		var itemCounter = 0;
@@ -342,7 +343,7 @@ function walkDaily(dir, outDir, done) { //	per day
 			var folder = path.join(dir, baseFolder);
 			fs.stat(folder, function (errStat, stat) {
 				if (stat && stat.isDirectory()) {
-					emitter.emit('doneDaily', NEWLINE + baseFolder);
+					//emitter.emit('doneDaily', NEWLINE + baseFolder);
 					walkJobCat(folder, path.join(outDir, baseFolder), function (err, count) {
 						itemCounter += count;
 						catCount++;
@@ -379,7 +380,7 @@ function walk(dir, outDir, done) {
 			var folder = path.join(dir, baseFolder);
 			fs.stat(folder, function (errStat, stat) {
 				if (stat && stat.isDirectory()) {
-					emitter.emit('doneTop', NEWLINE + baseFolder);
+					//emitter.emit('doneTop', NEWLINE + baseFolder);
 					walkDaily(folder, path.join(outDir, baseFolder), function (err, count) {
 						itemCounter += count;
 						dayCount++;
@@ -413,7 +414,7 @@ function readKeywords() {
 	}
 
 	async.parallel({
-		chinese: function(callback){
+		chinese : function (callback) {
 			// read all lines:
 			lineReader.eachLine(basename_keyword, function (line) {
 				if (line.trim().length > 0)
@@ -431,7 +432,7 @@ function readKeywords() {
 				callback(null, keywords.length);
 			});
 		},
-		english: function(callback){
+		english : function (callback) {
 			// read all lines:
 			lineReader.eachLine(basename_keyword_en, function (line) {
 				if (line.trim().length > 0)
@@ -454,52 +455,64 @@ function readKeywords() {
 			});
 		}
 	},
-	function(err, results) {
+		function (err, results) {
 		//console.log(keywords);
 		//console.log(keywords_en);
 		//process.exit();
 		// results is now equals to: {one: 1, two: 2}
 		emitter.emit('keyword', NEWLINE + 'Totally ' + results.chinese + ' Chinese keywords counted.' +
-								NEWLINE + 'Totally ' + results.english + ' English keywords counted.');
+			NEWLINE + 'Totally ' + results.english + ' English keywords counted.');
 	});
-	
+
 	/*
 	var last = false;
 	var count = 0;
 
 	async.doWhilst(
-		function (callback) {
-		// read all lines:
-		lineReader.eachLine(basename_keyword, function (line) {
-			keywords.push(line.trim());
-			count++;
-		}).then(function () {
-			last = true;
-			callback();
-		});
-	},
-		function () {
-		return !last;
-	},
-		function (err) {
-		keywords.sort(function (a, b) { //	sort as longest prefix match
-			if (a.length < b.length)
-				return -1;
-			else if (a.length > b.length)
-				return 1;
-			else
-				return a.localeCompare(b);
-		}).reverse();
-		//console.log(keywords);
-		//process.exit();
-		emitter.emit('keyword', NEWLINE + 'Totally ' + count + ' keywords counted.');
+	function (callback) {
+	// read all lines:
+	lineReader.eachLine(basename_keyword, function (line) {
+	keywords.push(line.trim());
+	count++;
+	}).then(function () {
+	last = true;
+	callback();
 	});
-	*/
+	},
+	function () {
+	return !last;
+	},
+	function (err) {
+	keywords.sort(function (a, b) { //	sort as longest prefix match
+	if (a.length < b.length)
+	return -1;
+	else if (a.length > b.length)
+	return 1;
+	else
+	return a.localeCompare(b);
+	}).reverse();
+	//console.log(keywords);
+	//process.exit();
+	emitter.emit('keyword', NEWLINE + 'Totally ' + count + ' keywords counted.');
+	});
+	 */
+}
+
+function processOptions() {
+	//console.log(process.argv);
+	//console.log(process.argv.length);
+	if (process.argv.length > 2) {
+		if (cat_resume === process.argv[2].toLowerCase()) {
+			console.log('\nProcess resumes!');
+			presetList.cat = [];
+			presetList.cat.push(cat_resume);
+		}
+	}
 }
 
 if (!fs.existsSync(inTopDir)) {
 	console.log("Dir " + inTopDir + " not found!");
-	process.exit(1);	
+	process.exit(1);
 } else {
 	var totalItems = 0;
 
@@ -537,6 +550,7 @@ if (!fs.existsSync(inTopDir)) {
 	fs.appendFileSync(filename_status, getDateTime() + NEWLINE);
 
 	getPreset();
+	processOptions();
 
 	var timeA = new Date().getTime();
 
@@ -555,8 +569,8 @@ if (!fs.existsSync(inTopDir)) {
 
 			if (results) {
 				totalItems += results;
-				process.stdout.write('\nTotally ' + totalItems + ' courses processed.\n');
-				fs.appendFileSync(filename_status, NEWLINE + 'Totally ' + totalItems + ' courses processed.' + NEWLINE);
+				process.stdout.write('\nTotally ' + totalItems + ' jobs processed.\n');
+				fs.appendFileSync(filename_status, NEWLINE + 'Totally ' + totalItems + ' jobs processed.' + NEWLINE);
 
 				console.log('Elapsed time: ' + (timeB - timeA) / 1000 + ' sec.');
 				fs.appendFileSync(filename_status, NEWLINE + 'Elapsed time: ' + (timeB - timeA) / 1000 + ' sec.' + NEWLINE);
