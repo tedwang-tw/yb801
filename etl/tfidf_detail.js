@@ -24,6 +24,7 @@ var outTopDir = 'tfidf/104/job';
 
 var basename_keyword = 'input/keywords_merge.txt';
 var basename_keywords_sort = 'keywords_merge_sort.txt';
+var basename_keywords_sort_index = 'keywords_merge_sort_index.txt';
 var basename_tf_idf = 'tf_idf.txt';
 var basename_tfidf = 'tfidf.txt'; //	tf*idf
 var basename_tfidf_idx = 'tfidf_index.txt'; //	index + tf*idf
@@ -291,7 +292,7 @@ function walkJobCat(dir, outDir, done) { //	per job category
 								fd2_idx.end();
 							});
 							//countDown--;
-							emitter.emit('drainDone', NEWLINE + 'matrix done.');
+							//emitter.emit('drainDone', NEWLINE + 'matrix done.');
 							callback(null, 'two');
 						});
 					},
@@ -313,21 +314,33 @@ function walkJobCat(dir, outDir, done) { //	per job category
 							fd3.end();
 
 							//countDown--;
-							emitter.emit('drainDone', NEWLINE + 'matrix3 done.');
+							//emitter.emit('drainDone', NEWLINE + 'matrix3 done.');
 							callback(null, 'three');
 						});
 					},
 					function (callback) {
 						var outFile_sort = path.join(outDir, basename_keywords_sort);
+						var outFile_index = path.join(outDir, basename_keywords_sort_index);
 						var fd_sort = fs.createWriteStream(outFile_sort);
+						var fd_index = fs.createWriteStream(outFile_index);
 						emitter.emit('log', NEWLINE + 'Sorted keywords also saved to ' + outFile_sort);
 
+						var lines = 0;
+						var dataOut4_1 = '';
+						var dataOut4_2 = '';
 						keywords.forEach(function (word) {
-							fd_sort.write(word + NEWLINE);
+							dataOut4_1 += word + NEWLINE;
+							dataOut4_2 += lines + ',' + word + NEWLINE;
+							lines++;
 						});
-						fd_sort.end();
-
-						callback(null, 'four');
+						fd_sort.write(dataOut4_1, function() {
+							fd_sort.end();
+							fd_index.write(dataOut4_2, function() {
+								fd_index.end();
+								emitter.emit('log', '\tdone.');
+								callback(null, 'four');
+							});
+						});
 					}
 				],
 				// optional callback
