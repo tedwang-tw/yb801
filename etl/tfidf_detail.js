@@ -30,6 +30,7 @@ var basename_keywords_sort_index = 'keywords_merge_sort_index.txt';
 var basename_tf_idf = 'tf_idf.txt';
 var basename_tfidf = 'tfidf.txt'; //	tf*idf
 var basename_tfidf_idx = 'tfidf_index.txt'; //	index + tf*idf
+var basename_tfidf_resume = 'tfidf_resume.txt'; //	tf*idf
 var basename_joblist = 'joblist.txt';
 var basename_err = 'error.txt';
 var basename_status = 'status.txt';
@@ -40,6 +41,7 @@ var presetList;
 
 var keywords = [];
 var jobList = [];
+var resumeItem = '';
 
 var emitter = new events.EventEmitter();
 
@@ -199,8 +201,8 @@ function scrapeContent(dir, outDir, task, done) {
 function processTFIDF(dir, outDir, done, itemCounter) {
 	var resume_dir = '';
 	if (presetList.resume)
-		resume_dir = cat_resume + '/';	//	force output files to resume folder
-		
+		resume_dir = cat_resume + '/'; //	force output files to resume folder
+
 	async.series([
 			function (callback) {
 				var outFile = path.join(outDir, resume_dir + basename_joblist);
@@ -227,11 +229,28 @@ function processTFIDF(dir, outDir, done, itemCounter) {
 				var fd2_idx = fs.createWriteStream(outFile2_idx);
 				var lines = 0;
 
+				var resumeIndex = jobList.indexOf(resumeItem);
+
 				var dataOut2_1 = '';
 				var dataOut2_2 = '';
 				matrix.forEach(function (doc) { //	per row (document)
 					var regEx = /[\[\]]/gi;
 					var terms = JSON.stringify(doc).replace(regEx, '');
+
+					if (presetList.resume) {
+						if (lines === resumeIndex) { //	bypass resume
+							var outFile_resume = path.join(outDir, resume_dir + basename_tfidf_resume);
+							emitter.emit('log', NEWLINE + 'Write ' + outFile_resume);
+							var fd_resume = fs.createWriteStream(outFile_resume);
+							fd_resume.write(terms, function () {
+								fd_resume.end();
+								emitter.emit('log', '\tDone.');
+							});
+
+							return;
+						}
+					}
+
 					dataOut2_1 += terms + NEWLINE;
 					dataOut2_2 += lines + ',' + terms + NEWLINE;
 					lines++;
@@ -279,9 +298,9 @@ function processTFIDF(dir, outDir, done, itemCounter) {
 					dataOut4_2 += lines + ',' + word + NEWLINE;
 					lines++;
 				});
-				fd_sort.write(dataOut4_1, function() {
+				fd_sort.write(dataOut4_1, function () {
 					fd_sort.end();
-					fd_index.write(dataOut4_2, function() {
+					fd_index.write(dataOut4_2, function () {
 						fd_index.end();
 						emitter.emit('log', '\tdone.');
 						callback(null, 'four');
@@ -300,6 +319,11 @@ function walkJobCat(dir, outDir, done) { //	per job category
 
 	fs.readdir(dir, function (err, list) {
 		var itemCounter = 0;
+
+		if (presetList.resume) {
+			if (extractLastDir(dir, true) === cat_resume)
+				resumeItem = path.basename(list[0], ext);
+		}
 
 		function enQueue(que, srcArr, fillLen) {
 			function workerCB(err) {
@@ -343,20 +367,20 @@ function walkJobCat(dir, outDir, done) { //	per job category
 			var countDown = 3; //	tasks count
 
 			function emitCB(message) {
-				process.stdout.write(message);
-				if (countDown === 0) {
-					emitter.removeListener('drainDone', emitCB);
-					done(null, itemCounter);
-				}
+			process.stdout.write(message);
+			if (countDown === 0) {
+			emitter.removeListener('drainDone', emitCB);
+			done(null, itemCounter);
+			}
 			}
 			emitter.on('drainDone', emitCB);
-			*/
+			 */
 			if (!presetList.resume)
 				processTFIDF(dir, outDir, done, itemCounter);
 			else
 				done(null, itemCounter);
 			return;
-			
+
 			async.series([
 					function (callback) {
 						var outFile = path.join(outDir, basename_joblist);
@@ -440,9 +464,9 @@ function walkJobCat(dir, outDir, done) { //	per job category
 							dataOut4_2 += lines + ',' + word + NEWLINE;
 							lines++;
 						});
-						fd_sort.write(dataOut4_1, function() {
+						fd_sort.write(dataOut4_1, function () {
 							fd_sort.end();
-							fd_index.write(dataOut4_2, function() {
+							fd_index.write(dataOut4_2, function () {
 								fd_index.end();
 								emitter.emit('log', '\tdone.');
 								callback(null, 'four');
@@ -567,7 +591,7 @@ function walkDaily(dir, outDir, done) { //	per day
 			} else {
 				emitter.emit('doneDaily', NEWLINE + 'Totally ' + catCount + '/' + list.length + ' categories processed.');
 				if (presetList.resume)
-					processTFIDF(dir, outDir, done, catCount, list.length);
+					processTFIDF(dir, outDir, done, catCount);
 				else
 					done(null, itemCounter);
 			}
