@@ -31,6 +31,7 @@ var basename_tf_idf = 'tf_idf.txt';
 var basename_tfidf = 'tfidf.txt'; //	tf*idf
 var basename_tfidf_idx = 'tfidf_index.txt'; //	index + tf*idf
 var basename_tfidf_resume = 'tfidf_resume.txt'; //	tf*idf
+var basename_tfidf_resume_idx = 'tfidf_resume_index.txt'; //	index + tf*idf
 var basename_joblist = 'joblist.txt';
 var basename_err = 'error.txt';
 var basename_status = 'status.txt';
@@ -240,12 +241,17 @@ function processTFIDF(dir, outDir, done, itemCounter) {
 					var terms = JSON.stringify(doc).replace(regEx, '');
 
 					if (presetList.resume) {
-						if (lines === resumeIndex) {	//	separate resume
+						if (lines === resumeIndex) {	//	separate resume ouput
 							var outFile_resume = path.join(outDir, resume_dir + basename_tfidf_resume);
+							var outFile_resume_idx = path.join(outDir, resume_dir + basename_tfidf_resume_idx);
 							emitter.emit('log', NEWLINE + 'Write ' + outFile_resume);
 							var fd_resume = fs.createWriteStream(outFile_resume);
+							var fd_resume_idx = fs.createWriteStream(outFile_resume_idx);
 							fd_resume.write(terms, function () {
 								fd_resume.end();
+							});
+							fd_resume_idx.write('1,' + terms, function () {
+								fd_resume_idx.end();
 								emitter.emit('log', '\tDone.');
 							});
 
@@ -253,9 +259,9 @@ function processTFIDF(dir, outDir, done, itemCounter) {
 						}
 					}
 
+					lines++;
 					dataOut2_1 += terms + NEWLINE;
 					dataOut2_2 += lines + ',' + terms + NEWLINE;
-					lines++;
 				});
 				fd2.write(dataOut2_1, function () {
 					fd2.end();
@@ -415,9 +421,9 @@ function walkJobCat(dir, outDir, done) { //	per job category
 						matrix.forEach(function (doc) { //	per row (document)
 							var regEx = /[\[\]]/gi;
 							var terms = JSON.stringify(doc).replace(regEx, '');
+							lines++;
 							dataOut2_1 += terms + NEWLINE;
 							dataOut2_2 += lines + ',' + terms + NEWLINE;
-							lines++;
 						});
 						fd2.write(dataOut2_1, function () {
 							fd2.end();
