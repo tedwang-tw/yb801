@@ -199,6 +199,7 @@ function scrapeContent(dir, outDir, task, done) {
 } //	scrapeContent
 
 function processTFIDF(dir, outDir, done, itemCounter) {
+	var resumeIndex = jobList.indexOf(resumeItem);
 	var resume_dir = '';
 	if (presetList.resume)
 		resume_dir = cat_resume + '/'; //	force output files to resume folder
@@ -209,7 +210,10 @@ function processTFIDF(dir, outDir, done, itemCounter) {
 				emitter.emit('log', NEWLINE + 'Write job list ' + outFile);
 				var fd = fs.createWriteStream(outFile);
 				var dataOut = '';
-				jobList.forEach(function (jobCode) {
+				jobList.forEach(function (jobCode, i) {
+					if (presetList.resume)
+						if (i >= resumeIndex)
+							return;	//	bypass resumes
 					dataOut += jobCode + NEWLINE;
 				});
 				fd.write(dataOut, function () {
@@ -229,8 +233,6 @@ function processTFIDF(dir, outDir, done, itemCounter) {
 				var fd2_idx = fs.createWriteStream(outFile2_idx);
 				var lines = 0;
 
-				var resumeIndex = jobList.indexOf(resumeItem);
-
 				var dataOut2_1 = '';
 				var dataOut2_2 = '';
 				matrix.forEach(function (doc) { //	per row (document)
@@ -238,7 +240,7 @@ function processTFIDF(dir, outDir, done, itemCounter) {
 					var terms = JSON.stringify(doc).replace(regEx, '');
 
 					if (presetList.resume) {
-						if (lines === resumeIndex) { //	bypass resume
+						if (lines === resumeIndex) {	//	separate resume
 							var outFile_resume = path.join(outDir, resume_dir + basename_tfidf_resume);
 							emitter.emit('log', NEWLINE + 'Write ' + outFile_resume);
 							var fd_resume = fs.createWriteStream(outFile_resume);
