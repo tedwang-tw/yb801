@@ -244,7 +244,7 @@ function scrapeContent(dir, outDir, jobOrder, index) {
 		if (i < presetList.recomNum) {
 			var record = job;
 			record.code = jobList[job.index];
-			if (jobUrl[record.code])	//	dictionary lookup
+			if (jobUrl[record.code]) //	dictionary lookup
 				record.url = header_Origin + jobUrl[record.code];
 			if (job.index >= jobGroup.length)
 				record.group = -1;
@@ -266,7 +266,8 @@ function scrapeContent(dir, outDir, jobOrder, index) {
 
 	fd.write(dataResume, function () {
 		fd.end();
-		emitter.emit('log', '\tdone.');
+		emitter.emit('drainDone', '\tdone.');
+		//emitter.emit('log', '\tdone.');
 	});
 
 	return count;
@@ -284,15 +285,26 @@ function walkJobCat(dir, outDir, done) { //	per job category
 		var itemCounter = 0;
 		newDir(outDir);
 
-		var listLen = list.length;
+		var vecLen = vectors.length;
+		var countDown = vecLen;
+
+		function emitCB(message) {
+			process.stdout.write(message);
+			if (--countDown === 0) {
+				emitter.removeListener('drainDone', emitCB);
+
+				emitter.emit('doneJobCat', NEWLINE + 'Totally ' + itemCounter + '/' + vecLen + ' jobs/resumes processed.');
+				done(null, itemCounter);
+			}
+		}
+		emitter.on('drainDone', emitCB);
 
 		vectors.forEach(function (vector, i) {
 			var jobOrder = genJobOrder(vector);
 			itemCounter += scrapeContent(dir, outDir, jobOrder, i);
 		});
 
-		emitter.emit('doneJobCat', NEWLINE + 'Totally ' + itemCounter + '/' + vectors.length + ' jobs/resumes processed.');
-		done(null, itemCounter);
+		//done(null, itemCounter);
 
 	});
 } //	walkJobCat
