@@ -11,7 +11,6 @@ var lineReader = require('line-reader');
 //var tfidf = new TfIdf();
 var cosineSim = require('./cosine_sim.js');
 
-
 var CONCURRENCY = 2;
 //var NORM_CONDS = 8; //	per actual job detail on web
 
@@ -25,15 +24,16 @@ var inTopDir = 'tfidf/104/job';
 var outTopDir = 'similarity/104/job';
 var cat_resume = 'resume';
 
-var basename_keyword = 'input/keywords_merge.txt';
-var basename_keyword_resume = 'input/keywords_merge_resume.txt';
-var basename_keywords_sort = 'keywords_merge_sort.txt';
-var basename_keywords_sort_index = 'keywords_merge_sort_index.txt';
+//var basename_keyword = 'input/keywords_merge.txt';
+//var basename_keyword_resume = 'input/keywords_merge_resume.txt';
+//var basename_keywords_sort = 'keywords_merge_sort.txt';
+//var basename_keywords_sort_index = 'keywords_merge_sort_index.txt';
 var basename_tf_idf = 'tf_idf.txt';
 var basename_tfidf = 'tfidf.txt'; //	tf*idf
 var basename_tfidf_idx = 'tfidf_index.txt'; //	index + tf*idf
 var basename_tfidf_resume = 'tfidf_resume.txt'; //	tf*idf
-var basename_joblist = 'joblist.txt';
+//var basename_joblist = 'joblist.txt';
+var basename_sim_resume = 'sim_resume.txt';
 var basename_err = 'error.txt';
 var basename_status = 'status.txt';
 var filename_status;
@@ -190,7 +190,7 @@ function scrapeContent(dir, outDir, done) {
 		var fileResume = path.join(dir, basename_tfidf_resume);
 		var fileJobs = path.join(dir, basename_tfidf);
 
-		var em = cosineSim.create(fileResume, fileJobs, false);
+		var em = cosineSim.create(fileResume, fileJobs, true);
 		var allData = '';
 
 		em.on('data', function (inData) {
@@ -198,11 +198,20 @@ function scrapeContent(dir, outDir, done) {
 		});
 
 		em.on('end', function (msg) {
-			process.stdout.write(allData);
-			done(null, 1); //	for count
+			//process.stdout.write(allData);
+
+			var outFile = path.join(outDir, basename_sim_resume);
+			emitter.emit('log', NEWLINE + 'Write similarity ' + outFile);
+			var fd = fs.createWriteStream(outFile);
+			fd.write(allData, function () {
+				fd.end();
+				emitter.emit('log', '\tdone.');
+				done(null, 1); //	for count
+			});
+
 		});
 
-		cosineSim.start();		
+		cosineSim.start();
 	});
 
 } //	scrapeContent
@@ -223,13 +232,13 @@ function walkJobCat(dir, outDir, done) { //	per job category
 
 		newDir(outDir);
 		var listLen = list.length;
-		
+
 		scrapeContent(dir, outDir, function (err, count) {
 			itemCounter += count;
-			emitter.emit('doneJobCat', NEWLINE + 'Totally ' + itemCounter + '/' + listLen + ' jobs/files processed.');
+			emitter.emit('doneJobCat', NEWLINE + 'Totally ' + itemCounter + '/' + listLen + ' resumes/files processed.');
 			done(null, itemCounter);
 		});
-		
+
 	});
 } //	walkJobCat
 
@@ -313,8 +322,7 @@ function walk(dir, outDir, done) {
 
 function processOptions() {
 	if (process.argv.length > 2) {
-		if (cat_resume === process.argv[2].toLowerCase()) {
-		}
+		if (cat_resume === process.argv[2].toLowerCase()) {}
 	}
 	console.log('\nProcess resumes!');
 	presetList.cat = [];
@@ -367,24 +375,24 @@ if (!fs.existsSync(inTopDir)) {
 	var timeA = new Date().getTime();
 
 	//emitter.on('keyword', function (message) {
-		//process.stdout.write(message);
-		//fs.appendFileSync(filename_status, message);
+	//process.stdout.write(message);
+	//fs.appendFileSync(filename_status, message);
 
-		walk(inTopDir, outTopDir, function (err, results) {
-			var timeB = new Date().getTime();
+	walk(inTopDir, outTopDir, function (err, results) {
+		var timeB = new Date().getTime();
 
-			if (err) {
-				console.err(util.inspect(err));
-			}
+		if (err) {
+			console.err(util.inspect(err));
+		}
 
-			if (results) {
-				totalItems += results;
-				process.stdout.write('\nTotally ' + totalItems + ' jobs processed.\n');
-				fs.appendFileSync(filename_status, NEWLINE + 'Totally ' + totalItems + ' jobs processed.' + NEWLINE);
+		if (results) {
+			totalItems += results;
+			process.stdout.write('\nTotally ' + totalItems + ' resumes processed.\n');
+			fs.appendFileSync(filename_status, NEWLINE + 'Totally ' + totalItems + ' resumes processed.' + NEWLINE);
 
-				console.log('Elapsed time: ' + (timeB - timeA) / 1000 + ' sec.');
-				fs.appendFileSync(filename_status, NEWLINE + 'Elapsed time: ' + (timeB - timeA) / 1000 + ' sec.' + NEWLINE);
-			}
-		});
+			console.log('Elapsed time: ' + (timeB - timeA) / 1000 + ' sec.');
+			fs.appendFileSync(filename_status, NEWLINE + 'Elapsed time: ' + (timeB - timeA) / 1000 + ' sec.' + NEWLINE);
+		}
+	});
 	//});
 }
