@@ -81,4 +81,5 @@ etl/synonym
 etl/text
 etl/tfidf
 etl/similarity
+etl/recommend
 etl/*.txt

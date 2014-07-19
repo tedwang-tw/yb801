@@ -2,5 +2,6 @@
 	"day" : ["20140716"],
 	"cat" : ["2007001000"],
 	"alg" : ["KM"],
-	"resume" : false
+	"resume" : false,
+	"recomNum" : 50
 }
