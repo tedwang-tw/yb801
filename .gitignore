@@ -80,4 +80,5 @@ etl/input
 etl/synonym
 etl/text
 etl/tfidf
+etl/similarity
 etl/*.txt
