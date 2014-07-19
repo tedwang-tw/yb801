@@ -8,6 +8,7 @@
 		"async" : ">=0.2.10",
 		"cheerio" : ">=0.15.0",
 		"line-reader" : ">=0.2.3",
+		"lodash" : "^2.4.1",
 		"mkdirp" : ">=0.3.5",
 		"sprintf-js" : ">=0.0.7",
 		"underscore" : ">=1.6.0",
