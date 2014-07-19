@@ -163,7 +163,7 @@ function start() {
 	var timeB = new Date().getTime();
 
 	if (testMode) {
-		process.stderr.write('\tDone.' + NEWLINE);
+		process.stderr.write('\tdone.');
 		process.stderr.write('\nElapsed time: ' + (timeB - timeA) / 1000 + ' sec.');
 		process.stderr.write('\nOutput result...\t');
 	}
@@ -193,8 +193,8 @@ function start() {
 	emitOut.emit('end', null);
 
 	//console.log(simMatrix);
-	if (testMode)
-		process.stderr.write('\ndone.\n');
+	//if (testMode)
+	//	process.stderr.write('\tdone.\n');
 }
 
 function create(filename_src_resume, filename_src, tMode) {
@@ -226,7 +226,7 @@ function create(filename_src_resume, filename_src, tMode) {
 
 	initMatrix(resumeDoubles.length, docDoubles.length);
 
-	process.stderr.write('Done.');
+	process.stderr.write('done.');
 
 	emitOut = new events.EventEmitter();
 
