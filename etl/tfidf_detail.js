@@ -33,6 +33,7 @@ var basename_tfidf_idx = 'tfidf_index.txt'; //	index + tf*idf
 var basename_tfidf_resume = 'tfidf_resume.txt'; //	tf*idf
 var basename_tfidf_resume_idx = 'tfidf_resume_index.txt'; //	index + tf*idf
 var basename_joblist = 'joblist.txt';
+var basename_resumelist = 'resumelist.txt';
 var basename_err = 'error.txt';
 var basename_status = 'status.txt';
 var filename_status;
@@ -42,6 +43,7 @@ var presetList;
 
 var keywords = [];
 var jobList = [];
+var resumeList = [];
 var resumeItem = '';
 
 var emitter = new events.EventEmitter();
@@ -219,7 +221,23 @@ function processTFIDF(dir, outDir, done, itemCounter) {
 				});
 				fd.write(dataOut, function () {
 					fd.end();
-					emitter.emit('log', '\tDone.');
+					emitter.emit('log', '\tdone.');
+
+					if (presetList.resume) {
+						var outFile_resume = path.join(outDir, resume_dir + basename_resumelist);
+						emitter.emit('log', NEWLINE + 'Write resume list ' + outFile_resume);
+						var fd_resume = fs.createWriteStream(outFile_resume);
+						var dataResume = '';
+
+						resumeList.forEach(function (resume) {
+							dataResume += resume + NEWLINE;
+						});
+						fd_resume.write(dataResume, function () {
+							fd_resume.end();
+							emitter.emit('log', '\tdone.');
+						});
+					}
+
 					callback(null, 'one');
 				});
 			},
@@ -335,8 +353,12 @@ function walkJobCat(dir, outDir, done) { //	per job category
 		var itemCounter = 0;
 
 		if (presetList.resume) {
-			if (extractLastDir(dir, true) === cat_resume)
+			if (extractLastDir(dir, true) === cat_resume) {
 				resumeItem = path.basename(list[0], ext);
+				list.forEach(function (resume) {
+					resumeList.push(path.basename(resume, ext)); //	record resume id
+				});
+			}
 		}
 
 		function enQueue(que, srcArr, fillLen) {
@@ -393,7 +415,7 @@ function walkJobCat(dir, outDir, done) { //	per job category
 				processTFIDF(dir, outDir, done, itemCounter);
 			else
 				done(null, itemCounter);
-			return;
+			return; //	--------------------------------------------------------
 
 			async.series([
 					function (callback) {
