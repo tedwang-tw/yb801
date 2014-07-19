@@ -213,7 +213,7 @@ function genDocTF(doc) {
 		return item;
 	});
 
-	return list.reverse();
+	return list;
 }
 
 function genClustersTF(outDir, clusterFileList, matrix) {
@@ -227,12 +227,26 @@ function genClustersTF(outDir, clusterFileList, matrix) {
 		var fd_rep = fs.createWriteStream(outFile_rep);
 		//var fd_rep = fs.openSync(outFile_rep, "w");
 		var repData = '';
+		var data = '';
 		var docTf = genDocTF(matrix[i]);
 
 		emitter.emit('log', ' ' + i);
 
+		var outFile_json = path.join(outDir, file + '.json');
+		emitter.emit('log', NEWLINE + 'Write cloud json ' + outFile_json);
+		var fd_json = fs.createWriteStream(outFile_json);
+		var docJson = JSON.stringify({
+				cloud : docTf
+			});
+
+		fd_json.write(docJson, function () {
+			fd_json.end();
+			//emitter.emit('log', '\tdone.');
+		});
+
 		docTf.forEach(function (item) {
-			fd.write(item.rfreq + FREQ_DELIMITER + item.keyword + FREQ_NEWLINE);
+			//fd.write(item.rfreq + FREQ_DELIMITER + item.keyword + FREQ_NEWLINE);
+			data += item.rfreq + FREQ_DELIMITER + item.keyword + FREQ_NEWLINE;
 
 			var buffer = item.keyword + FREQ_NEWLINE;
 			for (var i = 0; i < item.freq; i++)
@@ -242,8 +256,10 @@ function genClustersTF(outDir, clusterFileList, matrix) {
 		fd_rep.write(repData, function () {
 			fd_rep.end();
 		});
-		fd.end();
 		//fs.closeSync(fd_rep);
+		fd.write(data, function () {
+			fd.end();
+		});
 	});
 }
 
@@ -310,7 +326,7 @@ function walkAlgorithm(dir, outDir, done) { //	per algorithm
 			var outFile = path.join(outDir, basename_joblist);
 			emitter.emit('log', NEWLINE + 'Write job list ' + outFile);
 			var fd = fs.createWriteStream(outFile);
-			var countDown = 2;	//	two matrix calc
+			var countDown = 2; //	two matrix calc
 
 			function emitCB(message) {
 				process.stdout.write(message);
