@@ -186,12 +186,13 @@ function subKeyword(list, pos, word) { //	check sub-string like
 	return false;
 }
 
-function genDocTF(doc) {
+function genDocTF(doc, tf_idfs) {
 	var list = [];
 	doc.forEach(function (tfidf, i) {
 		if (tfidf > 0) //	only count appeared words
 			list.push({
 				tfidf : tfidf,
+				tf : tf_idfs[i],
 				keyword : keywords[i],
 				freq : 0,
 				rfreq : 0 //	reduced frequency
@@ -216,7 +217,7 @@ function genDocTF(doc) {
 	return list;
 }
 
-function genClustersTF(outDir, clusterFileList, matrix) {
+function genClustersTF(outDir, clusterFileList, tfidf_mat, tf_idf_mat) {
 	var FREQ_DELIMITER = ' ';
 	var FREQ_NEWLINE = '\n';
 
@@ -226,11 +227,10 @@ function genClustersTF(outDir, clusterFileList, matrix) {
 		var fd = fs.createWriteStream(outFile);
 		var fd_rep = fs.createWriteStream(outFile_rep);
 		//var fd_rep = fs.openSync(outFile_rep, "w");
+
 		var repData = '';
 		var data = '';
-		var docTf = genDocTF(matrix[i]);
-
-		emitter.emit('log', ' ' + i);
+		var docTf = genDocTF(tfidf_mat[i], tf_idf_mat[i]);
 
 		var outFile_json = path.join(outDir, file + '.json');
 		emitter.emit('log', NEWLINE + 'Write cloud json ' + outFile_json);
@@ -238,11 +238,6 @@ function genClustersTF(outDir, clusterFileList, matrix) {
 		var docJson = JSON.stringify({
 				cloud : docTf
 			});
-
-		fd_json.write(docJson, function () {
-			fd_json.end();
-			//emitter.emit('log', '\tdone.');
-		});
 
 		docTf.forEach(function (item) {
 			//fd.write(item.rfreq + FREQ_DELIMITER + item.keyword + FREQ_NEWLINE);
@@ -253,12 +248,34 @@ function genClustersTF(outDir, clusterFileList, matrix) {
 				//fs.writeSync(fd_rep, buffer);
 				repData += buffer;
 		});
-		fd_rep.write(repData, function () {
-			fd_rep.end();
-		});
-		//fs.closeSync(fd_rep);
-		fd.write(data, function () {
-			fd.end();
+
+		//emitter.emit('log', ' ' + i);
+
+		async.series([
+				function (callback) {
+					fd_json.write(docJson, function () {
+						fd_json.end();
+						callback(null, 'one');
+					});
+				},
+				function (callback) {
+					fd.write(data, function () {
+						fd.end();
+						callback(null, 'two');
+					});
+				},
+				function (callback) {
+					fd_rep.write(repData, function () {
+						fd_rep.end();
+						callback(null, 'three');
+					});
+					//fs.closeSync(fd_rep);
+				}
+			],
+			// optional callback
+			function (err, results) {
+			// results is now equal to ['one', 'two']
+			emitter.emit('drainDone', ' ' + i);
 		});
 	});
 }
@@ -323,101 +340,162 @@ function walkAlgorithm(dir, outDir, done) { //	per algorithm
 			}, CONCURRENCY);
 
 		q.drain = function () {
-			var outFile = path.join(outDir, basename_joblist);
-			emitter.emit('log', NEWLINE + 'Write job list ' + outFile);
-			var fd = fs.createWriteStream(outFile);
-			var countDown = 2; //	two matrix calc
+			var countDown = jobList.length;
 
 			function emitCB(message) {
-				process.stdout.write(message);
-				if (countDown === 0) {
+				process.stdout.write(message.toString());
+				if (--countDown === 0) {
 					emitter.removeListener('drainDone', emitCB);
-
-					emitter.emit('log', NEWLINE + 'Generate cloud freq per cluster...');
-					genClustersTF(outDir, jobList, matrix);
-					emitter.emit('log', '\tdone.');
 
 					done(null, itemCounter);
 				}
 			}
 			emitter.on('drainDone', emitCB);
 
-			jobList.forEach(function (jobCode) {
-				fd.write(jobCode + NEWLINE);
+			async.series([
+					function (callback) {
+						var outFile = path.join(outDir, basename_joblist);
+						emitter.emit('log', NEWLINE + 'Write job list ' + outFile);
+						var fd = fs.createWriteStream(outFile);
+						var data1 = '';
+						jobList.forEach(function (jobCode) {
+							data1 += jobCode + NEWLINE;
+						});
+						fd.write(data1, function () {
+							fd.end();
+							emitter.emit('log', '\tDone.');
+							callback(null, 'one');
+						});
+					},
+					function (callback) {
+						var outFile_sort = path.join(outDir, basename_keywords_sort);
+						var fd_sort = fs.createWriteStream(outFile_sort);
+						emitter.emit('log', NEWLINE + 'Sorted keywords also saved to ' + outFile_sort);
+
+						var data2_1 = '';
+						keywords.forEach(function (word) {
+							data2_1 += word + NEWLINE;
+						});
+						fd_sort.write(data2_1, function () {
+							fd_sort.end();
+							callback(null, 'two');
+						});
+					},
+					function (callback) {
+						var matrix = tfidf.tfidf_matrix(keywords, function (i, measure) {
+								//console.log('document #' + i + ' is ' + measure);
+							});
+						//console.log(matrix);
+						var outFile2 = path.join(outDir, basename_tfidf);
+						////var outFile2_idx = path.join(outDir, basename_tfidf_idx);
+						emitter.emit('log', NEWLINE + 'Write TF*IDF result to ' + outFile2 + '...');
+						var fd2 = fs.createWriteStream(outFile2);
+						////var fd2_idx = fs.createWriteStream(outFile2_idx);
+						var lines = 0;
+
+						var data2 = '';
+						matrix.forEach(function (doc) { //	per row (document)
+							var regEx = /[\[\]]/gi;
+							var terms = JSON.stringify(doc).replace(regEx, '');
+							data2 += terms + NEWLINE;
+							lines++;
+						});
+						fd2.write(data2, function () {
+							fd2.end();
+							emitter.emit('log', NEWLINE + 'Totally ' + itemCounter + '/' + listLen + ' cluster/files processed.');
+
+							//countDown--;
+							//emitter.emit('drainDone', NEWLINE + 'matrix done.');
+							callback(null, matrix);
+						});
+					},
+					function (callback) {
+						var matrix3 = tfidf.tf_idf_matrix(keywords, function (i, measure) {});
+						var outFile3 = path.join(outDir, basename_tf_idf);
+						emitter.emit('log', NEWLINE + 'Write TF_IDF result to ' + outFile3 + '...');
+						var fd3 = fs.createWriteStream(outFile3);
+						var lines3 = 0;
+
+						var data3 = '';
+						matrix3.forEach(function (doc) { //	per row (document)
+							var regEx = /[\[\]]/gi;
+							var terms = JSON.stringify(doc).replace(regEx, '');
+							data3 += terms + NEWLINE;
+							lines3++;
+						});
+						fd3.write(data3, function () {
+							fd3.end();
+							emitter.emit('log', NEWLINE + 'Totally ' + itemCounter + '/' + listLen + ' cluster/files processed.');
+
+							//countDown--;
+							//emitter.emit('drainDone', NEWLINE + 'matrix3 done.');
+							callback(null, matrix3);
+						});
+					}
+				],
+				// optional callback
+				function (err, results) {
+				// results is now equal to ['one', 'two']
+				emitter.emit('log', NEWLINE + 'Generate cloud freq per cluster...');
+				genClustersTF(outDir, jobList, results[2], results[3]);
+				emitter.emit('log', '\tdone.');
 			});
-			fd.end();
-			emitter.emit('log', '\tDone.');
 
-			var matrix = tfidf.tfidf_matrix(keywords, function (i, measure) {
-					//console.log('document #' + i + ' is ' + measure);
-				});
-			//console.log(matrix);
-			var outFile2 = path.join(outDir, basename_tfidf);
-			////var outFile2_idx = path.join(outDir, basename_tfidf_idx);
-			emitter.emit('log', NEWLINE + 'Write TF*IDF result to ' + outFile2 + '...');
-			var fd2 = fs.createWriteStream(outFile2);
-			////var fd2_idx = fs.createWriteStream(outFile2_idx);
-			var lines = 0;
-
+			/*
 			async.eachSeries(matrix, function (doc, outerCallback) { //	per row (document)
-				var regEx = /[\[\]]/gi;
-				var terms = JSON.stringify(doc).replace(regEx, '');
-				//emitter.emit('log', terms + NEWLINE);
-				fd2.write(terms + NEWLINE);
-				//emitter.emit('log', ++lines + ' ');
-				lines++;
-				////fd2_idx.write(lines + ',' + terms + NEWLINE);
-				outerCallback();
+			var regEx = /[\[\]]/gi;
+			var terms = JSON.stringify(doc).replace(regEx, '');
+			//emitter.emit('log', terms + NEWLINE);
+			fd2.write(terms + NEWLINE);
+			//emitter.emit('log', ++lines + ' ');
+			lines++;
+			////fd2_idx.write(lines + ',' + terms + NEWLINE);
+			outerCallback();
 			}, function (err) {
-				if (err) {
-					console.log('Failed to process outer!');
-				} else {
-					//fd2.write(util.inspect(matrix));
-					fd2.end();
-					////fd2_idx.end();
-					//emitter.emit('log', NEWLINE + lines + ' rows Done.');
-					emitter.emit('log', NEWLINE + 'Totally ' + itemCounter + '/' + listLen + ' cluster/files processed.');
+			if (err) {
+			console.log('Failed to process outer!');
+			} else {
+			//fd2.write(util.inspect(matrix));
+			fd2.end();
+			////fd2_idx.end();
+			//emitter.emit('log', NEWLINE + lines + ' rows Done.');
+			emitter.emit('log', NEWLINE + 'Totally ' + itemCounter + '/' + listLen + ' cluster/files processed.');
 
-					var outFile_sort = path.join(outDir, basename_keywords_sort);
-					var fd_sort = fs.createWriteStream(outFile_sort);
-					emitter.emit('log', NEWLINE + 'Sorted keywords also saved to ' + outFile_sort);
+			var outFile_sort = path.join(outDir, basename_keywords_sort);
+			var fd_sort = fs.createWriteStream(outFile_sort);
+			emitter.emit('log', NEWLINE + 'Sorted keywords also saved to ' + outFile_sort);
 
-					keywords.forEach(function (word) {
-						fd_sort.write(word + NEWLINE);
-					});
-					fd_sort.end();
-
-					countDown--;
-					emitter.emit('drainDone', NEWLINE + 'matrix done.');
-					//done(null, itemCounter);
-				}
+			keywords.forEach(function (word) {
+			fd_sort.write(word + NEWLINE);
 			});
+			fd_sort.end();
 
-			var matrix3 = tfidf.tf_idf_matrix(keywords, function (i, measure) {});
-			var outFile3 = path.join(outDir, basename_tf_idf);
-			emitter.emit('log', NEWLINE + 'Write TF_IDF result to ' + outFile3 + '...');
-			var fd3 = fs.createWriteStream(outFile3);
-			var lines3 = 0;
+			countDown--;
+			emitter.emit('drainDone', NEWLINE + 'matrix done.');
+			//done(null, itemCounter);
+			}
+			});
 
 			async.eachSeries(matrix3, function (doc, outerCallback) { //	per row (document)
-				var regEx = /[\[\]]/gi;
-				var terms = JSON.stringify(doc).replace(regEx, '');
-				fd3.write(terms + NEWLINE);
-				lines3++;
-				outerCallback();
+			var regEx = /[\[\]]/gi;
+			var terms = JSON.stringify(doc).replace(regEx, '');
+			fd3.write(terms + NEWLINE);
+			lines3++;
+			outerCallback();
 			}, function (err) {
-				if (err) {
-					console.log('Failed to process outer!');
-				} else {
-					fd3.end();
-					//emitter.emit('log', NEWLINE + lines3 + ' rows Done.');
-					emitter.emit('log', NEWLINE + 'Totally ' + itemCounter + '/' + listLen + ' cluster/files processed.');
+			if (err) {
+			console.log('Failed to process outer!');
+			} else {
+			fd3.end();
+			//emitter.emit('log', NEWLINE + lines3 + ' rows Done.');
+			emitter.emit('log', NEWLINE + 'Totally ' + itemCounter + '/' + listLen + ' cluster/files processed.');
 
-					countDown--;
-					emitter.emit('drainDone', NEWLINE + 'matrix3 done.');
-					//done(null, itemCounter);
-				}
+			countDown--;
+			emitter.emit('drainDone', NEWLINE + 'matrix3 done.');
+			//done(null, itemCounter);
+			}
 			});
+			 */
 		};
 		q.empty = function () {
 			enQueue(q, list, CONCURRENCY);
@@ -587,6 +665,16 @@ function readKeywords() {
 	});
 }
 
+function processOptions() {
+	//console.log(process.argv);
+	//console.log(process.argv.length);
+	if (process.argv.length > 2) {
+		var alg = process.argv[2].toUpperCase();
+		presetList.alg.push(alg);
+		console.log('\nProcess algorithm: ' + alg);
+	}
+}
+
 if (!fs.existsSync(inTopDir)) {
 	console.log("Dir " + inTopDir + " not found!");
 	process.exit(1);
@@ -627,6 +715,7 @@ if (!fs.existsSync(inTopDir)) {
 	fs.appendFileSync(filename_status, NEWLINE + getDateTime() + NEWLINE);
 
 	getPreset();
+	processOptions();
 
 	var timeA = new Date().getTime();
 
