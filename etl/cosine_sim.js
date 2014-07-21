@@ -17,7 +17,7 @@ var isPreset = true;
 var testMode = false;
 
 var emitter = new events.EventEmitter();
-var emitOut;
+var emitOut = null;
 
 var freqVector = function (word, letters) {
 	var freq = _.groupBy(word.split(''), function (l) {
@@ -130,6 +130,10 @@ function start() {
 
 	var resumeLen = resumeDoubles.length;
 	var docsLen = docDoubles.length;
+
+	//console.log('resumeLen=' + resumeLen)
+	//console.log('docsLen=' + docsLen)
+
 	//resumeDoubles.forEach(function (docOuter, i) {
 	for (var i = 0; i < resumeLen; i++) {
 		//docDoubles.forEach(function (docInner, j) {
@@ -169,6 +173,7 @@ function start() {
 	}
 
 	var len1 = simMatrix.length;
+	//console.log('len1=' + len1)
 	var vector = initVector(len1);
 
 	for (var ii = 0; ii < len1; ii++) {
@@ -231,7 +236,45 @@ function create(filename_src_resume, filename_src, tMode) {
 	emitOut = new events.EventEmitter();
 
 	return emitOut;
-}
+} //	create
+
+function createData(src_resume, src_jobs, tMode) {
+	if (tMode)
+		testMode = true;
+
+	process.stderr.write(NEWLINE + 'Load data...\t');
+	/*
+	delete docDoubles;
+	delete resumeDoubles;
+	delete docMags;
+	delete resumeMags;
+	delete simMatrix;
+	 */
+	docDoubles = [];
+	resumeDoubles = [];
+	docMags = [];
+	resumeMags = [];
+	simMatrix = [];
+
+	resumeDoubles = src_resume;
+	docDoubles = src_jobs;
+	//console.log(resumeDoubles.length);
+	//console.log(docDoubles.length);
+	//process.exit(1);
+	resumeMags = prepareMag(resumeDoubles);
+	docMags = prepareMag(docDoubles);
+	//console.log(resumeMags.length);
+	//console.log(docMags.length);
+	//process.exit(1);
+
+	initMatrix(resumeDoubles.length, docDoubles.length);
+
+	process.stderr.write('done.');
+
+	emitOut = new events.EventEmitter();
+
+	return emitOut;
+} //	createData
 
 function main() {
 	var filename_src;
@@ -257,4 +300,5 @@ function main() {
 //main();
 
 module.exports.create = create;
+module.exports.createData = createData;
 module.exports.start = start;
