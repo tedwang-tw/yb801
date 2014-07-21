@@ -9,8 +9,8 @@ var cheerio = require("cheerio");
 var lineReader = require('line-reader');
 var os = require('os');
 var child_process = require('child_process');
-var TfIdf = require('./tfidf');
-var tfidf = new TfIdf();
+//var TfIdf = require('./tfidf');
+//var tfidf = new TfIdf();
 
 var CONCURRENCY = 2;
 //var NORM_CONDS = 8; //	per actual job detail on web
@@ -52,7 +52,7 @@ var basename_jobgroup = 'input/jobgroup.txt';
 var basename_joburl = 'input/joburl.txt';
 var basename_resumelist = 'input/resumelist.txt';
 var basename_sim = 'input/sim_resume.txt';
-var recommend_prefix = 'recommend_job_';
+var recommend_prefix = ''; //	'recommend_job_';
 var basename_err = 'error.txt';
 var basename_status = 'status.txt';
 var basename_na = 'not_found.txt';
@@ -214,18 +214,18 @@ function subKeyword(list, pos, word) { //	check sub-string like
 
 function genJobOrder(doc) {
 	var list = [];
-	doc.forEach(function (tfidf, i) {
-		if (tfidf > 0) //	only count appeared jobs
+	doc.forEach(function (similarity, i) {
+		if (similarity > 0) //	only count appeared jobs
 			list.push({
-				tfidf : tfidf,
+				similarity : similarity,
 				index : i
 			});
 	});
 
 	list.sort(function (a, b) {
-		if (a.tfidf > b.tfidf)
+		if (a.similarity > b.similarity)
 			return -1;
-		else if (a.tfidf < b.tfidf)
+		else if (a.similarity < b.similarity)
 			return 1;
 		else
 			return 0;
@@ -529,9 +529,9 @@ function readJobs() {
 		emitter.emit('log', NEWLINE + 'Totally ' + size + ' groups.');
 		//process.exit();
 		emitter.emit('keyword', NEWLINE + 'Totally ' + results.joblist + ' jobs counted.' +
-			NEWLINE + 'Totally ' + results.jobgroup + ' job/group counted.',
-			NEWLINE + 'Totally ' + results.joburl + ' urls counted.',
-			NEWLINE + 'Totally ' + results.resumelist + ' resumes counted.',
+			NEWLINE + 'Totally ' + results.jobgroup + ' job/group counted.' +
+			NEWLINE + 'Totally ' + results.joburl + ' urls counted.' +
+			NEWLINE + 'Totally ' + results.resumelist + ' resumes counted.' +
 			NEWLINE + 'Totally ' + results.similarity + ' resume vectors counted.');
 	});
 }
