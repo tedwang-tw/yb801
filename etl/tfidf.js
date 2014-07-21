@@ -254,3 +254,11 @@ TfIdf.prototype.tfidf_matrix = function (terms, callback) { //	tf*idf
 
 	return tfidf_arr;
 };
+
+TfIdf.prototype.reNew = function () {
+	delete this.documents;
+	delete this._idCache;
+
+	this.documents = [];
+	this._idfCache = {};
+};
