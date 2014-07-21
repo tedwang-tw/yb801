@@ -38,13 +38,18 @@ var basename_err = 'error.txt';
 var basename_status = 'status.txt';
 var filename_status;
 
+var outFile_resume;
+var outFile_tfidf_resume;
+var outFile_tfidf_resume_idx;
+
 var filename_preset = path.join(__dirname, 'etl_config.json');
 var presetList;
 
 var keywords = [];
 var jobList = [];
+var jobWord_matrix = [];
 var resumeList = [];
-var resumeItem = '';
+//var resumeItem = '';
 
 var emitter = new events.EventEmitter();
 
@@ -195,17 +200,42 @@ function scrapeContent(dir, outDir, task, done) {
 		var fileData = JSON.parse(fs.readFileSync(file, 'utf8'));
 
 		tfidf.addDocument(fileData);
+		if (presetList.resume)
+			jobWord_matrix.push(fileData); //	backup for later resume usage
 
 		done(null, 1); //	for count
 	});
 
 } //	scrapeContent
 
+function scrapeContentResume(dir, outDir, task, done) {
+	if (path.extname(task) != ext) {
+		return done(null, 0); //	skip
+	}
+
+	setImmediate(function () {
+		var file = path.join(dir, task);
+		var fileData = JSON.parse(fs.readFileSync(file, 'utf8'));
+
+		tfidf.reNew();
+
+		jobWord_matrix.forEach(function (jobDoc) {
+			tfidf.addDocument(jobDoc);
+		});
+		tfidf.addDocument(fileData);
+
+		done(null, 1); //	for count
+	});
+
+} //	scrapeContentResume
+
 function processTFIDF(dir, outDir, done, itemCounter) {
-	var resumeIndex = jobList.indexOf(resumeItem);
+	var resumeIndex = jobList.length;
 	var resume_dir = '';
-	if (presetList.resume)
-		resume_dir = cat_resume + '/'; //	force output files to resume folder
+	if (presetList.resume) {
+		resume_dir = '../' + cat_resume + '/'; //	force output files to resume folder
+		newDir(outDir + '/../' + cat_resume);
+	}
 
 	async.series([
 			function (callback) {
@@ -222,21 +252,6 @@ function processTFIDF(dir, outDir, done, itemCounter) {
 				fd.write(dataOut, function () {
 					fd.end();
 					emitter.emit('log', '\tdone.');
-
-					if (presetList.resume) {
-						var outFile_resume = path.join(outDir, resume_dir + basename_resumelist);
-						emitter.emit('log', NEWLINE + 'Write resume list ' + outFile_resume);
-						var fd_resume = fs.createWriteStream(outFile_resume);
-						var dataResume = '';
-
-						resumeList.forEach(function (resume) {
-							dataResume += resume + NEWLINE;
-						});
-						fd_resume.write(dataResume, function () {
-							fd_resume.end();
-							emitter.emit('log', '\tdone.');
-						});
-					}
 
 					callback(null, 'one');
 				});
@@ -276,21 +291,6 @@ function processTFIDF(dir, outDir, done, itemCounter) {
 					fd2_idx.write(dataOut2_2, function () {
 						fd2_idx.end();
 					});
-
-					if (presetList.resume) {
-						var outFile_resume = path.join(outDir, resume_dir + basename_tfidf_resume);
-						var outFile_resume_idx = path.join(outDir, resume_dir + basename_tfidf_resume_idx);
-						emitter.emit('log', NEWLINE + 'Write ' + outFile_resume);
-						var fd_resume = fs.createWriteStream(outFile_resume);
-						var fd_resume_idx = fs.createWriteStream(outFile_resume_idx);
-						fd_resume.write(dataResume, function () {
-							fd_resume.end();
-						});
-						fd_resume_idx.write('1,' + dataResume, function () {
-							fd_resume_idx.end();
-							emitter.emit('log', '\tDone.');
-						});
-					}
 
 					callback(null, 'two');
 				});
@@ -344,22 +344,75 @@ function processTFIDF(dir, outDir, done, itemCounter) {
 		function (err, results) {
 		done(null, itemCounter);
 	});
-}
+} //	processTFIDF
+
+function processResumeTFIDF(dir, outDir, taskCB, index) {
+	var resumeTfidfIndex = jobList.length; //	resume is appended after all jobs in the doc matrix
+	var resume_dir = '';
+	//if (presetList.resume)
+	//	resume_dir = cat_resume + '/'; //	force output files to resume folder
+
+	async.series([
+			function (callback) {
+				if (presetList.resume) {
+					//var outFile_resume = path.join(outDir, resume_dir + basename_resumelist);
+					emitter.emit('log', NEWLINE + 'Write resume id ' + index + '\t');
+					
+					var dataResume = resumeList[index] + NEWLINE;
+					fs.appendFileSync(outFile_resume, dataResume);
+					callback(null, 'one');
+				}
+			},
+			function (callback) {
+				var matrix = tfidf.tfidf_matrix(keywords, function (i, measure) {
+						//console.log('document #' + i + ' is ' + measure);
+					});
+
+				var dataResume = matrix[resumeTfidfIndex] + NEWLINE;
+
+				//var outFile_tfidf_resume = path.join(outDir, resume_dir + basename_tfidf_resume);
+				//var outFile_tfidf_resume_idx = path.join(outDir, resume_dir + basename_tfidf_resume_idx);
+
+				emitter.emit('log', NEWLINE + 'Write resume tf*idf ' + index + '\t');
+
+				fs.appendFileSync(outFile_tfidf_resume, dataResume);
+				fs.appendFileSync(outFile_tfidf_resume_idx, (index + 1) + ',' + dataResume);
+
+				emitter.emit('log', '\tdone.\t');
+				callback(null, 'two');
+			}
+		],
+		// optional callback
+		function (err, results) {
+		setImmediate(taskCB);
+	});
+} //	processResumeTFIDF
 
 function walkJobCat(dir, outDir, done) { //	per job category
+	var isResumeCat = false;
+	var resume_dir = '';
 	emitter.emit('log', '\n' + dir + '\n');
+
+	if (presetList.resume) {
+		if (extractLastDir(dir, true) === cat_resume) {
+			isResumeCat = true;
+
+			outFile_resume = path.join(outDir, resume_dir + basename_resumelist);
+			outFile_tfidf_resume = path.join(outDir, resume_dir + basename_tfidf_resume);
+			outFile_tfidf_resume_idx = path.join(outDir, resume_dir + basename_tfidf_resume_idx);
+
+			//	Since later file output is in appending mode, we need to delete old files.
+			if (fs.existsSync(outFile_resume))
+				fs.unlinkSync(outFile_resume);
+			if (fs.existsSync(outFile_tfidf_resume))
+				fs.unlinkSync(outFile_tfidf_resume);
+			if (fs.existsSync(outFile_tfidf_resume_idx))
+				fs.unlinkSync(outFile_tfidf_resume_idx);
+		}
+	}
 
 	fs.readdir(dir, function (err, list) {
 		var itemCounter = 0;
-
-		if (presetList.resume) {
-			if (extractLastDir(dir, true) === cat_resume) {
-				resumeItem = path.basename(list[0], ext);
-				list.forEach(function (resume) {
-					resumeList.push(path.basename(resume, ext)); //	record resume id
-				});
-			}
-		}
 
 		function enQueue(que, srcArr, fillLen) {
 			function workerCB(err) {
@@ -388,13 +441,27 @@ function walkJobCat(dir, outDir, done) { //	per job category
 		var listLen = list.length;
 
 		var q = async.queue(function (task, taskCB) {
-				scrapeContent(dir, outDir, task, function (err, count) {
-					itemCounter += count;
-					if (count > 0) {
-						jobList.push(path.basename(task, ext)); //	record job id
-					}
-					setImmediate(taskCB);
-				});
+				if (isResumeCat) {
+					scrapeContentResume(dir, outDir, task, function (err, count) {
+
+						if (count > 0) {
+							//resumeItem = path.basename(list[0], ext);
+							resumeList.push(path.basename(task, ext)); //	record resume id
+							processResumeTFIDF(dir, outDir, taskCB, itemCounter); //	processResumeTFIDF() per resume
+						}
+						itemCounter += count; //	inc after processResumeTFIDF()
+						//setImmediate(taskCB);
+					});
+				} else {
+					scrapeContent(dir, outDir, task, function (err, count) {
+						itemCounter += count;
+
+						if (count > 0) {
+							jobList.push(path.basename(task, ext)); //	record job id
+						}
+						setImmediate(taskCB);
+					});
+				}
 			}, CONCURRENCY);
 
 		q.drain = function () {
@@ -411,8 +478,8 @@ function walkJobCat(dir, outDir, done) { //	per job category
 			}
 			emitter.on('drainDone', emitCB);
 			 */
-			if (!presetList.resume)
-				processTFIDF(dir, outDir, done, itemCounter);
+			if (!isResumeCat)
+				processTFIDF(dir, outDir, done, itemCounter); //	processTFIDF() after all jobs accumulated
 			else
 				done(null, itemCounter);
 			return; //	--------------------------------------------------------
@@ -626,10 +693,10 @@ function walkDaily(dir, outDir, done) { //	per day
 				done(errAsync, 0);
 			} else {
 				emitter.emit('doneDaily', NEWLINE + 'Totally ' + catCount + '/' + list.length + ' categories processed.');
-				if (presetList.resume)
-					processTFIDF(dir, outDir, done, catCount);
-				else
-					done(null, itemCounter);
+				//if (presetList.resume)
+				//	processTFIDF(dir, outDir, done, catCount);
+				//else
+				done(null, itemCounter);
 			}
 		});
 	});
