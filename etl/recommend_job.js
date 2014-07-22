@@ -685,7 +685,7 @@ if (!fs.existsSync(inTopDir)) {
 	});
 
 	filename_status = path.join(outTopDir, basename_status);
-	fs.appendFileSync(filename_status, getDateTime() + NEWLINE);
+	fs.appendFileSync(filename_status, NEWLINE + getDateTime() + NEWLINE);
 
 	getPreset();
 
@@ -712,6 +712,7 @@ if (!fs.existsSync(inTopDir)) {
 				fs.appendFileSync(filename_status, NEWLINE + 'Totally ' + totalItems + ' jobs processed.' + NEWLINE);
 
 				console.log('Elapsed time: ' + (timeB - timeA) / 1000 + ' sec.');
+				fs.appendFileSync(filename_status, NEWLINE + 'Elapsed time: ' + (timeB - timeA) / 1000 + ' sec.' + NEWLINE);
 			}
 		});
 	});
