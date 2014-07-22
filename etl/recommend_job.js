@@ -17,15 +17,18 @@ var CONCURRENCY = 2;
 var GroupMode = {
 	KMEANS : {
 		value : 1,
+		key : 'KM',
 		name : 'KM'
 	},
 	HIERARCHY : {
 		value : 2,
+		key : 'HI',
 		name : 'HI'
 	},
-	KMEANS_MA : {
+	MA_KM : {
 		value : 3,
-		name : 'MA:KM'
+		key : 'MA:KM',
+		name : 'MA_KM'
 	},
 	UNKNOWN : {
 		value : 0,
@@ -72,6 +75,7 @@ var presetList;
 var jobList = [];
 var jobGroup = [];
 var groupCount = {};
+var clusterSort = []; //	for Mahout
 var jobUrl = {};
 var resumeList = {
 	resumes : []
@@ -471,6 +475,48 @@ function walk(dir, outDir, done) {
 	});
 } //	walk
 
+function convertMahoutCluster(line) {
+	var groups = {};
+	var job2cluster = [];
+	var size;
+
+	line.split(',').forEach(function (job) {
+		job = job.trim();
+		if (job.length > 0) {
+			var keyValue = job.split(':');
+			var key = keyValue[1].trim();
+			job2cluster.push(key);
+			if (groups[key])
+				groups[key].count += 1;
+			else
+				groups[key] = {
+					count : 1,
+					index : -1
+				};
+		}
+	});
+
+	//var clusterSort = [];
+	for (var id in groups) {
+		clusterSort.push(parseInt(id, 10));
+	}
+	clusterSort.sort(function (a, b) { //	sort cluster id
+		return a - b;
+	});
+	clusterSort.forEach(function (key, i) { //	convert Mahout cluster id to zero-based index
+		groups[key].index = i + 1;
+	});
+
+	console.log(clusterSort);
+	console.log(Object.keys(groups).length);
+
+	jobGroup = job2cluster.map(function (key) {
+			return groups[key].index;
+		});
+
+	return clusterSort.length;
+}
+
 /*
 <<	Clusters file format	>>
 R:
@@ -549,7 +595,9 @@ function readJobs() {
 				line = line.trim();
 				if (line.length > 0) {
 					if (firstLine) { //	group mode string
-						if (line.toUpperCase().indexOf(GroupMode.KMEANS.name) !== -1)
+						if (line.toUpperCase().indexOf(GroupMode.MA_KM.key) !== -1) //	longest match first
+							group_mode = GroupMode.MA_KM;
+						else if (line.toUpperCase().indexOf(GroupMode.KMEANS.name) !== -1)
 							group_mode = GroupMode.KMEANS;
 						else if (line.toUpperCase().indexOf(GroupMode.HIERARCHY.name) !== -1)
 							group_mode = GroupMode.HIERARCHY;
@@ -563,18 +611,23 @@ function readJobs() {
 						if (group_mode.value === GroupMode.KMEANS.value) {
 							if ((lineNum % 2) === 0)
 								bypass = true;
-						} else { //	HIERARCHY MODE
+						} else if (group_mode.value === GroupMode.HIERARCHY.value) {
 							var regEx = /\[[0-9]+\]/g;
 							line = line.replace(regEx, '');
+						} else { //	MA MODES
 						}
 						if (!bypass) {
-							line.split(/\s/).forEach(function (job) {
-								if (job.length > 0) {
-									jobGroup.push(job);
-									if (Number(job) > size)
-										size = Number(job);
-								}
-							});
+							if (group_mode.value === GroupMode.MA_KM.value) {
+								size = convertMahoutCluster(line);
+							} else {
+								line.split(/\s/).forEach(function (job) {
+									if (job.length > 0) {
+										jobGroup.push(job);
+										if (Number(job) > size)
+											size = Number(job);
+									}
+								});
+							}
 						}
 						lineNum++;
 					}
