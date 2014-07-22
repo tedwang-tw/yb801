@@ -364,7 +364,7 @@ function walkJobCat(dir, outDir, done) { //	per job category
 						var data = '';
 
 						clusterSort.forEach(function (cluster, i) {
-							data += cluster + ':' + i + NEWLINE;
+							data += cluster + ':' + (i + 1) + NEWLINE;
 						});
 						fd.write(data, function () {
 							fd.end();
