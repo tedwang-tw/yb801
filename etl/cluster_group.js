@@ -264,7 +264,7 @@ function scrapeContent(dir, outDir, task, done) {
 			if (jobUrl[record.code]) //	dictionary lookup
 				record.url = header_Origin + jobUrl[record.code];
 			scrapeJob(dir, outDir, task, record);
-			record.group = parseInt(group, 10) + 1;
+			record.group = parseInt(group, 10);
 
 			if (!jobsCluster[group])
 				jobsCluster[group] = [];
@@ -341,7 +341,7 @@ function walkJobCat(dir, outDir, done) { //	per job category
 			newDir(groupDir);
 
 			async.each(Object.keys(jobsCluster), function (group, callback) {
-				var outFile = path.join(outDir, group_mode.name + '/' + sprintf('%03d', parseInt(group, 10) + 1) + outExt);
+				var outFile = path.join(outDir, group_mode.name + '/' + sprintf('%03d', parseInt(group, 10)) + outExt);
 				emitter.emit('log', NEWLINE + 'Write clustered jobs ' + outFile);
 				var data = JSON.stringify({
 						group : jobsCluster[group]
@@ -364,7 +364,7 @@ function walkJobCat(dir, outDir, done) { //	per job category
 						var data = '';
 
 						clusterSort.forEach(function (cluster, i) {
-							data += cluster + ':' + (i + 1) + NEWLINE;
+							data += cluster + ':' + i + NEWLINE;
 						});
 						fd.write(data, function () {
 							fd.end();
@@ -492,7 +492,7 @@ function convertMahoutCluster(line) {
 		return a - b;
 	});
 	clusterSort.forEach(function (key, i) { //	convert Mahout cluster id to zero-based index
-		groups[key].index = i;
+		groups[key].index = i + 1;
 	});
 
 	console.log(clusterSort);
