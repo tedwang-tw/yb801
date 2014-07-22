@@ -81,6 +81,7 @@ etl/input
 etl/synonym
 etl/text
 etl/tfidf
+etl/tfidf_group
 etl/similarity
 etl/recommend
 etl/group
