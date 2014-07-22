@@ -50,7 +50,7 @@ var outTopDir = 'group/104/job';
 var basename_joblist = 'input/joblist.txt';
 var basename_jobgroup = 'input/jobgroup.txt';
 var basename_joburl = 'input/joburl.txt';
-var basename_cluster2group = 'clustergroup.txt'; //	for Mahout
+var basename_cluster2group = 'clustergroup.json'; //	for Mahout
 var basename_err = 'error.txt';
 var basename_status = 'status.txt';
 var basename_na = 'not_found.txt';
@@ -361,12 +361,18 @@ function walkJobCat(dir, outDir, done) { //	per job category
 						var outFile = path.join(outDir, group_mode.name + '/' + basename_cluster2group);
 						emitter.emit('log', NEWLINE + 'Write cluster/group mapping file ' + outFile);
 						var fd = fs.createWriteStream(outFile);
-						var data = '';
+						var data = {
+							clusters : []
+						};
 
 						clusterSort.forEach(function (cluster, i) {
-							data += cluster + ':' + (i + 1) + NEWLINE;
+							//console.log(i);
+							data.clusters.push({
+								ma : cluster,
+								id : sprintf('%03d', parseInt(i + 1, 10))
+							});
 						});
-						fd.write(data, function () {
+						fd.write(JSON.stringify(data), function () {
 							fd.end();
 							done(null, itemCounter);
 						});
