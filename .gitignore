@@ -82,4 +82,5 @@ etl/text
 etl/tfidf
 etl/similarity
 etl/recommend
+etl/group
 etl/*.txt
