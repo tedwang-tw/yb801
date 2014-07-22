@@ -238,6 +238,36 @@ function genJobOrder(doc) {
 	return list;
 }
 
+function scrapeJob(dir, outDir, task, record) {
+	if (path.extname(task) != '.html') {
+		return; //	skip
+	}
+
+	//setImmediate(function () {
+	var file = path.join(dir, task);
+	var fileData = fs.readFileSync(file, 'utf8');
+	//var outFile = path.join(outDir, path.basename(file, ext) + outExt);
+	var outText = '';
+
+	var compId = '#comp_header > ul > li > p > a'; //'#comp_header';
+	var titleId = '#comp_header > ul > li > h1';
+	var contentTag = '#cont_main';
+	var contentClass = '.intro';
+	var workClass = '.work';
+
+	var $ = cheerio.load(fileData);
+
+	record.company = $(compId).text().trim();
+	record.title = $(titleId).text().trim();
+	if (record.title.match(/\n/)) {
+		var lines = record.title.split('\n');
+		record.title = lines[0].trim();
+	}
+
+	//});
+
+} //	scrapeJob
+
 function scrapeContent(dir, outDir, jobOrder, index) {
 	//setImmediate(function () {
 	var recommendation = {
@@ -251,8 +281,9 @@ function scrapeContent(dir, outDir, jobOrder, index) {
 			if (jobUrl[record.code]) //	dictionary lookup
 				record.url = header_Origin + jobUrl[record.code];
 
-			record.title = '';
-			record.company = '';
+			//record.title = '';
+			//record.company = '';
+			scrapeJob(dir, outDir, record.code + '.html', record);
 
 			if (job.index >= jobGroup.length)
 				record.group = -1;
