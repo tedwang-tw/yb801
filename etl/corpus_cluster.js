@@ -23,6 +23,11 @@ var GroupMode = {
 		value : 2,
 		name : 'HI'
 	},
+	MA_KM : {
+		value : 3,
+		key : 'MA:KM',
+		name : 'MA_KM'
+	},
 	UNKNOWN : {
 		value : 0,
 		name : ''
@@ -60,6 +65,7 @@ var keywords = [];
 var keywords_merge = [];
 var jobList = [];
 var jobGroup = [];
+var clusterSort = []; //	for Mahout
 //var groupCount = {};
 
 var emitter = new events.EventEmitter();
@@ -224,6 +230,8 @@ function scrapeContent(dir, outDir, task, done) {
 			var groupNum = Number(group) - 1;
 			var fileData = JSON.parse(fs.readFileSync(file, 'utf8'));
 
+			//console.log('\n' + groupNum);
+			
 			fileData.forEach(function (word) {
 				keywords[groupNum].push(word);
 				addUniqueKeyword(word);
@@ -280,7 +288,7 @@ function walkJobCat(dir, outDir, done) { //	per job category
 			emitter.emit('log', NEWLINE + 'Writing grouped keywords to folder ' + groupDir);
 
 			keywords.forEach(function (groupWords, i) {
-				var outFile = path.join(groupDir, basename_prefix + sprintf('%03d', i) + outExt); //	format group number for future alphabetical sorting
+				var outFile = path.join(groupDir, basename_prefix + sprintf('%03d', i+1) + outExt); //	format group number for future alphabetical sorting
 				var fd = fs.createWriteStream(outFile);
 				fd.write(JSON.stringify(groupWords), function () {
 					fd.end();
@@ -392,6 +400,48 @@ function initGroupKeywords(size) {
 		keywords.push([]);
 }
 
+function convertMahoutCluster(line) {
+	var groups = {};
+	var job2cluster = [];
+	var size;
+
+	line.split(',').forEach(function (job) {
+		job = job.trim();
+		if (job.length > 0) {
+			var keyValue = job.split(':');
+			var key = keyValue[1].trim();
+			job2cluster.push(key);
+			if (groups[key])
+				groups[key].count += 1;
+			else
+				groups[key] = {
+					count : 1,
+					index : -1
+				};
+		}
+	});
+
+	//var clusterSort = [];
+	for (var id in groups) {
+		clusterSort.push(parseInt(id, 10));
+	}
+	clusterSort.sort(function (a, b) { //	sort cluster id
+		return a - b;
+	});
+	clusterSort.forEach(function (key, i) { //	convert Mahout cluster id to 1-based index
+		groups[key].index = i + 1;
+	});
+
+	console.log(clusterSort);
+	console.log(Object.keys(groups).length);
+
+	jobGroup = job2cluster.map(function (key) {
+			return groups[key].index;
+		});
+
+	return clusterSort.length;
+}
+
 function readJobs() {
 	if (!fs.existsSync(basename_joblist)) {
 		console.log('File "' + basename_joblist + '" not found!');
@@ -422,7 +472,9 @@ function readJobs() {
 				line = line.trim();
 				if (line.length > 0) {
 					if (firstLine) { //	group mode string
-						if (line.toUpperCase().indexOf(GroupMode.KMEANS.name) !== -1)
+						if (line.toUpperCase().indexOf(GroupMode.MA_KM.key) !== -1) //	longest match first
+							group_mode = GroupMode.MA_KM;
+						else if (line.toUpperCase().indexOf(GroupMode.KMEANS.name) !== -1)
 							group_mode = GroupMode.KMEANS;
 						else if (line.toUpperCase().indexOf(GroupMode.HIERARCHY.name) !== -1)
 							group_mode = GroupMode.HIERARCHY;
@@ -436,18 +488,23 @@ function readJobs() {
 						if (group_mode.value === GroupMode.KMEANS.value) {
 							if ((lineNum % 2) === 0)
 								bypass = true;
-						} else { //	HIERARCHY MODE
+						} else if (group_mode.value === GroupMode.HIERARCHY.value) {
 							var regEx = /\[[0-9]+\]/g;
 							line = line.replace(regEx, '');
+						} else { //	MA MODES
 						}
 						if (!bypass) {
-							line.split(/\s/).forEach(function (job) {
-								if (job.length > 0) {
-									jobGroup.push(job);
-									if (Number(job) > size)
-										size = Number(job);
-								}
-							});
+							if (group_mode.value === GroupMode.MA_KM.value) {
+								size = convertMahoutCluster(line);
+							} else {
+								line.split(/\s/).forEach(function (job) {
+									if (job.length > 0) {
+										jobGroup.push(job);
+										if (Number(job) > size)
+											size = Number(job);
+									}
+								});
+							}
 						}
 						lineNum++;
 					}
