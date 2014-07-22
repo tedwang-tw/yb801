@@ -35,6 +35,7 @@ var GroupMode = {
 var group_mode = 0;
 
 var header_Origin = 'http://www.104.com.tw';
+var header_Referer = 'http://vip.104.com.tw/9/search/search_result.cfm?jobcat=2007001000';
 
 var ext = '.txt'; //	null;	//	input file filter
 var outExt = '.json';
@@ -53,6 +54,7 @@ var basename_joburl = 'input/joburl.txt';
 var basename_resumelist = 'input/resumelist.txt';
 var basename_sim = 'input/sim_resume.txt';
 var recommend_prefix = ''; //	'recommend_job_';
+var basename_resumeRecord = 'resumelist.json';
 var basename_err = 'error.txt';
 var basename_status = 'status.txt';
 var basename_na = 'not_found.txt';
@@ -71,7 +73,9 @@ var jobList = [];
 var jobGroup = [];
 var groupCount = {};
 var jobUrl = {};
-var resumeList = [];
+var resumeList = {
+	resumes : []
+};
 var vectors = [];
 
 var emitter = new events.EventEmitter();
@@ -237,7 +241,7 @@ function genJobOrder(doc) {
 function scrapeContent(dir, outDir, jobOrder, index) {
 	//setImmediate(function () {
 	var recommendation = {
-		list : []
+		jobs : []
 	};
 	var count = 0;
 	jobOrder.forEach(function (job, i) {
@@ -246,20 +250,21 @@ function scrapeContent(dir, outDir, jobOrder, index) {
 			record.code = jobList[job.index];
 			if (jobUrl[record.code]) //	dictionary lookup
 				record.url = header_Origin + jobUrl[record.code];
+
+			record.title = '';
+			record.company = '';
+
 			if (job.index >= jobGroup.length)
 				record.group = -1;
 			else
 				record.group = jobGroup[job.index];
 
-			recommendation.list.push(record);
+			recommendation.jobs.push(record);
 			count++;
 		}
 	});
 
-	var groupDir = path.join(outDir, group_mode.name);
-	newDir(groupDir);
-
-	var outFile = path.join(groupDir, recommend_prefix + resumeList[index] + outExt);
+	var outFile = path.join(outDir, recommend_prefix + resumeList.resumes[index].id_no + outExt);
 	emitter.emit('log', NEWLINE + 'Write recommendation list ' + outFile);
 	var fd = fs.createWriteStream(outFile);
 	var dataResume = JSON.stringify(recommendation);
@@ -276,7 +281,55 @@ function scrapeContent(dir, outDir, jobOrder, index) {
 } //	scrapeContent
 
 function walkJobCat(dir, outDir, done) { //	per job category
-	emitter.emit('log', '\n' + dir + '\n');
+	emitter.emit('log', '\nIn: ' + dir + '\n');
+	emitter.emit('log', '\nOut: ' + outDir + '\n');
+
+	var itemCounter = 0;
+	var groupDir = path.join(outDir, group_mode.name);
+	newDir(groupDir);
+
+	async.series([
+			function (callback) {
+				var outFile = path.join(groupDir, basename_resumeRecord);
+				emitter.emit('log', NEWLINE + 'Write resume list ' + outFile);
+				var fd = fs.createWriteStream(outFile);
+				var dataResume = JSON.stringify(resumeList);
+				fd.write(dataResume, function () {
+					fd.end();
+					emitter.emit('log', '\tdone.');
+
+					callback(null, 'one');
+				});
+			},
+			function (callback) {
+				var vecLen = vectors.length;
+				var countDown = vecLen;
+
+				function emitCB(message) {
+					process.stdout.write(message);
+					if (--countDown === 0) {
+						emitter.removeListener('drainDone', emitCB);
+
+						emitter.emit('doneJobCat', NEWLINE + 'Totally ' + itemCounter + '/' + vecLen + ' jobs/resumes processed.');
+						//done(null, itemCounter);
+					}
+				}
+				emitter.on('drainDone', emitCB);
+
+				vectors.forEach(function (vector, i) {
+					var jobOrder = genJobOrder(vector);
+					itemCounter += scrapeContent(dir, groupDir, jobOrder, i);
+				});
+				callback(null, 'two');
+			}
+		],
+		// optional callback
+		function (err, results) {
+		// results is now equal to ['one', 'two']
+		done(null, itemCounter);
+	});
+
+	return;
 
 	fs.readdir(dir, function (err, list) {
 		if (err)
@@ -448,9 +501,13 @@ function readJobs() {
 			lineReader.eachLine(basename_resumelist, function (line) {
 				var resume = line.trim();
 				if (resume.length > 0)
-					resumeList.push(resume);
+					resumeList.resumes.push({
+						id_no : resume,
+						referer : header_Referer,
+						vrfy : 1405961882495
+					});
 			}).then(function () {
-				callback(null, resumeList.length);
+				callback(null, resumeList.resumes.length);
 			});
 		},
 		jobgroup : function (callback) {
