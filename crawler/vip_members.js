@@ -15,9 +15,33 @@ var superagent = require('superagent');
 var emitter = new events.EventEmitter();
 
 var NEWLINE = '\r\n';
+var cat_resume = 'resume';
 
 var filename_preset = path.join(__dirname, 'hr_config.json');
 var presetList;
+
+var newEnv = {
+	baseUrl : 'http://vip.104.com.tw/9/main/before/post/search_resume_detail.cfm',
+	headers : {
+		Host : 'vip.104.com.tw',
+		Origin : 'http://vip.104.com.tw',
+		Referer : 'http://vip.104.com.tw/9/search/search_result.cfm?jobcat=2007001000',
+		UserAgent : 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36',
+		Accept : 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*'
+	},
+	capList : [],
+	rawTopDir : 'raw/104/vip',
+	rawExt : '.html',
+	textTopDir : 'text/104/vip',
+	textResumeTopDir : '../etl/text/104/job',
+	extExt : '.txt',
+	//crawler : newCrawler,
+	processProtection : checkHome,
+	processError : checkClosed,
+	scraper : newScraper,
+	dateStr : '',
+	concurrency : 2
+};
 
 function getPreset() {
 	if (fs.existsSync(filename_preset)) {
@@ -52,6 +76,33 @@ function checkPresetArea(area) {
 				return true;
 		return false; //	no match
 	}
+}
+
+function newDateStr() {
+	var d = new Date();
+
+	var curr_date = d.getDate();
+	var curr_month = d.getMonth();
+	curr_month++;
+	var curr_year = d.getFullYear();
+
+	return (curr_year + sprintf('%02d', curr_month) + sprintf('%02d', curr_date));
+}
+
+function newDir(topDir, dateStr) {
+	var dir = path.join(topDir, '/' + dateStr);
+	//console.log("Destination: " + dir);
+
+	if (!fs.existsSync(dir)) {
+		console.log("Creating dir " + dir);
+		mkdirp.sync(dir);
+
+		if (!fs.existsSync(dir)) {
+			process.stderr.write("Unable to create dir " + dir);
+		}
+	}
+
+	return dir;
 }
 
 function checkHome(data, options) {
@@ -99,23 +150,50 @@ function newScraper(options, env, callback) {
 		//console.log(file);
 
 		var fileData = fs.readFileSync(file, 'utf8');
-		var outFile = path.join(options.outDir, path.basename(options.postfix, env.rawExt) + env.extExt);
 		var outText = '';
 
 		var $ = cheerio.load(fileData);
 
-		var CSSpath = '#content > div > div.master_bg > div > div:nth-child(7) > dl > dd'; //	§Þ¯à±Mªø
-		var phrases = $(CSSpath);
+		var CSSpath = '#content > div > div.master_bg > div > div:nth-child(7) > dl > dd'; //	æŠ€èƒ½å°ˆé•·
+		var rows = $(CSSpath);
 
-		outText += phrases.slice(0, 1).text() + NEWLINE; //	¾Õªø¤u¨ã
-		outText += phrases.slice(1, 2).text() + NEWLINE; //	¤u§@§Þ¯à
+		//outText += rows.slice(0, 1).text() + NEWLINE; //	æ“…é•·å·¥å…·
+		//outText += rows.slice(1, 2).text() + NEWLINE; //	å·¥ä½œæŠ€èƒ½
+
+		var cert = 'è­‰ç…§ï¼š';
+		var ucodes = '';
+		for (var i = 0; i < cert.length; i++) {
+			ucodes += '\\u' + cert.charCodeAt(i).toString(16);
+		}
+		var newExp = new RegExp(ucodes);
+
+		rows.each(function (i, elem) {
+			var record = $(this).text().trim();
+			if (i < 2) { //	only extract æ“…é•·å·¥å…· and å·¥ä½œæŠ€èƒ½
+				//console.log(record);
+				if (record.indexOf(cert) < 0)
+				//if (!record.match(newExp))
+					outText += record + NEWLINE;
+				else
+					console.log('Bypass cert!');
+			}
+		});
 
 		//console.log(outText);
 		//return callback(null, 1); //	for count
 
+		var outFile = path.join(options.outDir, path.basename(options.postfix, env.rawExt) + env.extExt);
 		var fd = fs.createWriteStream(outFile);
 		fd.write(outText, function () {
 			fd.end();
+
+			var etlDir = path.join(newEnv.textResumeTopDir, newEnv.dateStr + '/' + cat_resume);
+			newDir(etlDir, '');
+			var outFile2 = path.join(etlDir, path.basename(options.postfix, env.rawExt) + env.extExt);
+			if (fs.existsSync(outFile2))
+				fs.unlinkSync(outFile2);
+			fs.appendFileSync(outFile2, outText);
+
 			callback(null, 1); //	for count
 		});
 	});
@@ -125,13 +203,13 @@ function scrapeList(inData, callback) {
 	setImmediate(function () {
 		var $ = cheerio.load(inData);
 
-		var CSSpath = '#right_sidebar755 > div > div.resume_tit > div > span.id_no'; //	¥N½X
+		var CSSpath = '#right_sidebar755 > div > div.resume_tit > div > span.id_no'; //	ä»£ç¢¼
 		var codes = $(CSSpath);
 
 		//console.log('codes.len = ' + codes.length);
 
 		codes.each(function (i, elem) {
-			var record = $(this).text().trim(); //.replace('¡G', ':');
+			var record = $(this).text().trim(); //.replace('ï¼š', ':');
 			var offset = record.search(/[a-z]/i);
 			newEnv.capList.push(record.slice(offset));
 		});
@@ -189,7 +267,7 @@ function getCatPage(cat, callback) {
 				process.stdout.write('X');
 				callback();
 			} else {
-				fs.appendFileSync('search.html', res.text);
+				//fs.appendFileSync('search.html', res.text);
 				getMembers(res.text, callback);
 			}
 		}
@@ -197,28 +275,9 @@ function getCatPage(cat, callback) {
 
 }
 
-var newEnv = {
-	baseUrl : 'http://vip.104.com.tw/9/main/before/post/search_resume_detail.cfm',
-	headers : {
-		Host : 'vip.104.com.tw',
-		Origin : 'http://vip.104.com.tw',
-		Referer : 'http://vip.104.com.tw/9/search/search_result.cfm?jobcat=2007001000',
-		UserAgent : 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36',
-		Accept : 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*'
-	},
-	capList : [],
-	rawTopDir : 'raw/104/vip',
-	rawExt : '.html',
-	textTopDir : 'text/104/vip',
-	extExt : '.txt',
-	//crawler : newCrawler,
-	processProtection : checkHome,
-	processError : checkClosed,
-	scraper : newScraper,
-	concurrency : 2
-};
-
 function getList() {
+	newEnv.dateStr = newDateStr();
+
 	async.eachSeries(presetList.cat, function (cat, callback) {
 		getCatPage(cat, callback);
 	}, function (err) {
