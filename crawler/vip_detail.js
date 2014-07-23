@@ -84,7 +84,7 @@ function defaultCrawler(options, env, callback) {
 	var filename_status = path.join(options.outDir, 'status.log');
 
 	setImmediate(function () {
-		console.log(options.postfix);
+		//console.log(options.postfix);
 		//return callback(null, 1);
 
 		superagent
@@ -256,17 +256,17 @@ function startScraper(env, dateStr, outerCallback) {
 }
 
 function start(env, done) {
-	var dateStr = newDateStr();
+	//env.dateStr = newDateStr();	//	moved to caller
 
 	if (!env.crawler)
 		env.crawler = defaultCrawler; //	use default
 
 	async.series([
 			function (callback) {
-				startCrawler(env, dateStr, callback);
+				startCrawler(env, env.dateStr, callback);
 			},
 			function (callback) {
-				startScraper(env, dateStr, callback);
+				startScraper(env, env.dateStr, callback);
 			}
 		],
 		// optional callback
