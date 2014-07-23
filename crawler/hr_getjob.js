@@ -6,6 +6,7 @@ var superagent = require('superagent');
 var async = require('async');
 
 var ext = '.html';
+var basename_url = 'joburl.txt';
 var interval = 550; //	ms
 var NEWLINE = '\r\n';
 
@@ -42,7 +43,7 @@ function hr_getjob(options, jobs, next) {
 	var header_UserAgent = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36';
 	var header_Accept = 'text/html,application/xhtml+xml,application/xml';
 
-	var filename_url = path.join(options.dir, options.cat + '_url.txt');
+	var filename_url = path.join(options.dir, basename_url);
 	var newJobs = [];
 
 	async.whilst(
