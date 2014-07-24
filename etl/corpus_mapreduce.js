@@ -19,10 +19,13 @@ var DELIMITER = ',';
 
 var inTopDir = 'synonym/104/job';
 var outTopDir = 'corpus_merge/104/job';
+var cat_resume = 'resume';
 
 //var basename_keyword = 'keywords_merge.txt';
 var basename_joblist = 'joblist.txt';
+var basename_resumelist = 'resumelist.txt';
 var basename_jobword = 'jobword_merge.txt';
+var basename_prefix = 'jobword_';
 var basename_err = 'error.txt';
 var basename_status = 'status.txt';
 var filename_status;
@@ -30,8 +33,11 @@ var filename_status;
 var filename_preset = path.join(__dirname, 'etl_config.json');
 var presetList;
 
+var outFile_resume;
 var keywords = {};
 var jobwords = [];
+var jobWord_matrix = [];
+var resumeList = [];
 
 var emitter = new events.EventEmitter();
 
@@ -61,9 +67,9 @@ function isDate(tdate) {
 }
 
 function newDir(dir) {
-	console.log("\nDestination: " + dir);
+	//console.log("\nDestination: " + dir);
 	if (!fs.existsSync(dir)) {
-		console.log("Creating dir " + dir);
+		console.log("\nCreating dir " + dir);
 		mkdirp.sync(dir);
 
 		if (!fs.existsSync(dir)) {
@@ -181,14 +187,84 @@ function scrapeContent(dir, outDir, task, done) {
 		var fileData = JSON.parse(fs.readFileSync(file, 'utf8'));
 
 		jobwords.push([fileData.join(DELIMITER)]);
+		if (presetList.resume)
+			jobWord_matrix.push([fileData.join(DELIMITER)]); //	backup for later resume usage
 
 		done(null, 1); //	for count
 	});
 
 } //	scrapeContent
 
+function scrapeContentResume(dir, outDir, task, done) {
+	if (path.extname(task) != ext) {
+		return done(null, 0); //	skip
+	}
+
+	setImmediate(function () {
+		var file = path.join(dir, task);
+		var fileData = JSON.parse(fs.readFileSync(file, 'utf8'));
+
+		jobwords = [];
+		jobwords.push([fileData.join(DELIMITER)]); //	put at first position
+
+		jobWord_matrix.forEach(function (jobDoc) {
+			jobwords.push(jobDoc);
+		});
+
+		done(null, 1); //	for count
+	});
+
+} //	scrapeContentResume
+
+function processResumeMatrix(dir, outDir, taskCB, index) {
+	async.series([
+			function (callback) {
+				emitter.emit('log', NEWLINE + 'Write resume file id ' + index + '\t');
+
+				var dataResume = resumeList[index] + NEWLINE;
+				fs.appendFileSync(outFile_resume, dataResume);
+				callback(null, 'one');
+			},
+			function (callback) {
+				var outFile = path.join(outDir, basename_prefix + resumeList[index] + outExt);
+				emitter.emit('log', NEWLINE + 'Write back merged resume + jobs words to ' + outFile);
+
+				var fd = fs.createWriteStream(outFile);
+				var data = '';
+				jobwords.forEach(function (job, i) {
+					data += i + DELIMITER + job + NEWLINE; //	zero-based from resume first
+				});
+				fd.write(data, function () {
+					fd.end();
+					emitter.emit('log', '\tdone.');
+					callback(null, 'two');
+				});
+			}
+		],
+		// optional callback
+		function (err, results) {
+		// results is now equal to ['one', 'two']
+		setImmediate(taskCB);
+	});
+}
+
 function walkJobCat(dir, outDir, done) { //	per job category
-	emitter.emit('log', '\n' + dir);
+	var isResumeCat = false;
+	var resume_dir = '';
+	emitter.emit('log', '\n' + dir + '\n');
+
+	if (presetList.resume) {
+		resume_dir = '../' + cat_resume + '/';
+		newDir(outDir + '/../' + cat_resume);
+		if (extractLastDir(dir, true) === cat_resume) {
+			isResumeCat = true;
+			outFile_resume = path.join(outDir, basename_resumelist);
+
+			//	Since later file output is in appending mode, we need to delete old files.
+			if (fs.existsSync(outFile_resume))
+				fs.unlinkSync(outFile_resume);
+		}
+	}
 
 	fs.readdir(dir, function (err, list) {
 		var itemCounter = 0;
@@ -221,35 +297,52 @@ function walkJobCat(dir, outDir, done) { //	per job category
 		var jobList = [];
 
 		var q = async.queue(function (task, taskCB) {
-				scrapeContent(dir, outDir, task, function (err, count) {
-					itemCounter += count;
-					if (count > 0)
-						jobList.push(path.basename(task, ext)); //	record job id
-					setImmediate(taskCB);
-				});
+				if (isResumeCat) {
+					scrapeContentResume(dir, outDir, task, function (err, count) {
+
+						if (count > 0) {
+							resumeList.push(path.basename(task, ext)); //	record resume id
+							processResumeMatrix(dir, outDir, taskCB, itemCounter); //	processResumeMatrix() per resume
+						}
+						itemCounter += count; //	inc after processResumeTFIDF()
+					});
+				} else {
+					scrapeContent(dir, outDir, task, function (err, count) {
+						itemCounter += count;
+						if (count > 0)
+							jobList.push(path.basename(task, ext)); //	record job id
+						setImmediate(taskCB);
+					});
+				}
 			}, CONCURRENCY);
 
 		q.drain = function () {
-			var outFile1 = path.join(outDir, basename_joblist);
-			emitter.emit('doneJobCat', NEWLINE + 'Write job list ' + outFile1);
-			var fd1 = fs.createWriteStream(outFile1);
-			jobList.forEach(function (jobCode) {
-				fd1.write(jobCode + NEWLINE);
-			});
-			fd1.end();
-			emitter.emit('doneJobCat', NEWLINE + 'Done.');
-
-			var outFile = path.join(outDir, basename_jobword);
-			emitter.emit('doneJobCat', NEWLINE + 'Write back merged job words to ' + outFile);
-
-			var fd = fs.createWriteStream(outFile);
-			jobwords.forEach(function (job, i) {
-				fd.write((i + 1) + DELIMITER + job + NEWLINE);
-			});
-			fd.end();
-
-			emitter.emit('doneJobCat', NEWLINE + 'Done.');
 			emitter.emit('doneJobCat', NEWLINE + 'Totally ' + itemCounter + '/' + listLen + ' jobs/files processed.');
+
+			if (!isResumeCat) {
+				var outFile1 = path.join(outDir, resume_dir + basename_joblist);
+				emitter.emit('log', NEWLINE + 'Write job list ' + outFile1);
+				var fd1 = fs.createWriteStream(outFile1);
+				jobList.forEach(function (jobCode) {
+					fd1.write(jobCode + NEWLINE);
+				});
+				fd1.end();
+				emitter.emit('log', NEWLINE + 'Done.');
+
+				if (!presetList.resume) {
+					var outFile = path.join(outDir, basename_jobword);
+					emitter.emit('log', NEWLINE + 'Write back merged job words to ' + outFile);
+
+					var fd = fs.createWriteStream(outFile);
+					jobwords.forEach(function (job, i) {
+						fd.write((i + 1) + DELIMITER + job + NEWLINE);
+					});
+					fd.end();
+				}
+
+				emitter.emit('log', '\tdone.');
+			}
+
 			done(null, itemCounter);
 		};
 		q.empty = function () {
@@ -278,7 +371,7 @@ function walkDaily(dir, outDir, done) { //	per day
 			var folder = path.join(dir, baseFolder);
 			fs.stat(folder, function (errStat, stat) {
 				if (stat && stat.isDirectory()) {
-					emitter.emit('doneDaily', NEWLINE + baseFolder);
+					//emitter.emit('doneDaily', NEWLINE + baseFolder);
 					walkJobCat(folder, path.join(outDir, baseFolder), function (err, count) {
 						itemCounter += count;
 						catCount++;
@@ -315,7 +408,7 @@ function walk(dir, outDir, done) {
 			var folder = path.join(dir, baseFolder);
 			fs.stat(folder, function (errStat, stat) {
 				if (stat && stat.isDirectory()) {
-					emitter.emit('doneTop', NEWLINE + baseFolder);
+					//emitter.emit('doneTop', NEWLINE + baseFolder);
 					walkDaily(folder, path.join(outDir, baseFolder), function (err, count) {
 						itemCounter += count;
 						dayCount++;
@@ -338,9 +431,21 @@ function walk(dir, outDir, done) {
 	});
 } //	walk
 
+function processOptions() {
+	//console.log(process.argv);
+	//console.log(process.argv.length);
+	if (process.argv.length > 2) {
+		if (cat_resume === process.argv[2].toLowerCase()) {
+			console.log('\nProcess resumes!');
+			presetList.cat.push(cat_resume);
+			presetList.resume = true;
+		}
+	}
+}
+
 if (!fs.existsSync(inTopDir)) {
 	console.log("Dir " + inTopDir + " not found!");
-	process.exit(1);	
+	process.exit(1);
 } else {
 	var totalItems = 0;
 
@@ -375,9 +480,10 @@ if (!fs.existsSync(inTopDir)) {
 	});
 
 	filename_status = path.join(outTopDir, basename_status);
-	fs.appendFileSync(filename_status, getDateTime() + NEWLINE);
+	fs.appendFileSync(filename_status, NEWLINE + getDateTime() + NEWLINE);
 
 	getPreset();
+	processOptions();
 
 	var timeA = new Date().getTime();
 
