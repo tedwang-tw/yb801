@@ -586,8 +586,7 @@ if (!fs.existsSync(inTopDir)) {
 
 	getPreset();
 
-	var timeA = new Date().getTime(),
-	timeB;
+	var timeA = new Date().getTime();
 
 	readJobs();
 	checkPlatform();
@@ -597,7 +596,7 @@ if (!fs.existsSync(inTopDir)) {
 		fs.appendFileSync(filename_status, message);
 
 		walk(inTopDir, outTopDir, function (err, results) {
-			timeB = new Date().getTime();
+			var timeB = new Date().getTime();
 
 			if (err) {
 				console.err(util.inspect(err));
@@ -609,6 +608,7 @@ if (!fs.existsSync(inTopDir)) {
 				fs.appendFileSync(filename_status, NEWLINE + 'Totally ' + totalItems + ' jobs processed.' + NEWLINE);
 
 				console.log('Elapsed time: ' + (timeB - timeA) / 1000 + ' sec.');
+				fs.appendFileSync(filename_status, NEWLINE + 'Elapsed time: ' + (timeB - timeA) / 1000 + ' sec.' + NEWLINE);
 			}
 		});
 	});
