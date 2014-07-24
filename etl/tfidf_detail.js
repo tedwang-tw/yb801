@@ -27,6 +27,7 @@ var basename_keyword = 'input/keywords_merge.txt';
 var basename_keyword_resume = 'input/keywords_merge_resume.txt';
 var basename_keywords_sort = 'keywords_merge_sort.txt';
 var basename_keywords_sort_index = 'keywords_merge_sort_index.txt';
+var basename_keywords_resume_sort_index = 'keywords_merge_resume_sort_index.txt';
 var basename_tf_idf = 'tf_idf.txt';
 var basename_tfidf = 'tfidf.txt'; //	tf*idf
 var basename_tfidf_idx = 'tfidf_index.txt'; //	index + tf*idf
@@ -317,7 +318,12 @@ function processTFIDF(dir, outDir, done, itemCounter) {
 			},
 			function (callback) {
 				var outFile_sort = path.join(outDir, resume_dir + basename_keywords_sort);
-				var outFile_index = path.join(outDir, resume_dir + basename_keywords_sort_index);
+				var outFile_index;
+				if (presetList.resume)
+					outFile_index = path.join(outDir, resume_dir + basename_keywords_resume_sort_index);
+				else
+					outFile_index = path.join(outDir, resume_dir + basename_keywords_sort_index);
+				
 				var fd_sort = fs.createWriteStream(outFile_sort);
 				var fd_index = fs.createWriteStream(outFile_index);
 				emitter.emit('log', NEWLINE + 'Sorted keywords also saved to ' + outFile_sort);
