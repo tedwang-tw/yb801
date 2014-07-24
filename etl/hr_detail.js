@@ -213,7 +213,7 @@ function scrapeJob(dir, outDir, task, done) {
 } //	scrapeJob
 
 function walkJobCat(dir, outDir, done) { //	per job category
-	emitter.emit('log', '\n' + dir);
+	emitter.emit('log', '\n' + dir + '\n');
 
 	fs.readdir(dir, function (err, list) {
 		var jobCounter = 0;
@@ -281,7 +281,7 @@ function walkDaily(dir, outDir, done) { //	per day
 			var folder = path.join(dir, baseFolder);
 			fs.stat(folder, function (errStat, stat) {
 				if (stat && stat.isDirectory()) {
-					emitter.emit('doneDaily', NEWLINE + baseFolder);
+					//emitter.emit('doneDaily', NEWLINE + baseFolder);
 					walkJobCat(folder, path.join(outDir, baseFolder), function (err, count) {
 						jobCounter += count;
 						catCount++;
@@ -318,7 +318,7 @@ function walk(dir, outDir, done) {
 			var folder = path.join(dir, baseFolder);
 			fs.stat(folder, function (errStat, stat) {
 				if (stat && stat.isDirectory()) {
-					emitter.emit('doneTop', NEWLINE + baseFolder);
+					//emitter.emit('doneTop', NEWLINE + baseFolder);
 					walkDaily(folder, path.join(outDir, baseFolder), function (err, count) {
 						jobCounter += count;
 						dayCount++;
@@ -343,6 +343,7 @@ function walk(dir, outDir, done) {
 
 if (!fs.existsSync(inTopDir)) {
 	console.log("Dir " + inTopDir + " not found!");
+	process.exit(1);
 } else {
 	var totolJobs = 0;
 
@@ -377,15 +378,14 @@ if (!fs.existsSync(inTopDir)) {
 	});
 
 	filename_status = path.join(outTopDir, basename_status);
-	fs.appendFileSync(filename_status, getDateTime() + NEWLINE);
+	fs.appendFileSync(filename_status, NEWLINE + getDateTime() + NEWLINE);
 
 	getPreset();
 
-	var timeA = new Date().getTime(),
-	timeB;
+	var timeA = new Date().getTime();
 
 	walk(inTopDir, outTopDir, function (err, results) {
-		timeB = new Date().getTime();
+		var timeB = new Date().getTime();
 
 		if (err) {
 			console.err(util.inspect(err));
@@ -397,6 +397,7 @@ if (!fs.existsSync(inTopDir)) {
 			fs.appendFileSync(filename_status, NEWLINE + 'Totally ' + totolJobs + ' jobs processed.' + NEWLINE);
 
 			console.log('Elapsed time: ' + (timeB - timeA) / 1000 + ' sec.');
+			fs.appendFileSync(filename_status, NEWLINE + 'Elapsed time: ' + (timeB - timeA) / 1000 + ' sec.' + NEWLINE);
 		}
 	});
 }
