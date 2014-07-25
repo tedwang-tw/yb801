@@ -71,6 +71,7 @@ var jobList = [];
 var jobUrl = {};
 var jobGroup = [];
 var groupCount = {};
+var groupsMahout = {};
 var clusterSort = []; //	for Mahout
 var jobsCluster = {};
 
@@ -324,7 +325,7 @@ function walkJobCat(dir, outDir, done) { //	per job category
 		newDir(outDir);
 
 		var listLen = list.length;
-		var groups = {};
+		//var groups = {};
 
 		var q = async.queue(function (task, taskCB) {
 				scrapeContent(dir, outDir, task, function (err, count) {
@@ -369,7 +370,8 @@ function walkJobCat(dir, outDir, done) { //	per job category
 							//console.log(i);
 							data.clusters.push({
 								ma : cluster,
-								id : sprintf('%03d', parseInt(i + 1, 10))
+								id : sprintf('%03d', parseInt(i + 1, 10)),
+								count : groupsMahout[cluster].count
 							});
 						});
 						fd.write(JSON.stringify(data), function () {
@@ -470,7 +472,6 @@ function walk(dir, outDir, done) {
 } //	walk
 
 function convertMahoutCluster(line) {
-	var groups = {};
 	var job2cluster = [];
 	var size;
 
@@ -480,10 +481,10 @@ function convertMahoutCluster(line) {
 			var keyValue = job.split(':');
 			var key = keyValue[1].trim();
 			job2cluster.push(key);
-			if (groups[key])
-				groups[key].count += 1;
+			if (groupsMahout[key])
+				groupsMahout[key].count += 1;
 			else
-				groups[key] = {
+				groupsMahout[key] = {
 					count : 1,
 					index : -1
 				};
@@ -491,21 +492,21 @@ function convertMahoutCluster(line) {
 	});
 
 	//var clusterSort = [];
-	for (var id in groups) {
+	for (var id in groupsMahout) {
 		clusterSort.push(parseInt(id, 10));
 	}
 	clusterSort.sort(function (a, b) { //	sort cluster id
 		return a - b;
 	});
 	clusterSort.forEach(function (key, i) { //	convert Mahout cluster id to zero-based index
-		groups[key].index = i + 1;
+		groupsMahout[key].index = i + 1;
 	});
 
 	console.log(clusterSort);
-	console.log(Object.keys(groups).length);
+	console.log(Object.keys(groupsMahout).length);
 
 	jobGroup = job2cluster.map(function (key) {
-			return groups[key].index;
+			return groupsMahout[key].index;
 		});
 
 	return clusterSort.length;
