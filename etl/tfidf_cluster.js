@@ -208,8 +208,9 @@ function genDocTF(doc, tf_idfs) {
 			return 0;
 	});
 
+	var size = list.length;
 	list.map(function (item, i) {
-		item.freq = i + 1;
+		item.freq = size - i;	//	i + 1;
 		item.rfreq = Math.floor(item.freq / 10) + 1; //	to fit the two-digits limitation of the wordcloud2.js
 		return item;
 	});
