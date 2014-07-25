@@ -11,7 +11,7 @@ var lineReader = require('line-reader');
 //var tfidf = new TfIdf();
 var cosineSim = require('./cosine_sim.js');
 
-var CONCURRENCY = 2;
+var CONCURRENCY = 1;
 //var NORM_CONDS = 8; //	per actual job detail on web
 
 var ext = '.txt'; //	null;	//	input file filter
@@ -26,11 +26,12 @@ var cat_resume = 'resume';
 
 //var basename_keyword = 'input/keywords_merge.txt';
 //var basename_keyword_resume = 'input/keywords_merge_resume.txt';
+var basename_resumelist = 'input/resumelist.txt';
 //var basename_keywords_sort = 'keywords_merge_sort.txt';
 //var basename_keywords_sort_index = 'keywords_merge_sort_index.txt';
 //var basename_tf_idf = 'tf_idf.txt';
 var basename_tfidf = 'tfidf.txt'; //	tf*idf
-var basename_tfidf_idx = 'tfidf_index.txt'; //	index + tf*idf
+//var basename_tfidf_idx = 'tfidf_index.txt'; //	index + tf*idf
 var basename_tfidf_resume = 'tfidf_resume.txt'; //	tf*idf
 //var basename_joblist = 'joblist.txt';
 var basename_sim_resume = 'sim_resume.txt';
@@ -188,35 +189,36 @@ function subKeyword(list, pos, word) { //	check sub-string like
 
 function scrapeContent(dir, outDir, resumeTfidf, jobsTfidf, index, done) {
 
-	//setImmediate(function () {
-	//var fileResume = path.join(dir, basename_tfidf_resume);
-	//var fileJobs = path.join(dir, basename_tfidf);
-	//var em = cosineSim.create(fileResume, fileJobs, true);
+	setImmediate(function () {
+		//var fileResume = path.join(dir, basename_tfidf_resume);
+		//var fileJobs = path.join(dir, basename_tfidf);
+		//var em = cosineSim.create(fileResume, fileJobs, true);
 
-	var em = cosineSim.createData(resumeTfidf, jobsTfidf, false);
+		var em = cosineSim.createData(resumeTfidf, jobsTfidf, false);
 
-	var allData = '';
+		var allData = '';
 
-	function dataCB(inData) {
-		allData += inData;
-	}
-	function endCB(msg) {
-		emitter.removeListener('data', dataCB);
-		emitter.removeListener('end', endCB);
-		//process.stdout.write(allData);
+		function dataCB(inData) {
+			allData += inData;
+		}
+		function endCB(msg) {
+			em.removeListener('data', dataCB);
+			em.removeListener('end', endCB);
+			//process.stdout.write(allData);
 
-		emitter.emit('log', NEWLINE + 'Write resume similarity ' + index);
-		fs.appendFileSync(outFile_simResume, allData);
-		emitter.emit('log', '\tdone.');
+			emitter.emit('log', NEWLINE + 'Write resume similarity ' + index);
+			fs.appendFileSync(outFile_simResume, allData);
+			//allData = null;
+			emitter.emit('log', '\tdone.');
 
-		done(null, 1); //	for count
-	}
+			done(null, 1); //	for count
+		}
 
-	em.on('data', dataCB);
-	em.on('end', endCB);
+		em.on('data', dataCB);
+		em.on('end', endCB);
 
-	cosineSim.start();
-	//});
+		cosineSim.start();
+	});
 
 } //	scrapeContent
 
@@ -233,6 +235,24 @@ function loadMatrix(filename, matrix) {
 	});
 }
 
+function loadMixMatrix(filename, resumeMat, jobMat) {
+	if (!fs.existsSync(filename)) {
+		process.stderr.write('File "' + filename + '" not found!');
+		process.exit(1);
+	}
+
+	var docs = fs.readFileSync(filename, 'utf8').split(NEWLINE);
+	docs.forEach(function (doc, i) {
+		if (doc.trim().length > 0) {
+			if (i !== 0)
+				jobMat.push(JSON.parse('[' + doc.trim() + ']'));
+			else //	resume is at first position per tfidf_detail.js
+				resumeMat.push(JSON.parse('[' + doc.trim() + ']'));
+		}
+	});
+	//docs = null;
+}
+
 function walkJobCat(dir, outDir, done) { //	per job category
 	emitter.emit('log', '\n' + dir + '\n');
 
@@ -241,13 +261,8 @@ function walkJobCat(dir, outDir, done) { //	per job category
 			return done(null, 0);
 	}
 
-	var fileJobs = path.join(dir, basename_tfidf);
-	var fileResume = path.join(dir, basename_tfidf_resume);
 	var jobsTfidfs = [];
 	var resumeTfidfs = [];
-
-	loadMatrix(fileJobs, jobsTfidfs);
-	loadMatrix(fileResume, resumeTfidfs);
 
 	outFile_simResume = path.join(outDir, basename_sim_resume);
 	if (fs.existsSync(outFile_simResume))
@@ -255,6 +270,35 @@ function walkJobCat(dir, outDir, done) { //	per job category
 
 	newDir(outDir);
 	var itemCounter = 0;
+
+	async.eachLimit(resumeList, CONCURRENCY, function (resume, callback) {
+		var fileTfidf = path.join(dir, resume + ext);
+		jobsTfidfs = [];
+		resumeTfidfs = [];
+		loadMixMatrix(fileTfidf, resumeTfidfs, jobsTfidfs);
+
+		scrapeContent(dir, outDir, resumeTfidfs, jobsTfidfs, itemCounter, function (err, count) {
+			itemCounter += count;
+			//jobsTfidfs = [];
+			//resumeTfidfs = [];
+			callback();
+		});
+	}, function (err) {
+		if (err) {
+			// One of the iterations produced an error.
+			// All processing will now stop.
+			console.log('A file failed to process');
+		} else {
+			emitter.emit('doneJobCat', NEWLINE + 'Totally ' + itemCounter + '/' + jobsTfidfs.length + ' resumes/jobs processed.');
+			done(null, itemCounter);
+		}
+	});
+	return;
+
+	var fileJobs = path.join(dir, basename_tfidf);
+	var fileResume = path.join(dir, basename_tfidf_resume);
+	loadMatrix(fileJobs, jobsTfidfs);
+	loadMatrix(fileResume, resumeTfidfs);
 
 	//console.log('resume #: ' + resumeTfidfs.length);
 	//process.exit(1);
@@ -375,6 +419,31 @@ function processOptions() {
 	presetList.resume = true;
 }
 
+function readInputFiles() {
+	if (!fs.existsSync(basename_resumelist)) {
+		console.log('File "' + basename_resumelist + '" not found!');
+		process.exit(1);
+	}
+
+	async.parallel({
+		resumelist : function (callback) {
+			// read all lines:
+			lineReader.eachLine(basename_resumelist, function (line) {
+				var resume = line.trim();
+				if (resume.length > 0)
+					resumeList.push(resume);
+			}).then(function () {
+				callback(null, resumeList.length);
+			});
+		}
+	},
+		function (err, results) {
+		// results is now equals to: {one: 1, two: 2}
+		//process.exit();
+		emitter.emit('keyword', NEWLINE + 'Totally ' + results.resumelist + ' resumes counted.');
+	});
+}
+
 if (!fs.existsSync(inTopDir)) {
 	console.log("Dir " + inTopDir + " not found!");
 	process.exit(1);
@@ -416,28 +485,29 @@ if (!fs.existsSync(inTopDir)) {
 
 	getPreset();
 	processOptions();
+	readInputFiles();
 
 	var timeA = new Date().getTime();
 
-	//emitter.on('keyword', function (message) {
-	//process.stdout.write(message);
-	//fs.appendFileSync(filename_status, message);
+	emitter.on('keyword', function (message) {
+		process.stdout.write(message);
+		fs.appendFileSync(filename_status, message);
 
-	walk(inTopDir, outTopDir, function (err, results) {
-		var timeB = new Date().getTime();
+		walk(inTopDir, outTopDir, function (err, results) {
+			var timeB = new Date().getTime();
 
-		if (err) {
-			console.err(util.inspect(err));
-		}
+			if (err) {
+				console.err(util.inspect(err));
+			}
 
-		if (results) {
-			totalItems += results;
-			process.stdout.write('\nTotally ' + totalItems + ' resumes processed.\n');
-			fs.appendFileSync(filename_status, NEWLINE + 'Totally ' + totalItems + ' resumes processed.' + NEWLINE);
+			if (results) {
+				totalItems += results;
+				process.stdout.write('\nTotally ' + totalItems + ' resumes processed.\n');
+				fs.appendFileSync(filename_status, NEWLINE + 'Totally ' + totalItems + ' resumes processed.' + NEWLINE);
 
-			console.log('Elapsed time: ' + (timeB - timeA) / 1000 + ' sec.');
-			fs.appendFileSync(filename_status, NEWLINE + 'Elapsed time: ' + (timeB - timeA) / 1000 + ' sec.' + NEWLINE);
-		}
+				console.log('Elapsed time: ' + (timeB - timeA) / 1000 + ' sec.');
+				fs.appendFileSync(filename_status, NEWLINE + 'Elapsed time: ' + (timeB - timeA) / 1000 + ' sec.' + NEWLINE);
+			}
+		});
 	});
-	//});
 }

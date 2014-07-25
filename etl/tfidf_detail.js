@@ -14,7 +14,7 @@ var CONCURRENCY = 2;
 //var NORM_CONDS = 8; //	per actual job detail on web
 
 var ext = '.json'; //	null;	//	input file filter
-var outExt = '.json';
+var outExt = '.txt';
 
 var NEWLINE = '\r\n';
 var DELIMITER = ',';
@@ -40,8 +40,8 @@ var basename_status = 'status.txt';
 var filename_status;
 
 var outFile_resume;
-var outFile_tfidf_resume;
-var outFile_tfidf_resume_idx;
+//var outFile_tfidf_resume;
+//var outFile_tfidf_resume_idx;
 
 var filename_preset = path.join(__dirname, 'etl_config.json');
 var presetList;
@@ -220,10 +220,10 @@ function scrapeContentResume(dir, outDir, task, done) {
 
 		tfidf.reNew();
 
+		tfidf.addDocument(fileData);	//	resume is at first position
 		jobWord_matrix.forEach(function (jobDoc) {
 			tfidf.addDocument(jobDoc);
 		});
-		tfidf.addDocument(fileData);
 
 		done(null, 1); //	for count
 	});
@@ -231,7 +231,7 @@ function scrapeContentResume(dir, outDir, task, done) {
 } //	scrapeContentResume
 
 function processTFIDF(dir, outDir, done, itemCounter) {
-	var resumeIndex = jobList.length;
+	var resumeIndex = 0;	//jobList.length;
 	var resume_dir = '';
 	if (presetList.resume) {
 		resume_dir = '../' + cat_resume + '/'; //	force output files to resume folder
@@ -245,9 +245,11 @@ function processTFIDF(dir, outDir, done, itemCounter) {
 				var fd = fs.createWriteStream(outFile);
 				var dataOut = '';
 				jobList.forEach(function (jobCode, i) {
+					/*
 					if (presetList.resume)
 						if (i >= resumeIndex)
-							return; //	bypass resumes
+							return; //	bypass resumes					
+					*/
 					dataOut += jobCode + NEWLINE;
 				});
 				fd.write(dataOut, function () {
@@ -258,63 +260,69 @@ function processTFIDF(dir, outDir, done, itemCounter) {
 				});
 			},
 			function (callback) {
-				var matrix = tfidf.tfidf_matrix(keywords, function (i, measure) {
-						//console.log('document #' + i + ' is ' + measure);
-					});
-				var outFile2 = path.join(outDir, resume_dir + basename_tfidf);
-				var outFile2_idx = path.join(outDir, resume_dir + basename_tfidf_idx);
-				emitter.emit('log', NEWLINE + 'Write TF*IDF result to ' + outFile2 + '...');
-				var fd2 = fs.createWriteStream(outFile2);
-				var fd2_idx = fs.createWriteStream(outFile2_idx);
-				var lines = 0;
+				if (!presetList.resume) {			
+					var matrix = tfidf.tfidf_matrix(keywords, function (i, measure) {
+							//console.log('document #' + i + ' is ' + measure);
+						});
+					var outFile2 = path.join(outDir, resume_dir + basename_tfidf);
+					var outFile2_idx = path.join(outDir, resume_dir + basename_tfidf_idx);
+					emitter.emit('log', NEWLINE + 'Write TF*IDF result to ' + outFile2 + '...');
+					var fd2 = fs.createWriteStream(outFile2);
+					var fd2_idx = fs.createWriteStream(outFile2_idx);
+					var lines = 0;
 
-				var dataOut2_1 = '';
-				var dataOut2_2 = '';
-				var dataResume = '';
-				matrix.forEach(function (doc) { //	per row (document)
-					var regEx = /[\[\]]/gi;
-					var terms = JSON.stringify(doc).replace(regEx, '');
+					var dataOut2_1 = '';
+					var dataOut2_2 = '';
+					var dataResume = '';
+					matrix.forEach(function (doc) { //	per row (document)
+						var regEx = /[\[\]]/gi;
+						var terms = JSON.stringify(doc).replace(regEx, '');
+						/*
+						if (presetList.resume) {
+							if (lines === resumeIndex) { //	separate resume ouput
+								dataResume = terms;
 
-					if (presetList.resume) {
-						if (lines === resumeIndex) { //	separate resume ouput
-							dataResume = terms;
-
-							return;
+								return;
+							}
 						}
-					}
-
-					lines++;
-					dataOut2_1 += terms + NEWLINE;
-					dataOut2_2 += lines + ',' + terms + NEWLINE;
-				});
-				fd2.write(dataOut2_1, function () {
-					fd2.end();
-					fd2_idx.write(dataOut2_2, function () {
-						fd2_idx.end();
+						*/
+						lines++;
+						dataOut2_1 += terms + NEWLINE;
+						dataOut2_2 += lines + ',' + terms + NEWLINE;
 					});
+					fd2.write(dataOut2_1, function () {
+						fd2.end();
+						fd2_idx.write(dataOut2_2, function () {
+							fd2_idx.end();
+						});
 
+						callback(null, 'two');
+					});
+				} else
 					callback(null, 'two');
-				});
 			},
 			function (callback) {
-				var matrix3 = tfidf.tf_idf_matrix(keywords, function (i, measure) {});
-				var outFile3 = path.join(outDir, resume_dir + basename_tf_idf);
-				emitter.emit('log', NEWLINE + 'Write TF_IDF result to ' + outFile3 + '...');
-				var fd3 = fs.createWriteStream(outFile3);
-				var lines3 = 0;
+				if (!presetList.resume) {			
+					var matrix3 = tfidf.tf_idf_matrix(keywords, function (i, measure) {});
+					var outFile3 = path.join(outDir, resume_dir + basename_tf_idf);
+					emitter.emit('log', NEWLINE + 'Write TF_IDF result to ' + outFile3 + '...');
+					var fd3 = fs.createWriteStream(outFile3);
+					var lines3 = 0;
 
-				var dataOut3 = '';
-				matrix3.forEach(function (doc) { //	per row (document)
-					var regEx = /[\[\]]/gi;
-					var terms = JSON.stringify(doc).replace(regEx, '');
-					dataOut3 += terms + NEWLINE;
-					lines3++;
-				});
-				fd3.write(dataOut3, function () {
-					fd3.end();
+					var dataOut3 = '';
+					matrix3.forEach(function (doc) { //	per row (document)
+						var regEx = /[\[\]]/gi;
+						var terms = JSON.stringify(doc).replace(regEx, '');
+						dataOut3 += terms + NEWLINE;
+						lines3++;
+					});
+					fd3.write(dataOut3, function () {
+						fd3.end();
 
+						callback(null, 'three');
+					});
+				} else
 					callback(null, 'three');
-				});
 			},
 			function (callback) {
 				var outFile_sort = path.join(outDir, resume_dir + basename_keywords_sort);
@@ -353,7 +361,7 @@ function processTFIDF(dir, outDir, done, itemCounter) {
 } //	processTFIDF
 
 function processResumeTFIDF(dir, outDir, taskCB, index) {
-	var resumeTfidfIndex = jobList.length; //	resume is appended after all jobs in the doc matrix
+	var resumeTfidfIndex = 0;	//jobList.length; //	resume is appended after all jobs in the doc matrix
 	var resume_dir = '';
 	//if (presetList.resume)
 	//	resume_dir = cat_resume + '/'; //	force output files to resume folder
@@ -373,16 +381,39 @@ function processResumeTFIDF(dir, outDir, taskCB, index) {
 				var matrix = tfidf.tfidf_matrix(keywords, function (i, measure) {
 						//console.log('document #' + i + ' is ' + measure);
 					});
+				var outFile2 = path.join(outDir, resume_dir + resumeList[index] + outExt);
+				var outFile2_idx = path.join(outDir, resume_dir + resumeList[index] + '_index' + outExt);
+				emitter.emit('log', NEWLINE + 'Write resume tf*idf ' + index + '\t');
+				var fd2 = fs.createWriteStream(outFile2);
+				//var fd2_idx = fs.createWriteStream(outFile2_idx);
+				var lines = 0;
 
-				var dataResume = matrix[resumeTfidfIndex] + NEWLINE;
+				var dataOut2_1 = '';
+				var dataOut2_2 = '';
+				var dataResume = '';
+				matrix.forEach(function (doc) { //	per row (document)
+					var regEx = /[\[\]]/gi;
+					var terms = JSON.stringify(doc).replace(regEx, '');
+					lines++;
+					dataOut2_1 += terms + NEWLINE;
+					dataOut2_2 += lines + ',' + terms + NEWLINE;
+				});
+				fd2.write(dataOut2_1, function () {
+					fd2.end();
+					//fd2_idx.write(dataOut2_2, function () {
+					//	fd2_idx.end();
+					//});
 
-				//var outFile_tfidf_resume = path.join(outDir, resume_dir + basename_tfidf_resume);
-				//var outFile_tfidf_resume_idx = path.join(outDir, resume_dir + basename_tfidf_resume_idx);
-
+					callback(null, 'two');
+				});
+				return;
+					
+				dataResume = matrix[resumeTfidfIndex] + NEWLINE;
+				
 				emitter.emit('log', NEWLINE + 'Write resume tf*idf ' + index + '\t');
 
-				fs.appendFileSync(outFile_tfidf_resume, dataResume);
-				fs.appendFileSync(outFile_tfidf_resume_idx, (index + 1) + ',' + dataResume);
+				//fs.appendFileSync(outFile_tfidf_resume, dataResume);
+				//fs.appendFileSync(outFile_tfidf_resume_idx, (index + 1) + ',' + dataResume);
 
 				emitter.emit('log', '\tdone.\t');
 				callback(null, 'two');
@@ -404,16 +435,16 @@ function walkJobCat(dir, outDir, done) { //	per job category
 			isResumeCat = true;
 
 			outFile_resume = path.join(outDir, resume_dir + basename_resumelist);
-			outFile_tfidf_resume = path.join(outDir, resume_dir + basename_tfidf_resume);
-			outFile_tfidf_resume_idx = path.join(outDir, resume_dir + basename_tfidf_resume_idx);
+			//outFile_tfidf_resume = path.join(outDir, resume_dir + basename_tfidf_resume);
+			//outFile_tfidf_resume_idx = path.join(outDir, resume_dir + basename_tfidf_resume_idx);
 
 			//	Since later file output is in appending mode, we need to delete old files.
 			if (fs.existsSync(outFile_resume))
 				fs.unlinkSync(outFile_resume);
-			if (fs.existsSync(outFile_tfidf_resume))
-				fs.unlinkSync(outFile_tfidf_resume);
-			if (fs.existsSync(outFile_tfidf_resume_idx))
-				fs.unlinkSync(outFile_tfidf_resume_idx);
+			//if (fs.existsSync(outFile_tfidf_resume))
+			//	fs.unlinkSync(outFile_tfidf_resume);
+			//if (fs.existsSync(outFile_tfidf_resume_idx))
+			//	fs.unlinkSync(outFile_tfidf_resume_idx);
 		}
 	}
 
