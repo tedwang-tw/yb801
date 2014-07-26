@@ -16,6 +16,7 @@ var emitter = new events.EventEmitter();
 
 var NEWLINE = '\r\n';
 var cat_resume = 'resume';
+var demo_mode = 'demo';
 
 var filename_preset = path.join(__dirname, 'hr_config.json');
 var presetList;
@@ -172,7 +173,7 @@ function newScraper(options, env, callback) {
 			if (i < 2) { //	only extract 擅長工具 and 工作技能
 				//console.log(record);
 				if (record.indexOf(cert) < 0)
-				//if (!record.match(newExp))
+					//if (!record.match(newExp))
 					outText += record + NEWLINE;
 				else
 					console.log('Bypass cert!');
@@ -276,7 +277,10 @@ function getCatPage(cat, callback) {
 }
 
 function getList() {
-	newEnv.dateStr = newDateStr();
+	if (presetList.demo)
+		newEnv.dateStr = presetList.date[0];
+	else
+		newEnv.dateStr = newDateStr();
 
 	async.eachSeries(presetList.cat, function (cat, callback) {
 		getCatPage(cat, callback);
@@ -290,8 +294,26 @@ function getList() {
 
 }
 
+function processOptions() {
+	//console.log(process.argv);
+	//console.log(process.argv.length);
+	if (process.argv.length > 2) {
+		if (demo_mode === process.argv[2].toLowerCase()) {
+			console.log('\nIn demo mode!');
+			presetList.demo = true;
+			if (presetList.date.length === 0) {
+				console.log('No date preset for demo!');
+				process.exit(1);
+			} else {
+				console.log('Demo date: ' + presetList.date[0]);
+			}
+		}
+	}
+}
+
 function main() {
 	getPreset();
+	processOptions();
 	getList();
 }
 
