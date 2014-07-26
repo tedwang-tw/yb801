@@ -44,6 +44,7 @@ var NEWLINE = '\r\n';
 var DELIMITER = ',';
 
 var inTopDir = '../crawler/raw/104/job';
+var inTopCorpusDir = 'synonym/104/job';
 var outTopDir = 'group/104/job';
 
 //var basename_keyword = 'keywords_merge.txt';
@@ -243,7 +244,19 @@ function scrapeJob(dir, outDir, task, record) {
 
 } //	scrapeJob
 
-function scrapeContent(dir, outDir, task, done) {
+function genJobDict(words) {
+	var wordDict = {};
+	words.forEach(function (word) {
+		if (wordDict[word])
+			wordDict[word] += 1;
+		else
+			wordDict[word] = 1;
+	});
+
+	return Object.keys(wordDict);
+}
+
+function scrapeContent(dir, outDir, task, dir2, done) {
 	if (path.extname(task) != ext) {
 		return done(null, 0); //	skip
 	}
@@ -266,6 +279,10 @@ function scrapeContent(dir, outDir, task, done) {
 				record.url = header_Origin + jobUrl[record.code];
 			scrapeJob(dir, outDir, task, record);
 			record.group = parseInt(group, 10);
+
+			var file_corpus = path.join(dir2, path.basename(task, ext) + '.json');
+			var fileData = JSON.parse(fs.readFileSync(file_corpus, 'utf8'));
+			record.words = genJobDict(fileData);
 
 			if (!jobsCluster[group])
 				jobsCluster[group] = [];
@@ -294,7 +311,7 @@ function scrapeContent(dir, outDir, task, done) {
 
 } //	scrapeContent
 
-function walkJobCat(dir, outDir, done) { //	per job category
+function walkJobCat(dir, outDir, dir2, done) { //	per job category
 	emitter.emit('log', '\n' + dir + '\n');
 
 	fs.readdir(dir, function (err, list) {
@@ -328,7 +345,7 @@ function walkJobCat(dir, outDir, done) { //	per job category
 		//var groups = {};
 
 		var q = async.queue(function (task, taskCB) {
-				scrapeContent(dir, outDir, task, function (err, count) {
+				scrapeContent(dir, outDir, task, dir2, function (err, count) {
 					itemCounter += count;
 					setImmediate(taskCB);
 				});
@@ -393,7 +410,7 @@ function walkJobCat(dir, outDir, done) { //	per job category
 	});
 } //	walkJobCat
 
-function walkDaily(dir, outDir, done) { //	per day
+function walkDaily(dir, outDir, dir2, done) { //	per day
 	emitter.emit('log', '\n' + dir);
 
 	fs.readdir(dir, function (err, list) {
@@ -409,10 +426,11 @@ function walkDaily(dir, outDir, done) { //	per day
 			}
 
 			var folder = path.join(dir, baseFolder);
+			var folder2 = path.join(dir2, baseFolder);
 			fs.stat(folder, function (errStat, stat) {
 				if (stat && stat.isDirectory()) {
 					//emitter.emit('doneDaily', NEWLINE + baseFolder);
-					walkJobCat(folder, path.join(outDir, baseFolder), function (err, count) {
+					walkJobCat(folder, path.join(outDir, baseFolder), folder2, function (err, count) {
 						itemCounter += count;
 						catCount++;
 						callback();
@@ -432,7 +450,7 @@ function walkDaily(dir, outDir, done) { //	per day
 	});
 } //	walkDaily
 
-function walk(dir, outDir, done) {
+function walk(dir, outDir, dir2, done) {
 	fs.readdir(dir, function (err, list) {
 		var itemCounter = 0;
 		var dayCount = 0;
@@ -446,10 +464,11 @@ function walk(dir, outDir, done) {
 			}
 
 			var folder = path.join(dir, baseFolder);
+			var folder2 = path.join(dir2, baseFolder);
 			fs.stat(folder, function (errStat, stat) {
 				if (stat && stat.isDirectory()) {
 					//emitter.emit('doneTop', NEWLINE + baseFolder);
-					walkDaily(folder, path.join(outDir, baseFolder), function (err, count) {
+					walkDaily(folder, path.join(outDir, baseFolder), folder2, function (err, count) {
 						itemCounter += count;
 						dayCount++;
 						callback();
@@ -634,6 +653,11 @@ if (!fs.existsSync(inTopDir)) {
 	console.log('Source location: ' + inTopDir);
 	console.log('Target location: ' + outTopDir);
 
+	if (!fs.existsSync(inTopCorpusDir)) {
+		console.log("Dir " + inTopCorpusDir + " not found!");
+		process.exit(1);
+	}
+
 	newDir(outTopDir);
 
 	emitter.on('log', function (message) {
@@ -681,7 +705,7 @@ if (!fs.existsSync(inTopDir)) {
 		process.stdout.write(message);
 		fs.appendFileSync(filename_status, message);
 
-		walk(inTopDir, outTopDir, function (err, results) {
+		walk(inTopDir, outTopDir, inTopCorpusDir, function (err, results) {
 			var timeB = new Date().getTime();
 
 			if (err) {
