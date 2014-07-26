@@ -29,6 +29,7 @@ var basename_tf_idf = 'tf_icf.txt';
 var basename_tfidf = 'tficf.txt'; //	tf*idf
 var basename_tf_cluster = 'tf_cluster.txt'; //	term freq
 var basename_joblist = 'clusterlist.txt';
+var basename_groupwords = 'groupwords.json'; //	group word count
 var basename_err = 'error.txt';
 var basename_status = 'status.txt';
 var filename_status;
@@ -37,6 +38,7 @@ var filename_preset = path.join(__dirname, 'etl_config.json');
 var presetList;
 
 var keywords = [];
+var groupWordDict = [];
 
 var emitter = new events.EventEmitter();
 
@@ -189,7 +191,7 @@ function subKeyword(list, pos, word) { //	check sub-string like
 function genDocTF(doc, tf_idfs) {
 	var list = [];
 	doc.forEach(function (tfidf, i) {
-		if (tfidf > 0) //	only count appeared words
+		if (tf_idfs[i] > 0) //	only count appeared words
 			list.push({
 				tfidf : tfidf,
 				tf : tf_idfs[i],
@@ -210,7 +212,7 @@ function genDocTF(doc, tf_idfs) {
 
 	var size = list.length;
 	list.map(function (item, i) {
-		item.freq = size - i;	//	i + 1;
+		item.freq = size - i; //	i + 1;
 		item.rfreq = Math.floor(item.freq / 10) + 1; //	to fit the two-digits limitation of the wordcloud2.js
 		return item;
 	});
@@ -281,6 +283,23 @@ function genClustersTF(outDir, clusterFileList, tfidf_mat, tf_idf_mat) {
 	});
 }
 
+function countGroupWords(index, words) {
+	var wordDict = {};
+	words.forEach(function (word) {
+		if (wordDict[word])
+			wordDict[word] += 1;
+		else
+			wordDict[word] = 1;
+	});
+
+	groupWordDict.push({
+		id : index,
+		dict : wordDict
+	});
+
+	//emitter.emit('log', NEWLINE + index + ': ' + words.length + ',' + Object.keys(wordDict).length);	
+}
+
 function scrapeContent(dir, outDir, task, done) {
 	if (path.extname(task) != ext) {
 		return done(null, 0); //	skip
@@ -289,6 +308,13 @@ function scrapeContent(dir, outDir, task, done) {
 	setImmediate(function () {
 		var file = path.join(dir, task);
 		var fileData = JSON.parse(fs.readFileSync(file, 'utf8'));
+
+		var groupNum = Number(path.basename(task, ext));
+		if (isNaN(groupNum)) {
+			emitter.emit('log', '\n--> Non group numbered file: ' + task);
+			done(null, 0); //	for count
+		}
+		countGroupWords(groupNum - 1, fileData);
 
 		tfidf.addDocument(fileData);
 
@@ -431,6 +457,27 @@ function walkAlgorithm(dir, outDir, done) { //	per algorithm
 							//countDown--;
 							//emitter.emit('drainDone', NEWLINE + 'matrix3 done.');
 							callback(null, matrix3);
+						});
+					},
+					function (callback) {
+						var groupWords = [];
+						groupWordDict.sort(function (a, b) { //	sort cluster id
+							return Number(a.id) - Number(b.id);
+						});
+						groupWordDict.forEach(function (gw, i) {
+							groupWords.push(Object.keys(gw.dict).length);
+						});
+
+						var outFile_groupword = path.join(outDir, basename_groupwords);
+						var fd_groupword = fs.createWriteStream(outFile_groupword);
+						emitter.emit('log', NEWLINE + 'Write group words count to ' + outFile_groupword);
+
+						fd_groupword.write(JSON.stringify({
+								counts : groupWords
+							}), function () {
+							fd_groupword.end();
+							emitter.emit('log', '\tdone.');
+							callback(null, 'five');
 						});
 					}
 				],
