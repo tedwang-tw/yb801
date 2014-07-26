@@ -67,6 +67,7 @@ $RECYCLE.BIN/
 *.bak
 *.zip
 *.html
+*.*~
 
 # output folder
 crawler/raw
