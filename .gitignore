@@ -74,6 +74,7 @@ crawler/concat
 crawler/text
 crawler/input
 crawler/*.txt
+etl/concat
 etl/corpus
 etl/corpus_merge
 etl/corpus_group
