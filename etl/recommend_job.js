@@ -48,6 +48,7 @@ var NEWLINE = '\r\n';
 var DELIMITER = ',';
 
 var inTopDir = '../crawler/raw/104/job';
+var inTopCorpusDir = 'synonym/104/job';
 var outTopDir = 'recommend/104/job';
 
 //var basename_keyword = 'keywords_merge.txt';
@@ -272,7 +273,19 @@ function scrapeJob(dir, outDir, task, record) {
 
 } //	scrapeJob
 
-function scrapeContent(dir, outDir, jobOrder, index) {
+function genJobDict(words) {
+	var wordDict = {};
+	words.forEach(function (word) {
+		if (wordDict[word])
+			wordDict[word] += 1;
+		else
+			wordDict[word] = 1;
+	});
+
+	return Object.keys(wordDict);
+}
+
+function scrapeContent(dir, outDir, dir2, jobOrder, index) {
 	//setImmediate(function () {
 	var recommendation = {
 		jobs : []
@@ -293,6 +306,10 @@ function scrapeContent(dir, outDir, jobOrder, index) {
 				record.group = -1;
 			else
 				record.group = jobGroup[job.index];
+
+			var file_corpus = path.join(dir2, record.code + '.json');
+			var fileData = JSON.parse(fs.readFileSync(file_corpus, 'utf8'));
+			record.words = genJobDict(fileData);
 
 			recommendation.jobs.push(record);
 			count++;
@@ -315,7 +332,7 @@ function scrapeContent(dir, outDir, jobOrder, index) {
 
 } //	scrapeContent
 
-function walkJobCat(dir, outDir, done) { //	per job category
+function walkJobCat(dir, outDir, dir2, done) { //	per job category
 	emitter.emit('log', '\nIn: ' + dir + '\n');
 	emitter.emit('log', '\nOut: ' + outDir + '\n');
 
@@ -324,6 +341,24 @@ function walkJobCat(dir, outDir, done) { //	per job category
 	newDir(groupDir);
 
 	async.series([
+			function (callback) {
+				var resumeDir = path.join(dir2, '../' + cat_resume);
+				var index = 0;
+				async.eachSeries(resumeList.resumes, function (resume, inCB) {
+					var inFile = path.join(resumeDir, resume.id_no + '.json');
+					var fileData = JSON.parse(fs.readFileSync(inFile, 'utf8'));
+					resumeList.resumes[index].words = genJobDict(fileData);
+					index++;
+					inCB();
+				}, function (err) {
+					if (err) {
+						// One of the iterations produced an error.
+						// All processing will now stop.
+						console.log('A resume failed to process');
+					} else {}
+					callback(null, 'zero');
+				});
+			},
 			function (callback) {
 				var outFile = path.join(groupDir, basename_resumeRecord);
 				emitter.emit('log', NEWLINE + 'Write resume list ' + outFile);
@@ -353,7 +388,7 @@ function walkJobCat(dir, outDir, done) { //	per job category
 
 				vectors.forEach(function (vector, i) {
 					var jobOrder = genJobOrder(vector);
-					itemCounter += scrapeContent(dir, groupDir, jobOrder, i);
+					itemCounter += scrapeContent(dir, groupDir, dir2, jobOrder, i);
 				});
 				callback(null, 'two');
 			}
@@ -397,7 +432,7 @@ function walkJobCat(dir, outDir, done) { //	per job category
 	});
 } //	walkJobCat
 
-function walkDaily(dir, outDir, done) { //	per day
+function walkDaily(dir, outDir, dir2, done) { //	per day
 	emitter.emit('log', '\n' + dir);
 
 	fs.readdir(dir, function (err, list) {
@@ -413,10 +448,11 @@ function walkDaily(dir, outDir, done) { //	per day
 			}
 
 			var folder = path.join(dir, baseFolder);
+			var folder2 = path.join(dir2, baseFolder);
 			fs.stat(folder, function (errStat, stat) {
 				if (stat && stat.isDirectory()) {
 					//emitter.emit('doneDaily', NEWLINE + baseFolder);
-					walkJobCat(folder, path.join(outDir, baseFolder), function (err, count) {
+					walkJobCat(folder, path.join(outDir, baseFolder), folder2, function (err, count) {
 						itemCounter += count;
 						catCount++;
 						callback();
@@ -436,7 +472,7 @@ function walkDaily(dir, outDir, done) { //	per day
 	});
 } //	walkDaily
 
-function walk(dir, outDir, done) {
+function walk(dir, outDir, dir2, done) {
 	fs.readdir(dir, function (err, list) {
 		var itemCounter = 0;
 		var dayCount = 0;
@@ -450,10 +486,11 @@ function walk(dir, outDir, done) {
 			}
 
 			var folder = path.join(dir, baseFolder);
+			var folder2 = path.join(dir2, baseFolder);
 			fs.stat(folder, function (errStat, stat) {
 				if (stat && stat.isDirectory()) {
 					//emitter.emit('doneTop', NEWLINE + baseFolder);
-					walkDaily(folder, path.join(outDir, baseFolder), function (err, count) {
+					walkDaily(folder, path.join(outDir, baseFolder), folder2, function (err, count) {
 						itemCounter += count;
 						dayCount++;
 						callback();
@@ -581,7 +618,8 @@ function readJobs() {
 					resumeList.resumes.push({
 						id_no : resume,
 						referer : header_Referer,
-						vrfy : 1405961882495
+						vrfy : 1405961882495,
+						words : []
 					});
 			}).then(function () {
 				callback(null, resumeList.resumes.length);
@@ -704,6 +742,11 @@ if (!fs.existsSync(inTopDir)) {
 	console.log('Source location: ' + inTopDir);
 	console.log('Target location: ' + outTopDir);
 
+	if (!fs.existsSync(inTopCorpusDir)) {
+		console.log("Dir " + inTopCorpusDir + " not found!");
+		process.exit(1);
+	}
+
 	newDir(outTopDir);
 
 	emitter.on('log', function (message) {
@@ -752,7 +795,7 @@ if (!fs.existsSync(inTopDir)) {
 		process.stdout.write(message);
 		fs.appendFileSync(filename_status, message);
 
-		walk(inTopDir, outTopDir, function (err, results) {
+		walk(inTopDir, outTopDir, inTopCorpusDir, function (err, results) {
 			var timeB = new Date().getTime();
 
 			if (err) {
