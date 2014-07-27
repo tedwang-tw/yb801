@@ -9,6 +9,7 @@ pause
 
 del ..\output\clusters\jobs\*.json
 copy group\104\job\20140716\2007001000\MA_KM\*.json ..\output\clusters\jobs
+move ..\output\clusters\jobs\clustergroup.json ..\output\clusters
 
 del corpus_group\104\job\20140716\2007001000\MA_KM\*.json
 
