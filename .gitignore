@@ -88,3 +88,4 @@ etl/similarity
 etl/recommend
 etl/group
 etl/*.txt
+output
