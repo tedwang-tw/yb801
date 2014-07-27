@@ -380,7 +380,7 @@ function walkJobCat(dir, outDir, dir2, done) { //	per job category
 					if (--countDown === 0) {
 						emitter.removeListener('drainDone', emitCB);
 
-						emitter.emit('doneJobCat', NEWLINE + 'Totally ' + itemCounter + '/' + vecLen + ' jobs/resumes processed.');
+						emitter.emit('doneJobCat', NEWLINE + 'Totally ' + itemCounter + '/' + vecLen + ' jobs/resumes processed.' + NEWLINE);
 						//done(null, itemCounter);
 					}
 				}
