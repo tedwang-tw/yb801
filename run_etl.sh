@@ -24,9 +24,10 @@ node tfidf_detail.js
 echo -n "Press any key or CTRL-C... "
 read text
 
-rm -r -f ../output/mapreduce.*.txt
+rm -r -f ../output/mapreduce/*.txt
 
 cp tfidf/104/job/20140716/2007001000/keywords_merge_sort_index.txt ../output/mapreduce
+cp tfidf/104/job/20140716/2007001000/tfidf.txt ../output/mapreduce
 
 node corpus_mapreduce.js
 

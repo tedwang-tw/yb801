@@ -19,9 +19,10 @@ node tfidf_detail.js
 
 pause
 
-del ..\output\mapreduce.*.txt
+del ..\output\mapreduce\*.txt
 
 copy tfidf\104\job\20140716\2007001000\keywords_merge_sort_index.txt ..\output\mapreduce
+copy tfidf\104\job\20140716\2007001000\tfidf_index.txt ..\output\mapreduce
 
 node corpus_mapreduce.js
 
