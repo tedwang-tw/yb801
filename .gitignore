@@ -66,7 +66,7 @@ $RECYCLE.BIN/
 # Temporary file
 *.bak
 *.zip
-*.html
+#*.html
 *.*~
 
 # output folder
