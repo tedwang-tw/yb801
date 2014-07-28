@@ -188,10 +188,34 @@ function subKeyword(list, pos, word) { //	check sub-string like
 	return false;
 }
 
+function insertTFIDF10(list, tfidf10, top) {
+	//	1. remove top 10 tfidf from original
+	tfidf10.forEach(function (item, idx) {
+		if (idx < top) {
+			var len = list.length;
+			for (var i = 0; i < len; i++) {
+				if (list[i].keyword === item.keyword) {
+					if (list.splice(i, 1) === [])
+						console.log('\n' + item.keyword + ' not found in splice!');
+					break;
+				}
+			}
+		}
+	});
+
+	//	2. insert top 10 tfidf to original
+	tfidf10.forEach(function (item, idx) { //	the result will be in descending order
+		if (idx < top)
+			list.splice(idx, 0, item);
+	});
+}
+
 function genDocTF(doc, tf_idfs) {
 	var list = [];
+	var tfidf10 = [];
+
 	doc.forEach(function (tfidf, i) {
-		if (tf_idfs[i] > 0) //	only count appeared words
+		if (tf_idfs[i] > 0) { //	only count appeared words
 			list.push({
 				tfidf : tfidf,
 				tf : tf_idfs[i],
@@ -199,9 +223,25 @@ function genDocTF(doc, tf_idfs) {
 				freq : 0,
 				rfreq : 0 //	reduced frequency
 			});
+			tfidf10.push({
+				tfidf : tfidf,
+				tf : tf_idfs[i],
+				keyword : keywords[i],
+				freq : 0,
+				rfreq : 0 //	reduced frequency
+			});
+		}
 	});
 
-	list.sort(function (a, b) {
+	list.sort(function (a, b) { //	in descending order
+		if (a.tf > b.tf)
+			return -1;
+		else if (a.tf < b.tf)
+			return 1;
+		else
+			return 0;
+	});
+	tfidf10.sort(function (a, b) { //	in descending order
 		if (a.tfidf > b.tfidf)
 			return -1;
 		else if (a.tfidf < b.tfidf)
@@ -209,6 +249,8 @@ function genDocTF(doc, tf_idfs) {
 		else
 			return 0;
 	});
+
+	insertTFIDF10(list, tfidf10, 10);
 
 	var size = list.length;
 	list.map(function (item, i) {
@@ -297,7 +339,7 @@ function countGroupWords(index, words) {
 		dict : wordDict
 	});
 
-	//emitter.emit('log', NEWLINE + index + ': ' + words.length + ',' + Object.keys(wordDict).length);	
+	//emitter.emit('log', NEWLINE + index + ': ' + words.length + ',' + Object.keys(wordDict).length);
 }
 
 function scrapeContent(dir, outDir, task, done) {
