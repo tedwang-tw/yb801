@@ -1,0 +1,136 @@
+<html>
+
+<head>
+    <title>Node.js WebSocket chat
+    </title>
+    <style type="text/css">
+    #header {
+        font-weight: bold;
+        font-family: sans-serif, serif, fantasy, cursive, monospace;
+    }
+    #input {
+        width: 300px;
+    }
+    #messages {
+        /*
+			position: fixed;   
+			top: 40px;   
+			bottom: 8px;   
+			left: 8px;   
+			right: 8px;   
+			*/
+        overflow: auto;
+        height: 80%;
+        border: 1px solid gray;
+        padding: 8px;
+        margin: 5px;
+        font-family: monospace, sans-serif, serif, fantasy, cursive;
+    }
+    #footer {
+        color: blue;
+        font-family: serif, fantasy, cursive, monospace, sans-serif;
+    }
+    </style>
+</head>
+
+<body>
+    <span id="header">Your message:</span>
+    <input type="text" id="input">
+    <div id="messages">
+    </div>
+    <div id="footer">Hint: '<b>/j room_name</b>' to join one room; '<b>/l [room_name | *]</b>' to leave a room
+    </div>
+    <script src="http://localhost:4000/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+    var messagesElement = document.getElementById('messages');
+    var lastMessageElement = null;
+
+    function addMessage(message) {
+        var newMessageElement = document.createElement('div');
+        var newMessageText = document.createTextNode(message);
+        newMessageElement.appendChild(newMessageText);
+        //messagesElement.insertBefore(newMessageElement, lastMessageElement);
+        messagesElement.insertBefore(newMessageElement, null);
+        lastMessageElement = newMessageElement;
+
+        var br = document.createElement("br");
+        newMessageElement.appendChild(br);
+        messagesElement.scrollTop = messagesElement.scrollHeight;
+    }
+    var socket = io.connect('http://localhost:4000');
+
+    function reformatMsg(message) {
+        var lines = message.split('\n');
+        //addMessage('line# == ' + lines.length);
+        //broadcast.emit('serverMessage', stdout);
+        //return;
+
+        lines.forEach(function(line) {
+            line = line.trim();
+            if (line.length > 0)
+                addMessage(line);
+        });
+    }
+
+    socket.on('serverMessage', function(content) {
+        //addMessage(content);
+        reformatMsg(content);
+    });
+    socket.on('login', function(sno) {
+        var username = prompt('What username would you like to use?', 'my name-' + sno);
+        socket.emit('login', username);
+    });
+
+    function sendCommand(command, args) {
+        if (command === 'j') {
+            socket.emit('join', args);
+        } else if (command === 'l') {
+            socket.emit('leave', args);
+        } else {
+            alert('unknown command: ' + command);
+        }
+    }
+
+    function isIE() {
+        var myNav = navigator.userAgent.toLowerCase();
+        return (myNav.indexOf('msie') != -1) ? parseInt(myNav.split('msie')[1]) : 10;
+    }
+    if (typeof String.prototype.trim !== 'function') {
+        String.prototype.trim = function() {
+            return this.replace(/^\s+|\s+$/g, '');
+        }
+    }
+
+    function sendMessage(message) {
+        var commandMatch = message.match(/^\/(\w*)(.*)/);
+        if (commandMatch) {
+            /*
+				if (isIE () < 9) {
+				 // is IE version less than 9
+					sendCommand(commandMatch[1], commandMatch[2]);
+				} else {
+					// is IE 9 and later or not IE
+					sendCommand(commandMatch[1], commandMatch[2].trim());
+				}
+				*/
+            sendCommand(commandMatch[1], commandMatch[2].trim());
+        } else {
+            socket.emit('clientMessage', message);
+        }
+    }
+    var inputElement = document.getElementById('input');
+    inputElement.onkeydown = function(keyboardEvent) {
+        if (!keyboardEvent)
+            keyboardEvent = window.event;
+        if (keyboardEvent.keyCode === 13) {
+            sendMessage(inputElement.value);
+            inputElement.value = '';
+            return false;
+        } else {
+            return true;
+        }
+    };
+    </script>
+</body>
+
+</html>
