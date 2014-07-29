@@ -21,6 +21,7 @@ pause
 
 del ..\output\mapreduce\*.txt
 
+copy tfidf\104\job\20140716\2007001000\joblist.txt ..\output\mapreduce
 copy tfidf\104\job\20140716\2007001000\keywords_merge_sort_index.txt ..\output\mapreduce
 copy tfidf\104\job\20140716\2007001000\tfidf_index.txt ..\output\mapreduce
 

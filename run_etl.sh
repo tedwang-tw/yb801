@@ -26,6 +26,7 @@ read text
 
 rm -r -f ../output/mapreduce/*.txt
 
+cp tfidf/104/job/20140716/2007001000/joblist.txt ../output/mapreduce
 cp tfidf/104/job/20140716/2007001000/keywords_merge_sort_index.txt ../output/mapreduce
 cp tfidf/104/job/20140716/2007001000/tfidf.txt ../output/mapreduce
 
