@@ -6,7 +6,8 @@ var WordFreq = require('wordfreq');
 // Create an options object for initialization
 var options = {
 	workerUrl : 'wordfreq/src/wordfreq.worker.js',
-	maxiumPhraseLength : 10,
+	maxiumPhraseLength : 8,
+	minimumCount : 6,
 	languages : ['chinese']
 };
 
