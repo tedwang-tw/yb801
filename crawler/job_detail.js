@@ -9,6 +9,7 @@ var mkdirp = require('mkdirp');
 
 var isNormal = true; //	run as service or not
 var evlog;
+var delayTime = 700;
 
 function newDateStr() {
 	var d = new Date();
@@ -122,7 +123,9 @@ function defaultCrawler(options, env, callback) {
 						sfile.end();
 						fs.appendFileSync(options.urlFile, options.codes.comCode + '_' + options.codes.jobCode + ',' + options.codes.link + NEWLINE);
 						process.stdout.write('.');
-						callback(null, 1);
+						setTimeout(function () {
+							callback(null, 1);
+						}, delayTime);
 					});
 				}
 			}
