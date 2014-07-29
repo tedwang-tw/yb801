@@ -1,6 +1,7 @@
 var httpd = require('http').createServer(handler);
 var io = require('socket.io').listen(httpd);
 var fs = require('fs');
+var os = require('os');
 var child_process = require('child_process');
 var count = 0;
 var sno = 0;
@@ -18,6 +19,29 @@ function handler(req, res) {
 	});
 }
 
+function runPlatform(cmd) {
+	//var child;
+	var cmds = cmd.split(/\s/);
+	var options = [];
+	var i;
+
+	if (os.type() === 'Windows_NT' || os.platform() === 'win32') {
+		options.push('/c');
+		options.push(cmds[0]);
+		if (cmds.length > 1) {
+			for (i = 1; i < cmds.length; i++)
+				options.push(cmds[i].trim());
+		}
+		return child_process.spawn('cmd', options);
+	} else {
+		if (cmds.length > 1) {
+			for (i = 1; i < cmds.length; i++)
+				options.push(cmds[i].trim());
+		}
+		return child_process.spawn(cmds[0].trim(), options);
+	}
+}
+
 function run_cmd(broadcast, cmd) {
 	var dataOut = '';
 
@@ -32,14 +56,7 @@ function run_cmd(broadcast, cmd) {
 	}
 
 	//*
-	var cmds = cmd.split(/\s/);
-	var options = [];
-
-	if (cmds.length > 1) {
-		for (var i = 1; i < cmds.length; i++)
-			options.push(cmds[i].trim());
-	}
-	var child = child_process.spawn(cmds[0].trim(), options);
+	var child = runPlatform(cmd);
 
 	child.stdout.setEncoding('utf8');
 
