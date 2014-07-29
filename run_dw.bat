@@ -2,6 +2,8 @@ rem #!/bin/sh
 cd etl
 
 del group\104\job\20140716\2007001000\MA_KM\*.json
+copy ..\crawler\raw\104\job\20140716\2007001000\2007001000_url.txt input\joburl.txt
+copy tfidf\104\job\20140716\2007001000\joblist.txt input\
 
 node cluster_group.js   
 

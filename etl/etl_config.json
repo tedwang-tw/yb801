@@ -3,5 +3,6 @@
 	"cat" : ["2007001000"],
 	"alg" : ["MA_KM"],
 	"resume" : false,
-	"recomNum" : 50
+	"recomNum" : 50,
+	"job" : false
 }
