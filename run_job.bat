@@ -65,5 +65,6 @@ pause
 :step7
 del ..\output\recommendation\*.json
 copy recommend\104\job\20140716\2007001000\MA_KM\*.json ..\output\recommendation
+move ..\output\recommendation\resumelist.json ..\output\recommendation\joblist.json
 
 cd ..
