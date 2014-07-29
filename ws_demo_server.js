@@ -19,10 +19,6 @@ function handler(req, res) {
 }
 
 function run_cmd(broadcast, cmd) {
-	var cmds = cmd.split(/\s/);
-	var op1 = cmds.length > 1 ? cmds[1] : '';
-	var child = child_process.spawn('cmd', ['/c', cmds[0], op1]);
-
 	var dataOut = '';
 
 	function pumpData(data) {
@@ -35,12 +31,35 @@ function run_cmd(broadcast, cmd) {
 		}
 	}
 
+	//*
+	var cmds = cmd.split(/\s/);
+	var options = [];
+
+	if (cmds.length > 1) {
+		for (var i = 1; i < cmds.length; i++)
+			options.push(cmds[i].trim());
+	}
+	var child = child_process.spawn(cmds[0].trim(), options);
+
 	child.stdout.setEncoding('utf8');
 
 	child.stdout.on('data', function (data) {
 		//broadcast.emit('serverMessage', data);
 		pumpData(data);
 	});
+
+	child.stderr.on('data', function (data) {
+		broadcast.emit('serverMessage', data);
+	});
+
+	child.on('close', function (code) {
+		//broadcast.emit('serverMessage', 'child process exited with code ' + code);
+	});
+	child.on('error', function (err) {
+		broadcast.emit('serverMessage', 'child process exited with code ' + err);
+	});
+
+	//*/
 
 	/*
 	child_process.exec(cmd, {
@@ -54,11 +73,13 @@ function run_cmd(broadcast, cmd) {
 	} else {
 	var lines = stdout.split('\n');
 	//broadcast.emit('serverMessage', 'line# == ' + lines.length);
-	broadcast.emit('serverMessage', stdout);
+	//broadcast.emit('serverMessage', stdout);
+
+	pumpData(stdout);
 	return;
 	}
 	});
-	 */
+	//*/
 }
 
 io.sockets.on('connection', function (socket) {
