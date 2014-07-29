@@ -43,6 +43,7 @@ var header_Referer = 'http://vip.104.com.tw/9/search/search_result.cfm?jobcat=20
 var ext = '.txt'; //	null;	//	input file filter
 var outExt = '.json';
 var cat_resume = 'resume';
+var cat_job = 'job';
 
 var NEWLINE = '\r\n';
 var DELIMITER = ',';
@@ -55,6 +56,7 @@ var outTopDir = 'recommend/104/job';
 var basename_joblist = 'input/joblist.txt';
 var basename_jobgroup = 'input/jobgroup.txt';
 var basename_joburl = 'input/joburl.txt';
+var basename_joburl_rec = 'input/joburl_rec.txt';
 var basename_resumelist = 'input/resumelist.txt';
 var basename_sim = 'input/sim_resume.txt';
 var recommend_prefix = ''; //	'recommend_job_';
@@ -78,6 +80,7 @@ var jobGroup = [];
 var groupCount = {};
 var clusterSort = []; //	for Mahout
 var jobUrl = {};
+var jobUrl_rec = {}; //	recommended by job
 var resumeList = {
 	resumes : []
 };
@@ -348,6 +351,7 @@ function walkJobCat(dir, outDir, dir2, done) { //	per job category
 					var inFile = path.join(resumeDir, resume.id_no + '.json');
 					var fileData = JSON.parse(fs.readFileSync(inFile, 'utf8'));
 					resumeList.resumes[index].words = genJobDict(fileData);
+					resumeList.resumes[index].referer = header_Origin + jobUrl_rec[resume.id_no];
 					index++;
 					inCB();
 				}, function (err) {
@@ -587,6 +591,11 @@ function readJobs() {
 		console.log('File "' + basename_joburl + '" not found!');
 		process.exit(1);
 	}
+	if (!fs.existsSync(basename_joburl_rec)) {
+		console.log('File "' + basename_joburl_rec + '" not found!');
+		if (presetList.job)
+			process.exit(1);
+	}
 	if (!fs.existsSync(basename_resumelist)) {
 		console.log('File "' + basename_resumelist + '" not found!');
 		process.exit(1);
@@ -688,6 +697,23 @@ function readJobs() {
 				callback(null, Object.keys(jobUrl).length);
 			});
 		},
+		joburl_rec : function (callback) {
+			if (presetList.job) {
+				// read all lines:
+				lineReader.eachLine(basename_joburl_rec, function (line) {
+					var urlPair = line.trim();
+					var record;
+					if (urlPair.length > 0) {
+						record = urlPair.split(',');
+						jobUrl_rec[record[0].trim()] = record[1].trim();
+					}
+				}).then(function () {
+					callback(null, Object.keys(jobUrl_rec).length);
+				});
+			} else {
+				callback(null, 0);
+			}
+		},
 		similarity : function (callback) {
 			// read all lines:
 			lineReader.eachLine(basename_sim, function (line) {
@@ -710,6 +736,7 @@ function readJobs() {
 		emitter.emit('keyword', NEWLINE + 'Totally ' + results.joblist + ' jobs counted.' +
 			NEWLINE + 'Totally ' + results.jobgroup + ' job/group counted.' +
 			NEWLINE + 'Totally ' + results.joburl + ' urls counted.' +
+			NEWLINE + 'Totally ' + results.joburl_rec + ' rec job urls counted.' +
 			NEWLINE + 'Totally ' + results.resumelist + ' resumes counted.' +
 			NEWLINE + 'Totally ' + results.similarity + ' resume vectors counted.');
 	});
@@ -727,7 +754,9 @@ function checkPlatform() {
 
 function processOptions() {
 	if (process.argv.length > 2) {
-		if (cat_resume === process.argv[2].toLowerCase()) {}
+		if (cat_job === process.argv[2].toLowerCase()) {
+			presetList.job = true;
+		}
 	}
 	console.log('\nProcess resumes!');
 	presetList.resume = true;
@@ -787,9 +816,9 @@ if (!fs.existsSync(inTopDir)) {
 
 	var timeA = new Date().getTime();
 
+	processOptions();
 	readJobs();
 	checkPlatform();
-	processOptions();
 
 	emitter.on('keyword', function (message) {
 		process.stdout.write(message);
