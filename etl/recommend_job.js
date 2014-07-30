@@ -351,7 +351,8 @@ function walkJobCat(dir, outDir, dir2, done) { //	per job category
 					var inFile = path.join(resumeDir, resume.id_no + '.json');
 					var fileData = JSON.parse(fs.readFileSync(inFile, 'utf8'));
 					resumeList.resumes[index].words = genJobDict(fileData);
-					resumeList.resumes[index].referer = header_Origin + jobUrl_rec[resume.id_no];
+					if (presetList.job)
+						resumeList.resumes[index].referer = header_Origin + jobUrl_rec[resume.id_no];
 					index++;
 					inCB();
 				}, function (err) {
