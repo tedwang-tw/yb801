@@ -170,6 +170,7 @@ function newScraper(options, env, callback) {
 
 		rows.each(function (i, elem) {
 			var record = $(this).text().trim();
+			/*
 			if (i < 2) { //	only extract 擅長工具 and 工作技能
 				//console.log(record);
 				if (record.indexOf(cert) < 0)
@@ -178,6 +179,8 @@ function newScraper(options, env, callback) {
 				else
 					console.log('Bypass cert!');
 			}
+			*/
+			outText += record + NEWLINE;
 		});
 
 		//console.log(outText);
