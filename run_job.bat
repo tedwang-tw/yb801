@@ -1,3 +1,5 @@
+@echo off
+
 rem #!/bin/sh
 cd crawler
 
@@ -7,7 +9,7 @@ del ..\etl\text\104\job\20140716\resume\*.txt
 
 node job_members.js demo
 
-if /i [%1]==[demo] goto step1
+@if /i [%1]==[demo] goto step1
 pause
 
 :step1
@@ -17,7 +19,7 @@ del corpus\104\job\20140716\resume\*.json
 
 node corpus_detail.js resume
 
-if /i [%1]==[demo] goto step2
+@if /i [%1]==[demo] goto step2
 pause
 
 :step2
@@ -25,13 +27,13 @@ del synonym\104\job\20140716\resume\*.json
 
 node synonym_detail.js resume
 
-if /i [%1]==[demo] goto step3
+@if /i [%1]==[demo] goto step3
 pause
 
 :step3
 node corpus_merge.js resume
 
-if /i [%1]==[demo] goto step4
+@if /i [%1]==[demo] goto step4
 pause
 
 :step4
@@ -39,7 +41,7 @@ del tfidf\104\job\20140716\resume\*.txt
 
 node tfidf_detail.js resume
 
-if /i [%1]==[demo] goto step5
+@if /i [%1]==[demo] goto step5
 pause
 
 :step5
@@ -47,7 +49,7 @@ copy tfidf\104\job\20140716\resume\resumelist.txt input\.
 
 node similarity_job.js
 
-if /i [%1]==[demo] goto step6
+@if /i [%1]==[demo] goto step6
 pause
 
 :step6
@@ -59,12 +61,18 @@ copy ..\crawler\raw\104\vip\20140716\joburl_rec.txt input\
 
 node recommend_job.js job
 
-if /i [%1]==[demo] goto step7
+@if /i [%1]==[demo] goto step7
 pause
 
 :step7
 del ..\output\recommendation\*.json
 copy recommend\104\job\20140716\2007001000\MA_KM\*.json ..\output\recommendation
 move ..\output\recommendation\resumelist.json ..\output\recommendation\joblist.json
+
+@if [%1]==[] goto end
+xcopy ..\output\recommendation C:\Users\III\Dropbox\project\data\recommendation\ /y /e /d
+xcopy ..\crawler\raw\104\vip\20140716\*.html C:\Users\III\Dropbox\project\raw\recommendation\ /y /e /d
+
+:end
 
 cd ..
