@@ -3,6 +3,11 @@ YB801 Project
 
 The project repository for III Business Intelligence / Big Data course.
 
+- Crawler
+- ETL
+- Recommender
+
+
 Acknowledgement
 -------------------
  - [NaturalNode / natural](https://github.com/NaturalNode/natural)
